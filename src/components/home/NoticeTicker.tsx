@@ -16,41 +16,57 @@ export function NoticeTicker() {
         </div>
         
         <div className="flex animate-marquee hover:pause-marquee">
-          {notices.map((notice) => (
-            <div key={notice.id} className="inline-flex items-center mx-8">
-              {notice.link_url ? (
-                <Link 
-                  to={notice.link_url} 
-                  className="font-hindi text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2"
-                >
-                  {notice.content}
-                  {notice.link_text && (
-                    <span className="text-primary underline decoration-dotted">{notice.link_text}</span>
-                  )}
-                </Link>
-              ) : (
-                <span className="font-hindi text-sm text-foreground">{notice.content}</span>
-              )}
-            </div>
-          ))}
+          {notices.map((notice, idx) => {
+            const isInternal = notice.link_url?.startsWith('/');
+            const content = (
+              <div className="inline-flex items-center mx-8">
+                {notice.link_url ? (
+                  <div className="font-hindi text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2">
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="text-primary underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </div>
+                ) : (
+                  <span className="font-hindi text-sm text-foreground">{notice.content}</span>
+                )}
+              </div>
+            );
+
+            if (notice.link_url) {
+              if (isInternal) {
+                return <Link key={notice.id} to={notice.link_url as any}>{content}</Link>;
+              }
+              return <a key={notice.id} href={notice.link_url} target="_blank" rel="noopener noreferrer">{content}</a>;
+            }
+            return <div key={notice.id}>{content}</div>;
+          })}
           {/* Duplicate for seamless scrolling */}
-          {notices.map((notice) => (
-            <div key={`${notice.id}-dup`} className="inline-flex items-center mx-8">
-              {notice.link_url ? (
-                <Link 
-                  to={notice.link_url} 
-                  className="font-hindi text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2"
-                >
-                  {notice.content}
-                  {notice.link_text && (
-                    <span className="text-primary underline decoration-dotted">{notice.link_text}</span>
-                  )}
-                </Link>
-              ) : (
-                <span className="font-hindi text-sm text-foreground">{notice.content}</span>
-              )}
-            </div>
-          ))}
+          {notices.map((notice, idx) => {
+            const isInternal = notice.link_url?.startsWith('/');
+            const content = (
+              <div className="inline-flex items-center mx-8">
+                {notice.link_url ? (
+                  <div className="font-hindi text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2">
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="text-primary underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </div>
+                ) : (
+                  <span className="font-hindi text-sm text-foreground">{notice.content}</span>
+                )}
+              </div>
+            );
+
+            if (notice.link_url) {
+              if (isInternal) {
+                return <Link key={`${notice.id}-dup`} to={notice.link_url as any}>{content}</Link>;
+              }
+              return <a key={`${notice.id}-dup`} href={notice.link_url} target="_blank" rel="noopener noreferrer">{content}</a>;
+            }
+            return <div key={`${notice.id}-dup`}>{content}</div>;
+          })}
         </div>
       </div>
       
