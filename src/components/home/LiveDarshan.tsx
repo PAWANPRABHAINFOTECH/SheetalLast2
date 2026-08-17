@@ -21,7 +21,11 @@ export function LiveDarshan() {
       </div>
 
       <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white ring-4 ring-primary/10 bg-black group">
-        {!live || !live.is_active ? (
+        {isLoading ? (
+          <div className="absolute inset-0 flex items-center justify-center text-white">
+            <p className="font-hindi">लोड हो रहा है...</p>
+          </div>
+        ) : !live || !live.is_active ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white bg-neutral-900">
             <PlayCircle className="h-20 w-20 mb-6 text-white/20" />
             <h3 className="font-hindi text-2xl font-bold mb-2">लाइव दर्शन शीघ्र उपलब्ध होगा</h3>
@@ -43,8 +47,10 @@ export function LiveDarshan() {
             src={live.video_url}
           ></video>
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-white">
-            <p className="font-hindi">लोड हो रहा है...</p>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white bg-neutral-900">
+            <PlayCircle className="h-20 w-20 mb-6 text-white/20" />
+            <h3 className="font-hindi text-2xl font-bold mb-2">लाइव दर्शन शीघ्र उपलब्ध होगा</h3>
+            <p className="font-hindi text-white/60">वर्तमान में कोई लाइव स्ट्रीम सक्रिय नहीं है।</p>
           </div>
         )}
       </div>
@@ -62,7 +68,8 @@ export function LiveDarshan() {
   );
 }
 
-function getYouTubeId(url: string) {
+function getYouTubeId(url: string | null) {
+  if (!url) return null;
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
   const match = url.match(regExp);
   return (match && match[2].length === 11) ? match[2] : null;
