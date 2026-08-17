@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useSiteSettings, useTempleTimings, useChairmanMessage } from "@/lib/temple.hooks";
 import logoAsset from "@/assets/logo.png.asset.json";
-import { Facebook, Instagram, Youtube, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 
 export function Footer() {
   const { data: settings } = useSiteSettings();
@@ -78,23 +78,48 @@ export function Footer() {
             <ul className="space-y-4 font-hindi">
               <li className="flex gap-3">
                 <MapPin className="h-5 w-5 shrink-0 text-secondary" />
-                <span className="text-sm">{settings?.address || "शीतल सिटीज, मंडीदीप, रायसेन"}</span>
+                <span className="text-sm">📍 शीतल सिटीज, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046</span>
               </li>
-              {settings?.phone && (
-                <li className="flex gap-3">
-                  <Phone className="h-5 w-5 shrink-0 text-secondary" />
-                  <a href={`tel:${settings.phone}`} className="hover:text-secondary transition-colors">{settings.phone}</a>
-                </li>
-              )}
+              
+              <li className="flex gap-3">
+                <Phone className="h-5 w-5 shrink-0 text-secondary" />
+                <div className="flex flex-col">
+                  <span className="text-xs text-white/60">📞 मोबाइल नंबर</span>
+                  <a href="tel:+918319322374" className="hover:text-secondary transition-colors">+91 831 932 2374</a>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <div className="h-5 w-5 shrink-0 flex items-center justify-center">
+                  <div className="bg-green-500 rounded-full p-0.5">
+                    <MessageCircle className="h-3 w-3 text-white fill-current" />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-white/60">🟢 WhatsApp</span>
+                  <a 
+                    href="https://wa.me/918319322374?text=नमस्कार, मुझे शीतल शिवालय समिति के संबंध में जानकारी चाहिए।" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-secondary transition-colors"
+                  >
+                    +91 831 932 2374
+                  </a>
+                </div>
+              </li>
+
               {settings?.email && (
                 <li className="flex gap-3">
                   <Mail className="h-5 w-5 shrink-0 text-secondary" />
-                  <a href={`mailto:${settings.email}`} className="hover:text-secondary transition-colors">{settings.email}</a>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-white/60">✉️ ईमेल</span>
+                    <a href={`mailto:${settings.email}`} className="hover:text-secondary transition-colors">{settings.email}</a>
+                  </div>
                 </li>
               )}
             </ul>
             <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-xs font-inter text-white/60">Reg No: {settings?.registration_no}</p>
+              <p className="text-xs font-inter text-white/60">Reg No: 01/02/03/43247/26</p>
             </div>
           </div>
         </div>

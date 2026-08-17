@@ -9,29 +9,29 @@ export function FloatingActions() {
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-4">
-      {settings?.whatsapp && (
-        <Button 
-          size="icon" 
-          className="h-14 w-14 rounded-full bg-green-500 hover:bg-green-600 shadow-2xl text-white transition-transform hover:scale-110"
-          asChild
+      <Button 
+        size="icon" 
+        className="h-14 w-14 rounded-full bg-green-500 hover:bg-green-600 shadow-2xl text-white transition-transform hover:scale-110"
+        asChild
+      >
+        <a 
+          href="https://wa.me/918319322374?text=नमस्कार, मुझे शीतल शिवालय समिति के संबंध में जानकारी चाहिए।" 
+          target="_blank" 
+          rel="noopener noreferrer"
         >
-          <a href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener noreferrer">
-            <MessageCircle className="h-8 w-8" />
-          </a>
-        </Button>
-      )}
+          <MessageCircle className="h-8 w-8" />
+        </a>
+      </Button>
       
-      {settings?.phone && (
-        <Button 
-          size="icon" 
-          className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 shadow-2xl text-white transition-transform hover:scale-110"
-          asChild
-        >
-          <a href={`tel:${settings.phone}`}>
-            <Phone className="h-8 w-8" />
-          </a>
-        </Button>
-      )}
+      <Button 
+        size="icon" 
+        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 shadow-2xl text-white transition-transform hover:scale-110"
+        asChild
+      >
+        <a href="tel:+918319322374">
+          <Phone className="h-8 w-8" />
+        </a>
+      </Button>
 
       <Button 
         size="icon" 
