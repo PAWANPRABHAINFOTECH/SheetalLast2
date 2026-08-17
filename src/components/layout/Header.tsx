@@ -134,8 +134,9 @@ export function Header() {
             </div>
             <div className="flex items-center gap-2">
               <Button 
-                size="xs" 
+                size="sm" 
                 className="bg-accent text-accent-foreground text-[10px] py-1 h-8 font-hindi" 
+
                 onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
               >
                 दान करें

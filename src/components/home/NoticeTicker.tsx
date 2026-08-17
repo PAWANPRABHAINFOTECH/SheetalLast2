@@ -30,10 +30,14 @@ export function NoticeTicker() {
             <div key={notice.id} className="inline-flex items-center px-4">
               {notice.link_url ? (
                 <Link 
-                  to={notice.link_url.startsWith('/') ? notice.link_url as any : undefined}
-                  href={!notice.link_url.startsWith('/') ? notice.link_url : undefined}
-                  target={!notice.link_url.startsWith('/') ? "_blank" : undefined}
+                  to={notice.link_url.startsWith('/') ? (notice.link_url as any) : undefined}
                   className="font-hindi text-sm hover:text-secondary transition-colors"
+                  {...(notice.link_url.startsWith('/') ? {} : { 
+                    tagName: 'a',
+                    href: notice.link_url,
+                    target: "_blank",
+                    rel: "noopener noreferrer"
+                  } as any)}
                 >
                   {notice.content}
                   {notice.link_text && (
@@ -52,10 +56,14 @@ export function NoticeTicker() {
             <div key={`${notice.id}-dup`} className="inline-flex items-center px-4">
               {notice.link_url ? (
                 <Link 
-                  to={notice.link_url.startsWith('/') ? notice.link_url as any : undefined}
-                  href={!notice.link_url.startsWith('/') ? notice.link_url : undefined}
-                  target={!notice.link_url.startsWith('/') ? "_blank" : undefined}
+                  to={notice.link_url.startsWith('/') ? (notice.link_url as any) : undefined}
                   className="font-hindi text-sm hover:text-secondary transition-colors"
+                  {...(notice.link_url.startsWith('/') ? {} : { 
+                    tagName: 'a',
+                    href: notice.link_url,
+                    target: "_blank",
+                    rel: "noopener noreferrer"
+                  } as any)}
                 >
                   {notice.content}
                   {notice.link_text && (
