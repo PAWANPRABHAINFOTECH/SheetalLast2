@@ -29,51 +29,66 @@ export function NoticeTicker() {
           {activeNotices.map((notice, idx) => (
             <div key={notice.id} className="inline-flex items-center px-4">
               {notice.link_url ? (
-                <Link 
-                  to={notice.link_url.startsWith('/') ? (notice.link_url as any) : undefined}
-                  className="font-hindi text-sm hover:text-secondary transition-colors"
-                  {...(notice.link_url.startsWith('/') ? {} : { 
-                    tagName: 'a',
-                    href: notice.link_url,
-                    target: "_blank",
-                    rel: "noopener noreferrer"
-                  } as any)}
-                >
-                  {notice.content}
-                  {notice.link_text && (
-                    <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
-                  )}
-                </Link>
+                notice.link_url.startsWith('/') ? (
+                  <Link 
+                    to={notice.link_url as any}
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </Link>
+                ) : (
+                  <a 
+                    href={notice.link_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </a>
+                )
               ) : (
                 <span className="font-hindi text-sm">{notice.content}</span>
               )}
-              {idx < activeNotices.length - 1 && <span className="mx-6 text-secondary/50">•</span>}
+              <span className="mx-6 text-secondary/50">•</span>
             </div>
           ))}
           {/* Duplicate for seamless scrolling */}
-          <span className="mx-6 text-secondary/50">•</span>
           {activeNotices.map((notice, idx) => (
             <div key={`${notice.id}-dup`} className="inline-flex items-center px-4">
               {notice.link_url ? (
-                <Link 
-                  to={notice.link_url.startsWith('/') ? (notice.link_url as any) : undefined}
-                  className="font-hindi text-sm hover:text-secondary transition-colors"
-                  {...(notice.link_url.startsWith('/') ? {} : { 
-                    tagName: 'a',
-                    href: notice.link_url,
-                    target: "_blank",
-                    rel: "noopener noreferrer"
-                  } as any)}
-                >
-                  {notice.content}
-                  {notice.link_text && (
-                    <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
-                  )}
-                </Link>
+                notice.link_url.startsWith('/') ? (
+                  <Link 
+                    to={notice.link_url as any}
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </Link>
+                ) : (
+                  <a 
+                    href={notice.link_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </a>
+                )
               ) : (
                 <span className="font-hindi text-sm">{notice.content}</span>
               )}
-              {idx < activeNotices.length - 1 && <span className="mx-6 text-secondary/50">•</span>}
+              <span className="mx-6 text-secondary/50">•</span>
             </div>
           ))}
         </div>
