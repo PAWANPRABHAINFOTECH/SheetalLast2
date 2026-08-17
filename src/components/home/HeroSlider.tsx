@@ -73,7 +73,7 @@ export function HeroSlider() {
                   className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-6 text-xl font-hindi rounded-full shadow-xl"
                   asChild
                 >
-                  <a href={slide.button_url}>{slide.button_text}</a>
+                  <Link to={slide.button_url as any}>{slide.button_text}</Link>
                 </Button>
               )}
             </div>
