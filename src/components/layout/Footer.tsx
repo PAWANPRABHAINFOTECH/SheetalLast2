@@ -138,14 +138,28 @@ export function Footer() {
         )}
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="font-hindi text-sm text-primary-foreground/60 text-center">
-            © 2026 शीतल शिवालय समिति. सर्वाधिकार सुरक्षित।
-          </p>
-          <div className="flex gap-6 font-hindi text-xs text-primary-foreground/60">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
-            <Link to="/refund-policy" className="hover:text-white transition-colors">Refund Policy</Link>
+        <div className="pt-8 border-t border-white/10 flex flex-col items-center gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4">
+            <p className="font-hindi text-sm text-primary-foreground/60 text-center">
+              © 2026 शीतल शिवालय समिति. सर्वाधिकार सुरक्षित।
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 font-hindi text-xs text-primary-foreground/60">
+              <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
+              <Link to="/refund-policy" className="hover:text-white transition-colors">Refund Policy</Link>
+            </div>
+          </div>
+          
+          <div className="text-[10px] md:text-xs font-inter tracking-wider text-primary-foreground/40 text-center uppercase">
+            Designed & Developed by{" "}
+            <a 
+              href="https://pawanprabhainfotech.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-secondary transition-colors font-semibold"
+            >
+              PAWAN PRABHA INFOTECH
+            </a>
           </div>
         </div>
       </div>
