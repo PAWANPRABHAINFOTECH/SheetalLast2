@@ -22,7 +22,13 @@ export function EnquiriesSection() {
   });
 
   const update = useMutation({
-    mutationFn: async ({ id, patch }: { id: string; patch: Record<string, boolean> }) => {
+    mutationFn: async ({
+      id,
+      patch,
+    }: {
+      id: string;
+      patch: { is_read?: boolean; is_replied?: boolean };
+    }) => {
       const { error } = await supabase.from("contact_enquiries").update(patch).eq("id", id);
       if (error) throw error;
     },
