@@ -35,18 +35,48 @@ function AdminPage() {
 
   if (!session) return <AdminLogin />
 
-  if (!isAdmin) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-muted/30 p-6 font-hindi text-center">
-        <p className="text-lg font-semibold text-destructive">
-          आपके खाते को एडमिन अनुमति प्राप्त नहीं है।
-        </p>
-        <Button variant="outline" onClick={() => void supabase.auth.signOut()}>
-          लॉगआउट
-        </Button>
-      </div>
-    )
+  if (!isAdmin) return <NoAccess />
+
+  return <AdminShell email={session.user.email ?? ''} />
+}
+
+function NoAccess() {
+  const [claiming, setClaiming] = useState(false)
+
+  const claim = async () => {
+    setClaiming(true)
+    const { data, error } = await supabase.rpc('claim_first_admin')
+    setClaiming(false)
+    if (error) {
+      toast.error(error.message)
+      return
+    }
+    if (data) {
+      toast.success('आप एडमिन बन गए हैं')
+      window.location.reload()
+    } else {
+      toast.error('एडमिन पहले से मौजूद है — कृपया अधिकृत खाते से लॉगिन करें')
+    }
   }
+
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-muted/30 p-6 font-hindi text-center">
+      <p className="text-lg font-semibold text-destructive">
+        आपके खाते को एडमिन अनुमति प्राप्त नहीं है।
+      </p>
+      <p className="max-w-md text-sm text-muted-foreground">
+        यदि यह वेबसाइट का पहला सेटअप है, तो नीचे क्लिक करके स्वयं को एडमिन बनाएँ। एक बार एडमिन बनने के
+        बाद यह विकल्प बंद हो जाएगा।
+      </p>
+      <Button onClick={() => void claim()} disabled={claiming} className="gap-2">
+        {claiming && <Loader2 className="h-4 w-4 animate-spin" />}
+        पहला एडमिन बनें
+      </Button>
+      <Button variant="outline" onClick={() => void supabase.auth.signOut()}>
+        लॉगआउट
+      </Button>
+    </div>
+  )
 
   return <AdminShell email={session.user.email ?? ''} />
 }
