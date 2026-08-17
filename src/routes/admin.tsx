@@ -142,8 +142,15 @@ function AdminLogin() {
             </div>
             <Button type="submit" disabled={submitting} className="w-full py-6 text-lg bg-primary">
               {submitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-              लॉगिन करें
+              {mode === 'login' ? 'लॉगिन करें' : 'खाता बनाएँ'}
             </Button>
+            <button
+              type="button"
+              onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
+              className="w-full text-center text-sm font-semibold text-primary underline-offset-4 hover:underline"
+            >
+              {mode === 'login' ? 'पहली बार सेटअप? खाता बनाएँ' : 'पहले से खाता है? लॉगिन करें'}
+            </button>
             <p className="text-center text-sm text-muted-foreground">
               सुरक्षित पहुँच के लिए अधिकृत विवरण दर्ज करें।
             </p>
