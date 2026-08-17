@@ -27,7 +27,7 @@ export function TempleTimings() {
               <div key={i} className="p-6 animate-pulse bg-muted/20" />
             ))
           ) : timings?.map((item) => {
-            const Icon = iconMap[item.title] || iconMap.default;
+            const Icon = iconMap[item.title] || iconMap['default'];
             return (
               <div key={item.id} className="flex items-center gap-4 p-6 hover:bg-primary/5 transition-colors">
                 <div className="p-3 rounded-full bg-secondary/10 text-secondary">
