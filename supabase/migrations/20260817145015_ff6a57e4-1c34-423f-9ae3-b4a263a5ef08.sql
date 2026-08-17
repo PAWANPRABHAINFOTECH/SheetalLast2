@@ -1,0 +1,1 @@
+UPDATE site_settings SET phone = '+91 831 932 2374', whatsapp = '+91 831 932 2374' WHERE id = (SELECT id FROM site_settings LIMIT 1);
