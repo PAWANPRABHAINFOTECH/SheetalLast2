@@ -14,7 +14,477 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      advertisements: {
+        Row: {
+          button_text: string | null
+          button_url: string | null
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          end_date: string | null
+          id: string
+          image_url: string
+          is_active: boolean | null
+          start_date: string | null
+          title: string | null
+        }
+        Insert: {
+          button_text?: string | null
+          button_url?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          end_date?: string | null
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          start_date?: string | null
+          title?: string | null
+        }
+        Update: {
+          button_text?: string | null
+          button_url?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          end_date?: string | null
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          start_date?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
+      chairman_messages: {
+        Row: {
+          created_at: string | null
+          designation: string | null
+          id: string
+          is_active: boolean | null
+          message: string
+          name: string
+          photo_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          designation?: string | null
+          id?: string
+          is_active?: boolean | null
+          message: string
+          name: string
+          photo_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          designation?: string | null
+          id?: string
+          is_active?: boolean | null
+          message?: string
+          name?: string
+          photo_url?: string | null
+        }
+        Relationships: []
+      }
+      contact_enquiries: {
+        Row: {
+          address: string | null
+          created_at: string | null
+          email: string | null
+          full_name: string
+          id: string
+          is_read: boolean | null
+          is_replied: boolean | null
+          message: string | null
+          mobile: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name: string
+          id?: string
+          is_read?: boolean | null
+          is_replied?: boolean | null
+          message?: string | null
+          mobile: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string
+          id?: string
+          is_read?: boolean | null
+          is_replied?: boolean | null
+          message?: string | null
+          mobile?: string
+        }
+        Relationships: []
+      }
+      gallery: {
+        Row: {
+          category: Database["public"]["Enums"]["gallery_category"] | null
+          created_at: string | null
+          description: string | null
+          event_date: string | null
+          id: string
+          image_url: string
+          is_active: boolean | null
+          title: string | null
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["gallery_category"] | null
+          created_at?: string | null
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          title?: string | null
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["gallery_category"] | null
+          created_at?: string | null
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          title?: string | null
+        }
+        Relationships: []
+      }
+      hero_slides: {
+        Row: {
+          button_text: string | null
+          button_url: string | null
+          created_at: string | null
+          display_order: number | null
+          id: string
+          image_url: string
+          is_active: boolean | null
+          subtitle: string | null
+          title: string | null
+        }
+        Insert: {
+          button_text?: string | null
+          button_url?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          subtitle?: string | null
+          title?: string | null
+        }
+        Update: {
+          button_text?: string | null
+          button_url?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          subtitle?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
+      live_darshan: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          mode: string | null
+          video_url: string | null
+          youtube_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          mode?: string | null
+          video_url?: string | null
+          youtube_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          mode?: string | null
+          video_url?: string | null
+          youtube_url?: string | null
+        }
+        Relationships: []
+      }
+      members: {
+        Row: {
+          category: Database["public"]["Enums"]["member_category"] | null
+          created_at: string | null
+          designation: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          name: string
+          photo_url: string | null
+          show_on_home: boolean | null
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["member_category"] | null
+          created_at?: string | null
+          designation?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          photo_url?: string | null
+          show_on_home?: boolean | null
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["member_category"] | null
+          created_at?: string | null
+          designation?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          photo_url?: string | null
+          show_on_home?: boolean | null
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          created_at: string | null
+          featured_image_url: string | null
+          full_description: string | null
+          id: string
+          is_active: boolean | null
+          publish_date: string | null
+          short_description: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          featured_image_url?: string | null
+          full_description?: string | null
+          id?: string
+          is_active?: boolean | null
+          publish_date?: string | null
+          short_description?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          featured_image_url?: string | null
+          full_description?: string | null
+          id?: string
+          is_active?: boolean | null
+          publish_date?: string | null
+          short_description?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      notices: {
+        Row: {
+          content: string
+          created_at: string | null
+          end_date: string | null
+          id: string
+          is_active: boolean | null
+          link_text: string | null
+          link_url: string | null
+          priority: Database["public"]["Enums"]["notice_priority"] | null
+          start_date: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          priority?: Database["public"]["Enums"]["notice_priority"] | null
+          start_date?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          priority?: Database["public"]["Enums"]["notice_priority"] | null
+          start_date?: string | null
+        }
+        Relationships: []
+      }
+      policies: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          last_revised: string | null
+          policy_type: string
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          last_revised?: string | null
+          policy_type: string
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          last_revised?: string | null
+          policy_type?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          address: string | null
+          bank_account_name: string | null
+          bank_account_number: string | null
+          bank_branch: string | null
+          bank_ifsc: string | null
+          bank_name: string | null
+          created_at: string | null
+          donation_qr_url: string | null
+          email: string | null
+          facebook_enabled: boolean | null
+          facebook_url: string | null
+          google_maps_embed_url: string | null
+          id: string
+          instagram_enabled: boolean | null
+          instagram_url: string | null
+          latitude: string | null
+          logo_url: string | null
+          longitude: string | null
+          phone: string | null
+          registration_no: string | null
+          site_name: string | null
+          updated_at: string | null
+          upi_id: string | null
+          whatsapp: string | null
+          youtube_enabled: boolean | null
+          youtube_url: string | null
+        }
+        Insert: {
+          address?: string | null
+          bank_account_name?: string | null
+          bank_account_number?: string | null
+          bank_branch?: string | null
+          bank_ifsc?: string | null
+          bank_name?: string | null
+          created_at?: string | null
+          donation_qr_url?: string | null
+          email?: string | null
+          facebook_enabled?: boolean | null
+          facebook_url?: string | null
+          google_maps_embed_url?: string | null
+          id?: string
+          instagram_enabled?: boolean | null
+          instagram_url?: string | null
+          latitude?: string | null
+          logo_url?: string | null
+          longitude?: string | null
+          phone?: string | null
+          registration_no?: string | null
+          site_name?: string | null
+          updated_at?: string | null
+          upi_id?: string | null
+          whatsapp?: string | null
+          youtube_enabled?: boolean | null
+          youtube_url?: string | null
+        }
+        Update: {
+          address?: string | null
+          bank_account_name?: string | null
+          bank_account_number?: string | null
+          bank_branch?: string | null
+          bank_ifsc?: string | null
+          bank_name?: string | null
+          created_at?: string | null
+          donation_qr_url?: string | null
+          email?: string | null
+          facebook_enabled?: boolean | null
+          facebook_url?: string | null
+          google_maps_embed_url?: string | null
+          id?: string
+          instagram_enabled?: boolean | null
+          instagram_url?: string | null
+          latitude?: string | null
+          logo_url?: string | null
+          longitude?: string | null
+          phone?: string | null
+          registration_no?: string | null
+          site_name?: string | null
+          updated_at?: string | null
+          upi_id?: string | null
+          whatsapp?: string | null
+          youtube_enabled?: boolean | null
+          youtube_url?: string | null
+        }
+        Relationships: []
+      }
+      temple_info: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          section_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          section_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          section_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      temple_timings: {
+        Row: {
+          created_at: string | null
+          display_order: number | null
+          id: string
+          timing: string
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          timing: string
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          timing?: string
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +493,19 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      gallery_category:
+        | "मंदिर"
+        | "धार्मिक आयोजन"
+        | "पूजा"
+        | "बैठक"
+        | "सामाजिक गतिविधियाँ"
+        | "अन्य"
+      member_category:
+        | "संरक्षक"
+        | "पदाधिकारी"
+        | "स्थाई कार्यकारिणी"
+        | "कार्यकारी सदस्य"
+      notice_priority: "low" | "medium" | "high"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +632,22 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      gallery_category: [
+        "मंदिर",
+        "धार्मिक आयोजन",
+        "पूजा",
+        "बैठक",
+        "सामाजिक गतिविधियाँ",
+        "अन्य",
+      ],
+      member_category: [
+        "संरक्षक",
+        "पदाधिकारी",
+        "स्थाई कार्यकारिणी",
+        "कार्यकारी सदस्य",
+      ],
+      notice_priority: ["low", "medium", "high"],
+    },
   },
 } as const
