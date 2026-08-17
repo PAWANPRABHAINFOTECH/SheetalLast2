@@ -34,7 +34,7 @@ export function LiveDarshan() {
         ) : live.mode === 'youtube' && live.youtube_url ? (
           <iframe
             className="w-full h-full"
-            src={`https://www.youtube.com/embed/${getYouTubeId(live.youtube_url) ?? ''}?autoplay=0`}
+            src={`https://www.youtube.com/embed/${getYouTubeId(live.youtube_url || "") ?? ''}?autoplay=0`}
             title="Live Darshan"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

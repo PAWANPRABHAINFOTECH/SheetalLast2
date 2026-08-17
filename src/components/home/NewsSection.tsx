@@ -47,7 +47,7 @@ export function NewsSection() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
                   <Calendar className="h-4 w-4" />
-                  <span className="font-inter">{new Date(item.publish_date).toLocaleDateString('hi-IN')}</span>
+                  <span className="font-inter">{new Date(item.publish_date || Date.now()).toLocaleDateString('hi-IN')}</span>
                 </div>
                 <h3 className="font-hindi text-xl font-bold text-primary mb-3 line-clamp-2">
                   {item.title}
