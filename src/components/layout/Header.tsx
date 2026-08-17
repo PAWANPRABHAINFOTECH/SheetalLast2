@@ -20,7 +20,7 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-primary/10">
+    <header className="z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-primary/10">
       <div className="container mx-auto px-4 py-2 md:py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
           
