@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useHeroSlides } from "@/lib/temple.hooks";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function HeroSlider() {
   const { data: slides, isLoading } = useHeroSlides();
