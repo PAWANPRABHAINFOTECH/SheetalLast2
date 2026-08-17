@@ -30,7 +30,7 @@ export function HeroSlider() {
     return () => clearInterval(interval);
   }, [slides, isHovered, nextSlide]);
 
-  const displaySlides = slides?.length ? slides.slice(0, 3) : [
+  const displaySlides = slides?.length ? slides : [
     {
       id: "demo-1",
       title: "शीतल शिवालय मंदिर",
