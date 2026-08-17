@@ -60,7 +60,7 @@ export function Header() {
                 </a>
               </Button>
             )}
-            <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-md">
+            <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}>
               <Heart className="mr-2 h-4 w-4 fill-current" />
               दान करें
             </Button>
