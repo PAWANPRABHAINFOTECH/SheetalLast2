@@ -10,7 +10,13 @@ export function FeaturedMembers() {
   if (isLoading) return <div className="h-96 w-full animate-pulse bg-muted rounded-3xl" />;
 
   // Display top 3 main members (e.g., President, Secretary, Treasurer)
-  const featured = members?.filter(m => m.show_on_home).slice(0, 3) || [];
+  // Fallback to first 3 if none marked as show_on_home
+  let featured = members?.filter(m => m.show_on_home) || [];
+  if (featured.length === 0 && members) {
+    featured = members.slice(0, 3);
+  } else {
+    featured = featured.slice(0, 3);
+  }
 
   return (
     <div>
