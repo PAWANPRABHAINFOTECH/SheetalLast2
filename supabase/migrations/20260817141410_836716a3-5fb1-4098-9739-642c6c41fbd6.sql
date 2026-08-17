@@ -1,0 +1,4 @@
+UPDATE public.members SET photo_url = '/__l5e/assets-v1/a5fb90f4-4d36-4bbc-9cf5-389547e5f7a4/pritam_singh_ahirwar.jpg' WHERE id = 'ce2de5a8-90db-4aef-86ad-30d4f4c2fe72';
+UPDATE public.members SET photo_url = '/__l5e/assets-v1/d0bb53f5-565a-4447-8e4b-40faf0ac4a41/manoj_gavande.jpg' WHERE id = '809af3b0-eb62-45a8-a385-65aa8102d721';
+UPDATE public.members SET photo_url = '/__l5e/assets-v1/abb0a775-f142-4e10-913a-ddc934702322/ajay_parashar.jpg' WHERE id = '743cbda6-3391-438a-bf99-52f5f6c80d08';
+UPDATE public.members SET photo_url = NULL WHERE id NOT IN ('ce2de5a8-90db-4aef-86ad-30d4f4c2fe72', '809af3b0-eb62-45a8-a385-65aa8102d721', '743cbda6-3391-438a-bf99-52f5f6c80d08');
