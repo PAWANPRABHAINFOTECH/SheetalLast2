@@ -1,0 +1,132 @@
+import { createServerFn } from "@tanstack/react-start";
+import { supabase } from "@/integrations/supabase/client";
+
+export const getSiteSettings = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("site_settings")
+      .select("*")
+      .single();
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getHeroSlides = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("hero_slides")
+      .select("*")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getActiveNotices = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("notices")
+      .select("*")
+      .eq("is_active", true)
+      .order("priority", { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getTempleInfo = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("temple_info")
+      .select("*");
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getTempleTimings = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("temple_timings")
+      .select("*")
+      .order("display_order", { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getMembers = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("members")
+      .select("*")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getNews = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("news")
+      .select("*")
+      .eq("is_active", true)
+      .order("publish_date", { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getGallery = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("gallery")
+      .select("*")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getLiveDarshan = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("live_darshan")
+      .select("*")
+      .eq("is_active", true)
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getChairmanMessage = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("chairman_messages")
+      .select("*")
+      .eq("is_active", true)
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  });
+
+export const getAdvertisements = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("advertisements")
+      .select("*")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  });
