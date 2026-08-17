@@ -5,75 +5,99 @@ import { Link } from "@tanstack/react-router";
 export function NoticeTicker() {
   const { data: notices, isLoading } = useNotices();
 
-  if (isLoading || !notices || notices.length === 0) return null;
+  // Filter only current notices based on date if present
+  const activeNotices = notices?.filter(notice => {
+    if (!notice.is_active) return false;
+    const now = new Date();
+    if (notice.start_date && new Date(notice.start_date) > now) return false;
+    if (notice.end_date && new Date(notice.end_date) < now) return false;
+    return true;
+  }) || [];
+
+  if (isLoading || activeNotices.length === 0) return null;
 
   return (
-    <div className="bg-primary/5 border-y border-primary/10 py-2 overflow-hidden whitespace-nowrap relative">
-      <div className="container mx-auto px-4 flex items-center">
-        <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-hindi z-10 mr-4 shrink-0">
-          <Megaphone className="h-4 w-4" />
-          <span>सूचना:</span>
-        </div>
-        
-        <div className="flex animate-marquee hover:pause-marquee">
-          {notices.map((notice, idx) => {
-            const isInternal = notice.link_url?.startsWith('/');
-            const content = (
-              <div className="inline-flex items-center mx-8">
-                {notice.link_url ? (
-                  <div className="font-hindi text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2">
+    <div className="bg-primary text-primary-foreground h-[36px] md:h-[42px] overflow-hidden flex items-center relative z-[60]">
+      <div className="flex items-center h-full px-4 bg-primary z-10 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
+        <Megaphone className="h-4 w-4 mr-2 animate-bounce" />
+        <span className="font-hindi text-sm font-bold whitespace-nowrap">महत्वपूर्ण सूचना</span>
+        <span className="mx-2 opacity-50">|</span>
+      </div>
+      
+      <div className="flex-1 overflow-hidden relative h-full flex items-center">
+        <div className="flex animate-marquee hover:pause-marquee whitespace-nowrap">
+          {activeNotices.map((notice, idx) => (
+            <div key={notice.id} className="inline-flex items-center px-4">
+              {notice.link_url ? (
+                notice.link_url.startsWith('/') ? (
+                  <Link 
+                    to={notice.link_url as any}
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
                     {notice.content}
                     {notice.link_text && (
-                      <span className="text-primary underline decoration-dotted">{notice.link_text}</span>
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
                     )}
-                  </div>
+                  </Link>
                 ) : (
-                  <span className="font-hindi text-sm text-foreground">{notice.content}</span>
-                )}
-              </div>
-            );
-
-            if (notice.link_url) {
-              if (isInternal) {
-                return <Link key={notice.id} to={notice.link_url as any}>{content}</Link>;
-              }
-              return <a key={notice.id} href={notice.link_url} target="_blank" rel="noopener noreferrer">{content}</a>;
-            }
-            return <div key={notice.id}>{content}</div>;
-          })}
+                  <a 
+                    href={notice.link_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </a>
+                )
+              ) : (
+                <span className="font-hindi text-sm">{notice.content}</span>
+              )}
+              <span className="mx-6 text-secondary/50">•</span>
+            </div>
+          ))}
           {/* Duplicate for seamless scrolling */}
-          {notices.map((notice, idx) => {
-            const isInternal = notice.link_url?.startsWith('/');
-            const content = (
-              <div className="inline-flex items-center mx-8">
-                {notice.link_url ? (
-                  <div className="font-hindi text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2">
+          {activeNotices.map((notice, idx) => (
+            <div key={`${notice.id}-dup`} className="inline-flex items-center px-4">
+              {notice.link_url ? (
+                notice.link_url.startsWith('/') ? (
+                  <Link 
+                    to={notice.link_url as any}
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
                     {notice.content}
                     {notice.link_text && (
-                      <span className="text-primary underline decoration-dotted">{notice.link_text}</span>
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
                     )}
-                  </div>
+                  </Link>
                 ) : (
-                  <span className="font-hindi text-sm text-foreground">{notice.content}</span>
-                )}
-              </div>
-            );
-
-            if (notice.link_url) {
-              if (isInternal) {
-                return <Link key={`${notice.id}-dup`} to={notice.link_url as any}>{content}</Link>;
-              }
-              return <a key={`${notice.id}-dup`} href={notice.link_url} target="_blank" rel="noopener noreferrer">{content}</a>;
-            }
-            return <div key={`${notice.id}-dup`}>{content}</div>;
-          })}
+                  <a 
+                    href={notice.link_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                  >
+                    {notice.content}
+                    {notice.link_text && (
+                      <span className="ml-2 underline decoration-dotted">{notice.link_text}</span>
+                    )}
+                  </a>
+                )
+              ) : (
+                <span className="font-hindi text-sm">{notice.content}</span>
+              )}
+              <span className="mx-6 text-secondary/50">•</span>
+            </div>
+          ))}
         </div>
       </div>
       
       <style>{`
         .animate-marquee {
           display: inline-flex;
-          animation: marquee 40s linear infinite;
+          animation: marquee 30s linear infinite;
         }
         .pause-marquee {
           animation-play-state: paused;
