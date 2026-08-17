@@ -30,31 +30,41 @@ export function HeroSlider() {
     return () => clearInterval(interval);
   }, [slides, isHovered, nextSlide]);
 
-  if (isLoading) {
+  const displaySlides = slides?.length ? slides.slice(0, 3) : [
+    {
+      id: "demo-1",
+      title: "शीतल शिवालय मंदिर",
+      subtitle: "शीतल सिटीज, मंडीदीप, जिला-रायसेन (मध्यप्रदेश)",
+      image_url: "https://images.unsplash.com/photo-1609766914176-e7130a74bc33?auto=format&fit=crop&q=80&w=2000",
+      button_text: "दर्शन करें",
+      button_url: "/about"
+    },
+    {
+      id: "demo-2",
+      title: "भव्य शिव मंदिर",
+      subtitle: "आध्यात्मिक शांति और भक्ति का केंद्र",
+      image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=2000",
+      button_text: "लाइव दर्शन",
+      button_url: "/live-darshan"
+    },
+    {
+      id: "demo-3",
+      title: "समिति की गतिविधियां",
+      subtitle: "आगामी धार्मिक आयोजन एवं मंदिर के विकास कार्यों की जानकारी",
+      image_url: "https://images.unsplash.com/photo-1600100395420-40aa0e665948?auto=format&fit=crop&q=80&w=2000",
+      button_text: "समाचार देखें",
+      button_url: "/news"
+    }
+  ];
+
+  if (isLoading && !slides) {
     return (
-      <div className="relative h-[300px] md:h-[450px] lg:h-[550px] w-full bg-muted animate-pulse overflow-hidden">
+      <div className="relative h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full bg-muted animate-pulse overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-muted to-muted/50" />
       </div>
     );
   }
 
-  // Filter to exactly 3 slides if we have more, or show what we have
-  const displaySlides = slides?.slice(0, 3) || [];
-
-  if (displaySlides.length === 0) {
-    return (
-      <div className="h-[300px] md:h-[450px] lg:h-[550px] w-full bg-primary/5 flex items-center justify-center border-b border-primary/10">
-        <div className="text-center px-4 max-w-2xl">
-          <h2 className="font-hindi text-3xl md:text-5xl font-bold text-primary mb-4">
-            शीतल शिवालय समिति
-          </h2>
-          <p className="font-hindi text-lg md:text-xl text-foreground/80">
-            मंडीदीप, जिला-रायसेन (मध्यप्रदेश)
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <section 
