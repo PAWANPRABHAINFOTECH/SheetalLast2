@@ -77,8 +77,6 @@ function NoAccess() {
       </Button>
     </div>
   )
-
-  return <AdminShell email={session.user.email ?? ''} />
 }
 
 function AdminLogin() {
