@@ -120,7 +120,7 @@ function AdminLogin() {
           <CardTitle className="font-hindi text-2xl">एडमिन पैनल</CardTitle>
         </CardHeader>
         <CardContent className="p-8">
-          <form className="space-y-6" onSubmit={handleLogin}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <label className="font-bold">ईमेल</label>
               <Input
