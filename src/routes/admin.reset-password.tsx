@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Loader2, CheckCircle2 } from 'lucide-react'
+import { Loader2, CheckCircle2, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 
 export const Route = createFileRoute('/admin/reset-password')({
