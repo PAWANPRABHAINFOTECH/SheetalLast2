@@ -20,7 +20,7 @@ export const Route = createFileRoute('/contact')({
       {
         name: 'description',
         content:
-          'शीतल शिवालय समिति, शीतल सिटीज़ मंडीदीप (रायसेन) से संपर्क करें — पता, फ़ोन, ईमेल और संदेश भेजने की सुविधा।',
+          'शीतल शिवालय समिति, शीतल सिटी मंडीदीप (रायसेन) से संपर्क करें — पता, फ़ोन, ईमेल और संदेश भेजने की सुविधा।',
       },
       { property: 'og:title', content: 'संपर्क करें | शीतल शिवालय समिति' },
       {
@@ -83,7 +83,7 @@ function ContactPage() {
             <div className="space-y-6">
               <div className="flex gap-4">
                 <MapPin className="h-6 w-6 text-secondary shrink-0" />
-                <p className="text-lg">{settings?.address || "शीतल सिटीज, मंडीदीप, रायसेन"}</p>
+                <p className="text-lg">{settings?.address || "शीतल सिटी, मंडीदीप, रायसेन"}</p>
               </div>
               <div className="flex gap-4">
                 <Phone className="h-6 w-6 text-secondary shrink-0" />

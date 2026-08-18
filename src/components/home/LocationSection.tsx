@@ -24,13 +24,13 @@ export function LocationSection() {
             <div>
               <h4 className="font-hindi text-xl font-bold text-primary">पता</h4>
               <p className="font-hindi text-lg text-foreground/80 leading-relaxed">
-                {settings?.address || "शीतल सिटीज, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046"}
+                {settings?.address || "शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046"}
               </p>
             </div>
           </div>
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full font-hindi px-8" asChild>
             <a 
-              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(settings?.address || "शीतल सिटीज, मंडीदीप, रायसेन")}`}
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(settings?.address || "शीतल सिटी, मंडीदीप, रायसेन")}`}
               target="_blank" 
               rel="noopener noreferrer"
             >
