@@ -59,8 +59,12 @@ function AdminLoginPage() {
       toast.error('कृपया पहले अपना ईमेल दर्ज करें')
       return
     }
+    const currentUrl = new URL(window.location.href);
+    const redirectTo = `${currentUrl.origin}/auth/callback?type=recovery`;
+    console.log("Password reset redirect:", redirectTo);
+    
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/callback?type=recovery`,
+      redirectTo: redirectTo,
     })
     if (error) {
       toast.error('त्रुटि: ' + error.message)

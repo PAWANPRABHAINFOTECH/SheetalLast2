@@ -14,33 +14,60 @@ function AuthCallbackPage() {
 
   useEffect(() => {
     const handleAuth = async () => {
-      // The session should be handled automatically by Supabase client 
-      // when it sees the access_token in the URL hash.
-      const { data: { session }, error } = await supabase.auth.getSession()
+      console.log('Auth Callback triggered, URL:', window.location.href);
+      
+      // Small delay to ensure the Supabase client has time to catch the hash
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // 1. Check for PKCE 'code' in search params
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = searchParams.get('code');
+      
+      if (code) {
+        console.log('Auth Callback: Exchanging PKCE code...');
+        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+        if (exchangeError) {
+          console.error('PKCE exchange error:', exchangeError);
+          toast.error('प्रमाणीकरण विफल: ' + exchangeError.message);
+          void navigate({ to: '/admin/login', replace: true });
+          return;
+        }
+      }
+
+      // 2. Get session (this handles both hash-based and code-based results)
+      const { data: { session }, error } = await supabase.auth.getSession();
 
       if (error) {
-        toast.error('प्रमाणीकरण विफल: ' + error.message)
-        void navigate({ to: '/admin/login', replace: true })
-        return
+        console.error('Auth Callback: Session error:', error);
+        toast.error('प्रमाणीकरण विफल: ' + error.message);
+        void navigate({ to: '/admin/login', replace: true });
+        return;
       }
+
+      // 3. Determine redirect path
+      const hash = window.location.hash || '';
+      const type = searchParams.get('type') || (hash.includes('type=recovery') ? 'recovery' : '');
+
+      console.log('Auth Callback: Processed state:', { hasSession: !!session, type });
 
       if (session) {
-        // If it's a recovery flow (password reset), redirect to reset-password
-        const isRecovery = window.location.hash.includes('type=recovery')
-        if (isRecovery) {
-          void navigate({ to: '/admin/reset-password', replace: true })
+        if (type === 'recovery') {
+          toast.success('पासवर्ड रीसेट के लिए तैयार');
+          void navigate({ to: '/admin/reset-password', replace: true });
         } else {
-          // Default to dashboard for other successful auths (like signup verification)
-          void navigate({ to: '/admin/dashboard', replace: true })
+          toast.success('लॉगिन सफल');
+          void navigate({ to: '/admin/dashboard', replace: true });
         }
       } else {
-        // Fallback if no session found immediately
-        void navigate({ to: '/admin/login', replace: true })
+        // No session found - maybe the link was already used or expired
+        console.warn('Auth Callback: No session found after exchange/hash processing');
+        toast.error('सत्र नहीं मिला। कृपया पुनः प्रयास करें।');
+        void navigate({ to: '/admin/login', replace: true });
       }
-    }
+    };
 
-    handleAuth()
-  }, [navigate])
+    handleAuth();
+  }, [navigate]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-4 font-hindi">
