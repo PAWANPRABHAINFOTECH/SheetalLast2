@@ -9,7 +9,13 @@ export function TempleTimings() {
     "दर्शन": Clock,
     "प्रातःकालीन आरती": Sun,
     "संध्या आरती": Moon,
-    "हवन एवं पूजन": Sparkles,
+    "हवन एवं पूजन": (props: any) => (
+      <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2c1 2 2 3.5 2 5.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2 1-3.5 2-5.5 1 2 2 3.5 2 5.5"/>
+        <path d="M18 10c1 2 2 3.5 2 5.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2 1-3.5 2-5.5 1 2 2 3.5 2 5.5"/>
+        <path d="M6 10c1 2 2 3.5 2 5.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2 1-3.5 2-5.5 1 2 2 3.5 2 5.5"/>
+      </svg>
+    ),
     "default": Sparkles
   };
 
