@@ -46,7 +46,7 @@ export function DonationModal() {
           <img src={logoAsset.url} alt="Logo" className="h-20 w-20 mx-auto mb-4 bg-white rounded-full p-2 relative z-10" />
           <DialogTitle className="font-hindi text-3xl font-bold mb-2 relative z-10">शीतल शिवालय समिति</DialogTitle>
           <p className="font-hindi text-sm text-primary-foreground/80 relative z-10">
-            मंडीदीप, जिला-रायसेन (मध्यप्रदेश) – 462046
+            शीतल सिटी, मंडीदीप, जिला-रायसेन (मध्यप्रदेश) – 462046
           </p>
         </div>
 

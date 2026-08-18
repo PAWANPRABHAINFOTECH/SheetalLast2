@@ -33,13 +33,6 @@ export function FloatingActions() {
         </a>
       </Button>
 
-      <Button 
-        size="icon" 
-        className="h-14 w-14 rounded-full bg-accent hover:bg-accent/90 shadow-2xl text-accent-foreground animate-bounce transition-transform hover:scale-110"
-        onClick={openModal}
-      >
-        <Heart className="h-8 w-8 fill-current" />
-      </Button>
     </div>
   );
 }

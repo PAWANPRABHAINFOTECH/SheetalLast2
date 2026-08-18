@@ -37,7 +37,7 @@ export function Header() {
                 शीतल शिवालय समिति
               </span>
               <span className="font-hindi truncate text-[10px] text-foreground/70 md:text-xs">
-                शीतल सिटीज, मंडीदीप, जिला-रायसेन (म.प्र.)
+                शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
               </span>
             </div>
           </Link>
