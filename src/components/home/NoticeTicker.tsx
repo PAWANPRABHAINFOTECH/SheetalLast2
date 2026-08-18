@@ -14,7 +14,7 @@ export function NoticeTicker() {
     return true;
   }) || [];
 
-  if (isLoading || activeNotices.length === 0) return null;
+  if (isLoading) return null;
 
   return (
     <div className="bg-primary text-primary-foreground h-[36px] md:h-[42px] overflow-hidden flex items-center relative z-[60]">
@@ -26,7 +26,7 @@ export function NoticeTicker() {
       
       <div className="flex-1 overflow-hidden relative h-full flex items-center">
         <div className="flex animate-marquee hover:pause-marquee whitespace-nowrap">
-          {activeNotices.map((notice, idx) => (
+          {activeNotices.length > 0 ? activeNotices.map((notice, idx) => (
             <div key={notice.id} className="inline-flex items-center px-4">
               {notice.link_url ? (
                 notice.link_url.startsWith('/') ? (
@@ -57,9 +57,14 @@ export function NoticeTicker() {
               )}
               <span className="mx-6 text-secondary/50">•</span>
             </div>
-          ))}
+          )) : (
+            <div className="inline-flex items-center px-4">
+              <span className="font-hindi text-sm">शीतल शिवालय समिति, मंडीदीप में आपका स्वागत है।</span>
+              <span className="mx-6 text-secondary/50">•</span>
+            </div>
+          )}
           {/* Duplicate for seamless scrolling */}
-          {activeNotices.map((notice, idx) => (
+          {activeNotices.length > 0 ? activeNotices.map((notice, idx) => (
             <div key={`${notice.id}-dup`} className="inline-flex items-center px-4">
               {notice.link_url ? (
                 notice.link_url.startsWith('/') ? (
@@ -90,7 +95,12 @@ export function NoticeTicker() {
               )}
               <span className="mx-6 text-secondary/50">•</span>
             </div>
-          ))}
+          )) : (
+            <div className="inline-flex items-center px-4">
+              <span className="font-hindi text-sm">शीतल शिवालय समिति, मंडीदीप में आपका स्वागत है।</span>
+              <span className="mx-6 text-secondary/50">•</span>
+            </div>
+          )}
         </div>
       </div>
       
