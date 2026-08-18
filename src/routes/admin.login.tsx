@@ -59,9 +59,8 @@ function AdminLoginPage() {
       toast.error('कृपया पहले अपना ईमेल दर्ज करें')
       return
     }
-    const targetOrigin = window.location.origin.replace(/\.lovableproject\.com$/, '.lovable.app');
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${targetOrigin}/auth/callback?type=recovery`,
+      redirectTo: `${window.location.origin}/auth/callback?type=recovery`,
     })
     if (error) {
       toast.error('त्रुटि: ' + error.message)
