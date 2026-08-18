@@ -154,55 +154,27 @@ export function Footer() {
               </button>
 
               <div className="pt-6 border-t border-white/5">
-                <h5 className="font-hindi text-lg font-bold text-secondary mb-4">हमें फॉलो करें</h5>
-                <div className="grid grid-cols-1 gap-3">
-                  <a 
-                    href={settings?.facebook_url || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={cn(
-                      "flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group",
-                      (!settings?.facebook_enabled || !settings?.facebook_url) && "hidden"
+                <div className="flex items-center gap-4">
+                  <h5 className="font-hindi text-sm font-bold text-secondary">फॉलो करें</h5>
+                  <div className="flex items-center gap-3">
+                    {socialLinks.map((link) => {
+                      const Icon = link.icon;
+                      return (
+                        <a 
+                          key={link.id}
+                          href={link.url || "#"} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-primary-foreground/80 hover:text-secondary transition-colors"
+                        >
+                          <Icon className="h-5 w-5" />
+                        </a>
+                      );
+                    })}
+                    {socialLinks.length === 0 && (
+                      <p className="text-[10px] text-white/30 italic font-hindi">लिंक एडमिन पैनल से जोड़ें</p>
                     )}
-                  >
-                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
-                      <Facebook className="h-5 w-5 text-secondary group-hover:text-primary" />
-                    </div>
-                    <span className="font-hindi text-sm font-medium">Facebook</span>
-                  </a>
-                  <a 
-                    href={settings?.instagram_url || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={cn(
-                      "flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group",
-                      (!settings?.instagram_enabled || !settings?.instagram_url) && "hidden"
-                    )}
-                  >
-                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
-                      <Instagram className="h-5 w-5 text-secondary group-hover:text-primary" />
-                    </div>
-                    <span className="font-hindi text-sm font-medium">Instagram</span>
-                  </a>
-                  <a 
-                    href={settings?.youtube_url || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={cn(
-                      "flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group",
-                      (!settings?.youtube_enabled || !settings?.youtube_url) && "hidden"
-                    )}
-                  >
-                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
-                      <Youtube className="h-5 w-5 text-secondary group-hover:text-primary" />
-                    </div>
-                    <span className="font-hindi text-sm font-medium">YouTube</span>
-                  </a>
-
-                  {/* Fallback for preview/demo if no links are set */}
-                  {(!settings?.facebook_url && !settings?.instagram_url && !settings?.youtube_url) && (
-                    <p className="text-[10px] text-white/30 italic font-hindi">सोशल मीडिया लिंक एडमिन पैनल से जोड़ें</p>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
