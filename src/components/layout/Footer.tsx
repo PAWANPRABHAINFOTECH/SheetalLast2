@@ -152,18 +152,21 @@ export function Footer() {
                 ऑनलाइन दान दें
               </button>
 
-              <div className="pt-4">
-                <h5 className="font-hindi text-xs font-bold text-secondary/70 uppercase tracking-widest mb-3">हमें फॉलो करें</h5>
-                <div className="flex gap-4">
+              <div className="pt-6 border-t border-white/5">
+                <h5 className="font-hindi text-lg font-bold text-secondary mb-4">हमें फॉलो करें</h5>
+                <div className="grid grid-cols-1 gap-3">
                   {socialLinks.map((social) => (
                     <a 
                       key={social.id} 
                       href={social.url || '#'} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-3 rounded-full bg-white/5 border border-white/10 text-secondary hover:bg-secondary hover:text-primary transition-all shadow-lg"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group"
                     >
-                      <social.icon className="h-5 w-5" />
+                      <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
+                        <social.icon className="h-5 w-5 text-secondary group-hover:text-primary" />
+                      </div>
+                      <span className="font-hindi text-sm font-medium capitalize">{social.id}</span>
                     </a>
                   ))}
                 </div>
