@@ -1,33 +1,36 @@
-# Plan: Header and Ticker Correction
+# Admin Panel Modules Activation Plan
 
-Fix the Header and Important Notice Ticker to match branding requirements, ensuring proper layout, administrative control, and visual polish.
+Enable and verify all requested modules in the Admin Dashboard and ensure they are properly reflected on the public website.
 
-## User Review Required
+## Admin Dashboard Modules
+The following modules are already defined in `SECTIONS` within `src/components/admin/AdminShell.tsx`. I will verify their functionality and ensure they handle data correctly.
 
-> [!IMPORTANT]
-> The logo will be clipped to a circle using CSS. If the source image has critical details in the extreme corners, they will be hidden.
+- **Notice/Ticker**: `notices` table (already in sidebar).
+- **Hero Slider**: `hero_slides` table (already in sidebar).
+- **Gallery**: `gallery` table (already in sidebar).
+- **News**: `news` table (already in sidebar).
+- **Members/Committee**: `members` table (already in sidebar).
+- **Live Darshan**: `live_darshan` table (already in sidebar).
+- **Donations**: Controlled via `site_settings` in "Website Settings" (already in sidebar).
 
-## Ticker & Header Implementation
+## Implementation Details
 
-### 1. Database & Ticker
-- Reorganize `src/routes/index.tsx` so `NoticeTicker` is the absolute first element.
-- Update `NoticeTicker` with a premium slim design (height ~40px) and a fixed "🔔 महत्वपूर्ण सूचना" label.
-- Implement smooth, continuous CSS marquee animation without gaps.
-- Ensure the ticker only shows active, priority-ordered notices from the database.
+### 1. Verification of Admin Sidebar
+Confirm all modules are visible and functional in the Admin Panel sidebar.
 
-### 2. Header Layout & Design
-- **Logo**: Apply `border-radius: 50%` and `aspect-ratio: 1/1` to the logo container in `Header.tsx` to force a circular appearance and hide square corners.
-- **Branding**: Display the committee name and location next to the circular logo.
-- **Contact Details**: Add clickable Phone, WhatsApp, and Email items to the header on desktop (right side of logo) and mobile (compact icons).
-- **Social Links**: Integrate social media icons near contact details on desktop and within the mobile menu.
-- **Responsiveness**: Ensure a clean stack on mobile with no horizontal overflow.
+### 2. Public Site Integration Check
+Ensure the frontend components correctly consume the data managed through the Admin Panel:
+- `NoticeTicker.tsx`
+- `HeroSlider.tsx`
+- `GalleryPreview.tsx`
+- `NewsSection.tsx`
+- `FeaturedMembers.tsx`
+- `LiveDarshan.tsx`
+- `DonationModal.tsx` (using `site_settings`)
 
-### 3. Integration
-- Connect all contact details in the Header to values from `site_settings`.
-- Ensure proper Z-indexing so the sticky Header and Ticker interact correctly.
+### 3. Data Seeding & Fallback
+Ensure that if no data is present, the site displays professional placeholders rather than empty sections.
 
-## Technical Details
-- CSS Animation for ticker: `translateX(0)` to `translateX(-50%)` for continuous loop.
-- Tailwind `rounded-full` and `overflow-hidden` for circular logo.
-- `site_settings` fields used: `phone`, `whatsapp`, `email`, `address`, `location_text`.
-- `social_links` used for YouTube, Instagram, and Facebook icons.
+## Verification
+- Use Playwright to log in as admin and verify navigation to each section.
+- Verify that saving a new record in a section (e.g., a new Notice) is reflected on the home page.
