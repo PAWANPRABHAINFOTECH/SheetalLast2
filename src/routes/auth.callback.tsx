@@ -16,19 +16,28 @@ function AuthCallbackPage() {
     const handleAuth = async () => {
       console.log('Auth Callback triggered, URL:', window.location.href);
       
-      const searchParams = new URLSearchParams(window.location.search);
-      const code = searchParams.get('code');
-      const hash = window.location.hash || '';
-      const type = searchParams.get('type') || (hash.includes('type=recovery') ? 'recovery' : '');
+      const url = new URL(window.location.href);
+      const code = url.searchParams.get('code');
+      const error = url.searchParams.get('error');
+      const errorDescription = url.searchParams.get('error_description');
+
+      if (error) {
+        console.error('Auth Callback: Error from URL:', error, errorDescription);
+        toast.error(`प्रमाणीकरण त्रुटि: ${errorDescription || error}`);
+        void navigate({ to: '/admin/login', replace: true });
+        return;
+      }
+      
+      // Check both query params and hash for type=recovery
+      const type = url.searchParams.get('type') || (url.hash.includes('type=recovery') ? 'recovery' : '');
       
       if (code) {
         console.log('Auth Callback: Exchanging PKCE code...');
         const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
         if (exchangeError) {
           console.error('PKCE exchange error:', exchangeError);
-          // If PKCE fails but it's a recovery flow, it might be because the verifier is missing
-          // (e.g. email link opened in different browser).
-          // Supabase still sets the session if the hash is present and detectSessionInUrl is true.
+          // Only show error if it's NOT a recovery flow, or if the error is severe.
+          // Sometimes for recovery flows across devices, PKCE exchange might fail but session might still be active.
           if (type !== 'recovery') {
             toast.error('प्रमाणीकरण विफल: ' + exchangeError.message);
             void navigate({ to: '/admin/login', replace: true });
@@ -37,19 +46,19 @@ function AuthCallbackPage() {
         }
       }
 
-      // Small delay to ensure the Supabase client has time to process the session from URL
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Small delay to ensure the Supabase client has time to process the session from URL hash if any
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
-      const { data: { session }, error } = await supabase.auth.getSession();
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
-      if (error) {
-        console.error('Auth Callback: Session error:', error);
-        toast.error('प्रमाणीकरण विफल: ' + error.message);
+      if (sessionError) {
+        console.error('Auth Callback: Session error:', sessionError);
+        toast.error('सत्र प्राप्त करने में त्रुटि: ' + sessionError.message);
         void navigate({ to: '/admin/login', replace: true });
         return;
       }
 
-      console.log('Auth Callback: Processed state:', { hasSession: !!session, type });
+      console.log('Auth Callback: Final state:', { hasSession: !!session, type });
 
       if (session) {
         if (type === 'recovery') {
@@ -60,9 +69,8 @@ function AuthCallbackPage() {
           void navigate({ to: '/admin/dashboard', replace: true });
         }
       } else {
-        // No session found
-        console.warn('Auth Callback: No session found after exchange/hash processing');
-        toast.error('सत्र नहीं मिला। कृपया पुनः प्रयास करें।');
+        console.warn('Auth Callback: No session found after processing');
+        toast.error('सत्र नहीं मिला। कृपया ईमेल लिंक का पुनः उपयोग करें।');
         void navigate({ to: '/admin/login', replace: true });
       }
     };

@@ -60,8 +60,10 @@ function AdminLoginPage() {
       return
     }
     
-    // Use window.location.origin to ensure it works in both preview and production
-    const redirectTo = `${window.location.origin}/auth/callback?type=recovery`;
+    // Use window.location.origin to ensure it works in preview and production.
+    // Explicitly using the current origin for the redirect.
+    const origin = window.location.origin;
+    const redirectTo = `${origin}/auth/callback?type=recovery`;
     console.log("Password reset redirect:", redirectTo);
     
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
