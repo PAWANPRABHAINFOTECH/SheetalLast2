@@ -212,6 +212,8 @@ export function Footer() {
               <Link to="/terms-and-conditions" className="hover:text-secondary transition-colors">Terms & Conditions</Link>
               <span className="opacity-20 hidden md:inline">|</span>
               <Link to="/refund-policy" className="hover:text-secondary transition-colors">Refund Policy</Link>
+              <span className="opacity-20 hidden md:inline">|</span>
+              <Link to="/admin/login" className="hover:text-secondary transition-colors font-medium opacity-80">Admin Login</Link>
             </div>
           </div>
         </div>
