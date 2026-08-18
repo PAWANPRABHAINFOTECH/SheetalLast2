@@ -84,7 +84,7 @@ export function Footer() {
                   <MapPin className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">📍 पता</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">पता</span>
                   <span className="text-sm leading-relaxed">{settings?.address || "शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046"}</span>
                 </div>
               </li>
@@ -94,7 +94,7 @@ export function Footer() {
                   <Phone className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">📞 मोबाइल नंबर</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">मोबाइल नंबर</span>
                   <a href={`tel:${settings?.phone?.replace(/\s/g, "") || "+918319322374"}`} className="text-sm hover:text-secondary transition-colors font-inter">
                     {settings?.phone || "+91 831 932 2374"}
                   </a>
@@ -108,7 +108,7 @@ export function Footer() {
                   </svg>
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">🟡 WhatsApp</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">WhatsApp</span>
                   <a 
                     href={`https://wa.me/${settings?.whatsapp?.replace(/\D/g, "") || "918319322374"}?text=नमस्कार, मुझे शीतल शिवालय समिति के संबंध में जानकारी चाहिए।`}
                     target="_blank" 
@@ -125,7 +125,7 @@ export function Footer() {
                   <Mail className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">✉️ ईमेल</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">ईमेल</span>
                   <a href={`mailto:${settings?.email || "info@sheetalshivayalaya.org"}`} className="text-sm hover:text-secondary transition-colors font-inter">
                     {settings?.email || "info@sheetalshivayalaya.org"}
                   </a>
@@ -149,7 +149,7 @@ export function Footer() {
                 className="w-full flex items-center justify-center gap-2 font-hindi bg-accent hover:bg-accent/90 text-accent-foreground py-4 px-6 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 group"
               >
                 <Heart className="h-5 w-5 fill-current group-hover:animate-pulse" />
-                🙏 ऑनलाइन दान दें
+                ऑनलाइन दान दें
               </button>
 
               <div className="pt-4">

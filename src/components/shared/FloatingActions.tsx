@@ -11,7 +11,7 @@ export function FloatingActions() {
     <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-4">
       <Button 
         size="icon" 
-        className="h-14 w-14 rounded-full bg-green-500 hover:bg-green-600 shadow-2xl text-white transition-transform hover:scale-110"
+        className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-2xl text-primary-foreground transition-transform hover:scale-110"
         asChild
       >
         <a 
@@ -25,7 +25,7 @@ export function FloatingActions() {
       
       <Button 
         size="icon" 
-        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 shadow-2xl text-white transition-transform hover:scale-110"
+        className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-2xl text-primary-foreground transition-transform hover:scale-110"
         asChild
       >
         <a href="tel:+918319322374">
