@@ -1,0 +1,1 @@
+UPDATE public.notices SET content = 'यह एक महत्वपूर्ण सूचना है जो मंदिर के बारे में है।' WHERE id = (SELECT id FROM public.notices ORDER BY created_at LIMIT 1);
