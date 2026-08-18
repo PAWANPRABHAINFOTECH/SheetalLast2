@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useSiteSettings, useTempleInfo } from "@/lib/temple.hooks";
 import logoAsset from "@/assets/logo.png.asset.json";
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, ChevronRight, Heart } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   const { data: settings } = useSiteSettings();
@@ -152,20 +153,56 @@ export function Footer() {
                 ऑनलाइन दान दें
               </button>
 
-              <div className="pt-4">
-                <h5 className="font-hindi text-xs font-bold text-secondary/70 uppercase tracking-widest mb-3">हमें फॉलो करें</h5>
-                <div className="flex gap-4">
-                  {socialLinks.map((social) => (
-                    <a 
-                      key={social.id} 
-                      href={social.url || '#'} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-full bg-white/5 border border-white/10 text-secondary hover:bg-secondary hover:text-primary transition-all shadow-lg"
-                    >
-                      <social.icon className="h-5 w-5" />
-                    </a>
-                  ))}
+              <div className="pt-6 border-t border-white/5">
+                <h5 className="font-hindi text-lg font-bold text-secondary mb-4">हमें फॉलो करें</h5>
+                <div className="grid grid-cols-1 gap-3">
+                  <a 
+                    href={settings?.facebook_url || "#"} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group",
+                      (!settings?.facebook_enabled || !settings?.facebook_url) && "hidden"
+                    )}
+                  >
+                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
+                      <Facebook className="h-5 w-5 text-secondary group-hover:text-primary" />
+                    </div>
+                    <span className="font-hindi text-sm font-medium">Facebook</span>
+                  </a>
+                  <a 
+                    href={settings?.instagram_url || "#"} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group",
+                      (!settings?.instagram_enabled || !settings?.instagram_url) && "hidden"
+                    )}
+                  >
+                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
+                      <Instagram className="h-5 w-5 text-secondary group-hover:text-primary" />
+                    </div>
+                    <span className="font-hindi text-sm font-medium">Instagram</span>
+                  </a>
+                  <a 
+                    href={settings?.youtube_url || "#"} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 text-primary-foreground/80 hover:bg-secondary hover:text-primary transition-all group",
+                      (!settings?.youtube_enabled || !settings?.youtube_url) && "hidden"
+                    )}
+                  >
+                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/10">
+                      <Youtube className="h-5 w-5 text-secondary group-hover:text-primary" />
+                    </div>
+                    <span className="font-hindi text-sm font-medium">YouTube</span>
+                  </a>
+
+                  {/* Fallback for preview/demo if no links are set */}
+                  {(!settings?.facebook_url && !settings?.instagram_url && !settings?.youtube_url) && (
+                    <p className="text-[10px] text-white/30 italic font-hindi">सोशल मीडिया लिंक एडमिन पैनल से जोड़ें</p>
+                  )}
                 </div>
               </div>
             </div>
