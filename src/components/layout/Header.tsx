@@ -148,7 +148,7 @@ export function Header() {
                 </a>
               )}
               {settings?.whatsapp && (
-                <a href={`https://wa.me/${settings.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full bg-primary/5 p-3 text-green-600">
+                <a href={`https://wa.me/${settings.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full bg-primary/5 p-3 text-primary">
                   <MessageCircle className="h-5 w-5" />
                 </a>
               )}

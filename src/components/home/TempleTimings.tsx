@@ -9,6 +9,7 @@ export function TempleTimings() {
     "दर्शन": Clock,
     "प्रातःकालीन आरती": Sun,
     "संध्या आरती": Moon,
+    "हवन एवं पूजन": Sparkles,
     "default": Sparkles
   };
 
@@ -16,7 +17,7 @@ export function TempleTimings() {
     <Card className="border-secondary border-2 shadow-xl overflow-hidden bg-card">
       <CardHeader className="bg-primary text-primary-foreground text-center py-6">
         <CardTitle className="font-hindi text-2xl flex items-center justify-center gap-2">
-          <Sparkles className="h-6 w-6 text-secondary fill-current" />
+          <Clock className="h-6 w-6 text-secondary" />
           दर्शन एवं आरती समय
         </CardTitle>
       </CardHeader>
