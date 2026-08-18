@@ -17,22 +17,21 @@ export function NoticeTicker() {
   if (isLoading || activeNotices.length === 0) return null;
 
   return (
-    <div className="bg-primary text-primary-foreground h-[36px] md:h-[42px] overflow-hidden flex items-center relative z-[60]">
-      <div className="flex items-center h-full px-4 bg-primary z-10 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
-        <Megaphone className="h-4 w-4 mr-2 animate-bounce" />
-        <span className="font-hindi text-sm font-bold whitespace-nowrap">महत्वपूर्ण सूचना</span>
-        <span className="mx-2 opacity-50">|</span>
+    <div className="bg-[#D98216] h-[40px] md:h-[48px] overflow-hidden flex items-center relative z-[60] border-b border-black/10">
+      <div className="flex items-center h-full px-6 bg-[#D98216] z-10">
+        <Megaphone className="h-4 w-4 mr-2 text-black fill-black/10" />
+        <span className="font-hindi text-base font-bold text-black whitespace-nowrap">महत्वपूर्ण सूचना</span>
       </div>
       
-      <div className="flex-1 overflow-hidden relative h-full flex items-center">
+      <div className="flex-1 overflow-hidden relative h-full flex items-center bg-[#F2F2F2] border-l border-black/5">
         <div className="flex animate-marquee hover:pause-marquee whitespace-nowrap">
-          {activeNotices.map((notice, idx) => (
+          {activeNotices.map((notice) => (
             <div key={notice.id} className="inline-flex items-center px-4">
               {notice.link_url ? (
                 notice.link_url.startsWith('/') ? (
                   <Link 
                     to={notice.link_url as any}
-                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                    className="font-hindi text-base font-bold text-black hover:text-[#D98216] transition-colors"
                   >
                     {notice.content}
                     {notice.link_text && (
@@ -44,7 +43,7 @@ export function NoticeTicker() {
                     href={notice.link_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                    className="font-hindi text-base font-bold text-black hover:text-[#D98216] transition-colors"
                   >
                     {notice.content}
                     {notice.link_text && (
@@ -53,19 +52,19 @@ export function NoticeTicker() {
                   </a>
                 )
               ) : (
-                <span className="font-hindi text-sm">{notice.content}</span>
+                <span className="font-hindi text-base font-bold text-black">{notice.content}</span>
               )}
-              <span className="mx-6 text-secondary/50">•</span>
+              <span className="mx-8 text-black/30 font-bold">•</span>
             </div>
           ))}
           {/* Duplicate for seamless scrolling */}
-          {activeNotices.map((notice, idx) => (
+          {activeNotices.map((notice) => (
             <div key={`${notice.id}-dup`} className="inline-flex items-center px-4">
               {notice.link_url ? (
                 notice.link_url.startsWith('/') ? (
                   <Link 
                     to={notice.link_url as any}
-                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                    className="font-hindi text-base font-bold text-black hover:text-[#D98216] transition-colors"
                   >
                     {notice.content}
                     {notice.link_text && (
@@ -77,7 +76,7 @@ export function NoticeTicker() {
                     href={notice.link_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-hindi text-sm hover:text-secondary transition-colors"
+                    className="font-hindi text-base font-bold text-black hover:text-[#D98216] transition-colors"
                   >
                     {notice.content}
                     {notice.link_text && (
@@ -86,9 +85,9 @@ export function NoticeTicker() {
                   </a>
                 )
               ) : (
-                <span className="font-hindi text-sm">{notice.content}</span>
+                <span className="font-hindi text-base font-bold text-black">{notice.content}</span>
               )}
-              <span className="mx-6 text-secondary/50">•</span>
+              <span className="mx-8 text-black/30 font-bold">•</span>
             </div>
           ))}
         </div>
@@ -97,7 +96,7 @@ export function NoticeTicker() {
       <style>{`
         .animate-marquee {
           display: inline-flex;
-          animation: marquee 30s linear infinite;
+          animation: marquee 40s linear infinite;
         }
         .pause-marquee {
           animation-play-state: paused;
