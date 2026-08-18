@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Loader2, CheckCircle2 } from 'lucide-react'
+import { Loader2, CheckCircle2, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 
 export const Route = createFileRoute('/admin/reset-password')({
@@ -20,6 +20,7 @@ export const Route = createFileRoute('/admin/reset-password')({
 
 function ResetPasswordPage() {
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const navigate = useNavigate()
@@ -79,15 +80,31 @@ function ResetPasswordPage() {
         </CardHeader>
         <CardContent className="p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="space-y-2">
+            <div className="space-y-2 relative">
               <label className="font-bold">नया पासवर्ड</label>
-              <Input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="कम से कम 6 अक्षर"
-              />
+              <div className="relative">
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="कम से कम 6 अक्षर"
+                  className="pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
+                  aria-label={showPassword ? 'पासवर्ड छुपाएं' : 'पासवर्ड दिखाएं'}
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
             <Button type="submit" disabled={loading} className="w-full py-6 text-lg bg-primary">
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
