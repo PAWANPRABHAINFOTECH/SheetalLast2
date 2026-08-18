@@ -97,7 +97,7 @@ export function NoticeTicker() {
       <style>{`
         .animate-marquee {
           display: inline-flex;
-          animation: marquee 60s linear infinite;
+          animation: marquee 30s linear infinite;
         }
         .pause-marquee {
           animation-play-state: paused;
