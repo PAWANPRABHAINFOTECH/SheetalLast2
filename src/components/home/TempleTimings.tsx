@@ -11,9 +11,11 @@ export function TempleTimings() {
     "संध्या आरती": Moon,
     "हवन एवं पूजन": (props: any) => (
       <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2c1 2 2 3.5 2 5.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2 1-3.5 2-5.5 1 2 2 3.5 2 5.5"/>
-        <path d="M18 10c1 2 2 3.5 2 5.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2 1-3.5 2-5.5 1 2 2 3.5 2 5.5"/>
-        <path d="M6 10c1 2 2 3.5 2 5.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2 1-3.5 2-5.5 1 2 2 3.5 2 5.5"/>
+        <path d="M12 10V2"/>
+        <path d="M12 2L9 5"/>
+        <path d="M12 2L15 5"/>
+        <path d="M12 14c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/>
+        <path d="M12 14c-4.42 0-8 3.58-8 8h16c0-4.42-3.58-8-8-8z"/>
       </svg>
     ),
     "default": Sparkles
