@@ -14,27 +14,50 @@ function AuthCallbackPage() {
 
   useEffect(() => {
     const handleAuth = async () => {
-      // The session should be handled automatically by Supabase client 
-      // when it sees the access_token in the URL hash.
+      // Small delay to ensure hash is processed by Supabase client
+      await new Promise(resolve => setTimeout(resolve, 500))
+
       const { data: { session }, error } = await supabase.auth.getSession()
 
       if (error) {
+        console.error('Auth error:', error)
         toast.error('प्रमाणीकरण विफल: ' + error.message)
         void navigate({ to: '/admin/login', replace: true })
         return
       }
 
+      // Check URL for recovery or signup confirmation
+      const hash = window.location.hash || ''
+      const searchParams = new URLSearchParams(window.location.search)
+      const isRecovery = hash.includes('type=recovery') || searchParams.get('type') === 'recovery'
+      const isSignup = hash.includes('type=signup') || searchParams.get('type') === 'signup'
+
       if (session) {
-        // If it's a recovery flow (password reset), redirect to reset-password
-        const isRecovery = window.location.hash.includes('type=recovery')
         if (isRecovery) {
           void navigate({ to: '/admin/reset-password', replace: true })
+        } else if (isSignup) {
+          void navigate({ to: '/admin/dashboard', replace: true })
         } else {
-          // Default to dashboard for other successful auths (like signup verification)
+          // Default fallback
           void navigate({ to: '/admin/dashboard', replace: true })
         }
       } else {
-        // Fallback if no session found immediately
+        // If no session, but we have a code in the URL, try to exchange it (PKCE)
+        const code = searchParams.get('code')
+        if (code) {
+          const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
+          if (exchangeError) {
+            toast.error('कोड एक्सचेंज विफल: ' + exchangeError.message)
+            void navigate({ to: '/admin/login', replace: true })
+          } else {
+            // Re-run the handleAuth to pick up the new session
+            handleAuth()
+          }
+          return
+        }
+
+        // Final fallback if no session and no code
+        toast.error('सत्र नहीं मिला। कृपया पुनः लॉगिन करें।')
         void navigate({ to: '/admin/login', replace: true })
       }
     }
