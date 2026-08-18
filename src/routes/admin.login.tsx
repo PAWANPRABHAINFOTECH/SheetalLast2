@@ -60,7 +60,7 @@ function AdminLoginPage() {
       return
     }
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/admin/reset-password`,
+      redirectTo: `${window.location.origin}/auth/callback?type=recovery`,
     })
     if (error) {
       toast.error('त्रुटि: ' + error.message)
