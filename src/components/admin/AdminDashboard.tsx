@@ -1,14 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import { Newspaper, Images, Users, MessageSquare, Bell } from "lucide-react";
+import {
+  Newspaper,
+  Images,
+  Users,
+  MessageSquare,
+  Bell,
+  GalleryHorizontal,
+  Megaphone,
+  Video,
+  Clock,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 
 const CARDS = [
-  { table: "news", label: "समाचार", icon: Newspaper },
-  { table: "gallery", label: "गैलरी छवियाँ", icon: Images },
-  { table: "members", label: "सदस्य", icon: Users },
-  { table: "notices", label: "सूचनाएँ", icon: Bell },
-  { table: "contact_enquiries", label: "संपर्क पूछताछ", icon: MessageSquare },
+  { table: "news", label: "कुल समाचार", icon: Newspaper },
+  { table: "gallery", label: "कुल गैलरी फोटो", icon: Images },
+  { table: "members", label: "कुल सदस्य", icon: Users },
+  { table: "hero_slides", label: "कुल स्लाइडर", icon: GalleryHorizontal },
+  { table: "advertisements", label: "कुल विज्ञापन", icon: Megaphone },
+  { table: "notices", label: "महत्वपूर्ण सूचनाएँ", icon: Bell },
+  { table: "live_darshan", label: "लाइव दर्शन", icon: Video },
+  { table: "temple_timings", label: "दर्शन / आरती समय", icon: Clock },
+  { table: "contact_enquiries", label: "संपर्क संदेश", icon: MessageSquare },
 ] as const;
 
 export function AdminDashboard() {

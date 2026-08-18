@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { LogOut, Menu } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -217,6 +218,7 @@ export function AdminShell({ email }: { email: string }) {
   const [activeId, setActiveId] = useState("dashboard");
   const [mobileOpen, setMobileOpen] = useState(false);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const active = SECTIONS.find((section) => section.id === activeId) ?? SECTIONS[0]!;
 
@@ -224,6 +226,7 @@ export function AdminShell({ email }: { email: string }) {
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
+    void navigate({ to: "/admin/login", replace: true });
   };
 
   const nav = (
