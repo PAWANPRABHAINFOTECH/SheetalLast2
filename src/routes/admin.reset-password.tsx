@@ -20,6 +20,7 @@ export const Route = createFileRoute('/admin/reset-password')({
 
 function ResetPasswordPage() {
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const navigate = useNavigate()
