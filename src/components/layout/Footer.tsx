@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useSiteSettings, useTempleInfo } from "@/lib/temple.hooks";
 import logoAsset from "@/assets/logo.png.asset.json";
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, ChevronRight, Heart } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   const { data: settings } = useSiteSettings();
