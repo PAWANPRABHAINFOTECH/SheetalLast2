@@ -15,9 +15,12 @@ function AuthCallbackPage() {
   useEffect(() => {
     const handleAuth = async () => {
       // Small delay to ensure hash is processed by Supabase client
-      await new Promise(resolve => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 800))
 
-      const { data: { session }, error } = await supabase.auth.getSession()
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession()
 
       if (error) {
         console.error('Auth error:', error)
@@ -27,22 +30,29 @@ function AuthCallbackPage() {
       }
 
       // Check URL for recovery or signup confirmation
+      // We look in both hash (legacy) and searchParams (PKCE)
       const hash = window.location.hash || ''
       const searchParams = new URLSearchParams(window.location.search)
       const isRecovery = hash.includes('type=recovery') || searchParams.get('type') === 'recovery'
       const isSignup = hash.includes('type=signup') || searchParams.get('type') === 'signup'
 
+      console.log('Auth Callback State:', {
+        hasSession: !!session,
+        isRecovery,
+        isSignup,
+        hash: hash.substring(0, 20) + '...',
+      })
+
       if (session) {
         if (isRecovery) {
+          toast.success('पासवर्ड रीसेट सत्र सक्रिय')
           void navigate({ to: '/admin/reset-password', replace: true })
-        } else if (isSignup) {
-          void navigate({ to: '/admin/dashboard', replace: true })
         } else {
-          // Default fallback
+          // Default to dashboard for successful login/signup
           void navigate({ to: '/admin/dashboard', replace: true })
         }
       } else {
-        // If no session, but we have a code in the URL, try to exchange it (PKCE)
+        // PKCE Flow handling
         const code = searchParams.get('code')
         if (code) {
           const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
@@ -56,7 +66,7 @@ function AuthCallbackPage() {
           return
         }
 
-        // Final fallback if no session and no code
+        // Final fallback
         toast.error('सत्र नहीं मिला। कृपया पुनः लॉगिन करें।')
         void navigate({ to: '/admin/login', replace: true })
       }
