@@ -28,15 +28,11 @@ function ResetPasswordPage() {
     // Check if we have a session (meaning the user clicked the reset link)
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()
+      
+      // We are in reset-password, we MUST have a session (handled by auth callback)
       if (!session) {
-        // We can check if we have a recovery flow indicator
-        const isRecovery = window.location.hash.includes('type=recovery') || 
-                          window.location.search.includes('type=recovery');
-        
-        if (!isRecovery) {
-          toast.error('सत्र समाप्त हो गया है। कृपया पुनः पासवर्ड रीसेट लिंक भेजें।')
-          void navigate({ to: '/admin/login', replace: true })
-        }
+        toast.error('पासवर्ड बदलने के लिए लॉगिन आवश्यक है। कृपया लिंक का पुनः उपयोग करें।')
+        void navigate({ to: '/admin/login', replace: true })
       }
     }
     checkSession()

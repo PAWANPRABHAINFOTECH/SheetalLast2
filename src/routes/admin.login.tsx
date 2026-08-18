@@ -59,8 +59,9 @@ function AdminLoginPage() {
       toast.error('कृपया पहले अपना ईमेल दर्ज करें')
       return
     }
-    const currentUrl = new URL(window.location.href);
-    const redirectTo = `${currentUrl.origin}/auth/callback?type=recovery`;
+    
+    // Use window.location.origin to ensure it works in both preview and production
+    const redirectTo = `${window.location.origin}/auth/callback?type=recovery`;
     console.log("Password reset redirect:", redirectTo);
     
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
