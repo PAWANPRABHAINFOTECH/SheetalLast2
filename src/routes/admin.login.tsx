@@ -51,8 +51,22 @@ function AdminLoginPage() {
       return
     }
     toast.success('स्वागत है')
-    void navigate({ to: '/admin/dashboard', replace: true })
+  const handleForgotPassword = async () => {
+    if (!email) {
+      toast.error('कृपया पहले अपना ईमेल दर्ज करें')
+      return
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/login`,
+    })
+    if (error) {
+      toast.error('त्रुटि: ' + error.message)
+    } else {
+      toast.success('पासवर्ड रीसेट लिंक आपके ईमेल पर भेज दिया गया है')
+    }
   }
+
+
 
   return (
     <div className="min-h-screen bg-muted/30 flex items-center justify-center p-4 font-hindi">
@@ -92,9 +106,19 @@ function AdminLoginPage() {
               {submitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               लॉगिन करें
             </Button>
-            <p className="text-center text-sm text-muted-foreground">
-              केवल अधिकृत प्रशासक ही लॉगिन कर सकते हैं।
-            </p>
+            <div className="text-center space-y-2">
+              <p className="text-sm text-muted-foreground">
+                केवल अधिकृत प्रशासक ही लॉगिन कर सकते हैं।
+              </p>
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                className="text-sm text-primary hover:underline font-bold"
+              >
+                पासवर्ड भूल गए? (Reset Password)
+              </button>
+            </div>
+
           </form>
         </CardContent>
       </Card>
