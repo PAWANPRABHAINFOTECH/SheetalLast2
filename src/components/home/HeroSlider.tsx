@@ -33,8 +33,8 @@ export function HeroSlider() {
   const displaySlides = slides?.length ? slides.slice(0, 3) : [
     {
       id: "demo-1",
-      title: "शीतल शिवालय मंदिर",
-      subtitle: "शीतल सिटीज, मंडीदीप, जिला-रायसेन (मध्यप्रदेश)",
+      title: "दिव्य शिव मंदिर",
+      subtitle: "समिति आपका हार्दिक स्वागत करती है",
       image_url: "https://images.unsplash.com/photo-1609766914176-e7130a74bc33?auto=format&fit=crop&q=80&w=2000",
       button_text: "दर्शन करें",
       button_url: "/about"
