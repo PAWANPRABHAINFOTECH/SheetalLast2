@@ -16,25 +16,30 @@ function AuthCallbackPage() {
     const handleAuth = async () => {
       console.log('Auth Callback triggered, URL:', window.location.href);
       
-      // Small delay to ensure the Supabase client has time to catch the hash
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // 1. Check for PKCE 'code' in search params
       const searchParams = new URLSearchParams(window.location.search);
       const code = searchParams.get('code');
+      const hash = window.location.hash || '';
+      const type = searchParams.get('type') || (hash.includes('type=recovery') ? 'recovery' : '');
       
       if (code) {
         console.log('Auth Callback: Exchanging PKCE code...');
         const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
         if (exchangeError) {
           console.error('PKCE exchange error:', exchangeError);
-          toast.error('प्रमाणीकरण विफल: ' + exchangeError.message);
-          void navigate({ to: '/admin/login', replace: true });
-          return;
+          // If PKCE fails but it's a recovery flow, it might be because the verifier is missing
+          // (e.g. email link opened in different browser).
+          // Supabase still sets the session if the hash is present and detectSessionInUrl is true.
+          if (type !== 'recovery') {
+            toast.error('प्रमाणीकरण विफल: ' + exchangeError.message);
+            void navigate({ to: '/admin/login', replace: true });
+            return;
+          }
         }
       }
 
-      // 2. Get session (this handles both hash-based and code-based results)
+      // Small delay to ensure the Supabase client has time to process the session from URL
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       const { data: { session }, error } = await supabase.auth.getSession();
 
       if (error) {
@@ -43,10 +48,6 @@ function AuthCallbackPage() {
         void navigate({ to: '/admin/login', replace: true });
         return;
       }
-
-      // 3. Determine redirect path
-      const hash = window.location.hash || '';
-      const type = searchParams.get('type') || (hash.includes('type=recovery') ? 'recovery' : '');
 
       console.log('Auth Callback: Processed state:', { hasSession: !!session, type });
 
@@ -59,7 +60,7 @@ function AuthCallbackPage() {
           void navigate({ to: '/admin/dashboard', replace: true });
         }
       } else {
-        // No session found - maybe the link was already used or expired
+        // No session found
         console.warn('Auth Callback: No session found after exchange/hash processing');
         toast.error('सत्र नहीं मिला। कृपया पुनः प्रयास करें।');
         void navigate({ to: '/admin/login', replace: true });
