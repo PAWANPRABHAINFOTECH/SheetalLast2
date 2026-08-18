@@ -51,6 +51,9 @@ function AdminLoginPage() {
       return
     }
     toast.success('स्वागत है')
+    void navigate({ to: '/admin/dashboard', replace: true })
+  }
+
   const handleForgotPassword = async () => {
     if (!email) {
       toast.error('कृपया पहले अपना ईमेल दर्ज करें')
@@ -65,8 +68,6 @@ function AdminLoginPage() {
       toast.success('पासवर्ड रीसेट लिंक आपके ईमेल पर भेज दिया गया है')
     }
   }
-
-
 
   return (
     <div className="min-h-screen bg-muted/30 flex items-center justify-center p-4 font-hindi">
@@ -118,7 +119,6 @@ function AdminLoginPage() {
                 पासवर्ड भूल गए? (Reset Password)
               </button>
             </div>
-
           </form>
         </CardContent>
       </Card>
