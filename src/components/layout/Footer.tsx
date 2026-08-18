@@ -158,7 +158,7 @@ export function Footer() {
                   {socialLinks.map((social) => (
                     <a 
                       key={social.id} 
-                      href={social.url} 
+                      href={social.url || '#'} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="p-3 rounded-full bg-white/5 border border-white/10 text-secondary hover:bg-secondary hover:text-primary transition-all shadow-lg"
