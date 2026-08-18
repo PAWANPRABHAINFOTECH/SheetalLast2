@@ -1,0 +1,1 @@
+UPDATE public.notices SET content = 'Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required. ok Are You Ready' WHERE id = 'aa45531f-03fd-496b-8de6-706bb4a7ba89';
