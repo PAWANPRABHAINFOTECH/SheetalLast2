@@ -29,8 +29,14 @@ function ResetPasswordPage() {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) {
-        // If no session, they might have landed here by mistake or the link expired
-        // But for password recovery, Supabase handles the session injection via hash
+        // We can check if we have a recovery flow indicator
+        const isRecovery = window.location.hash.includes('type=recovery') || 
+                          window.location.search.includes('type=recovery');
+        
+        if (!isRecovery) {
+          toast.error('सत्र समाप्त हो गया है। कृपया पुनः पासवर्ड रीसेट लिंक भेजें।')
+          void navigate({ to: '/admin/login', replace: true })
+        }
       }
     }
     checkSession()
