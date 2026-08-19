@@ -52,7 +52,7 @@ export function HeroSlider() {
       title: "समिति की गतिविधियां",
       subtitle: "आगामी धार्मिक आयोजन एवं मंदिर के विकास कार्यों की जानकारी",
       image_url: "https://images.unsplash.com/photo-1600100395420-40aa0e665948?auto=format&fit=crop&q=80&w=2000",
-      button_text: "समाचार देखें",
+      button_text: "विशेष सूचना देखें",
       button_url: "/news"
     }
   ];

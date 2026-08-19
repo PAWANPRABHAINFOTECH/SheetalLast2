@@ -25,7 +25,7 @@ export function NewsSection() {
           </h2>
         </div>
         <Button variant="outline" className="border-primary text-primary font-hindi rounded-full" asChild>
-          <Link to="/news">सभी समाचार देखें</Link>
+          <Link to="/news">सभी विशेष सूचना देखें</Link>
         </Button>
       </div>
 
