@@ -1,5 +1,5 @@
 import { useTempleTimings } from "@/lib/temple.hooks";
-import { Clock, Sun, Moon, Sparkles } from "lucide-react";
+import { Clock, Sun, Moon, Flame, Sparkles } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export function TempleTimings() {
@@ -9,7 +9,7 @@ export function TempleTimings() {
     "दर्शन": Clock,
     "प्रातःकालीन आरती": Sun,
     "संध्या आरती": Moon,
-    "हवन एवं पूजन": Sparkles,
+    "हवन एवं पूजन": Flame,
     "default": Sparkles
   };
 
