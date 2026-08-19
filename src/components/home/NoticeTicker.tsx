@@ -1,9 +1,13 @@
 import { useNotices } from "@/lib/temple.hooks";
 import { Megaphone } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useLanguage } from "@/lib/i18n";
+
 
 export function NoticeTicker() {
   const { data: notices, isLoading } = useNotices();
+  const { t } = useLanguage();
+
 
   // Filter only current notices based on date if present
   const activeNotices = notices?.filter(notice => {
@@ -20,7 +24,7 @@ export function NoticeTicker() {
     <div className="bg-primary text-primary-foreground h-[36px] md:h-[42px] overflow-hidden flex items-center relative z-[60]">
       <div className="flex items-center h-full px-4 bg-primary z-10 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
         <Megaphone className="h-4 w-4 mr-2 animate-bounce" />
-        <span className="font-hindi text-sm font-bold whitespace-nowrap">महत्वपूर्ण सूचना</span>
+        <span className="font-hindi text-sm font-bold whitespace-nowrap">{t('notice.label')}</span>
         <span className="mx-2 opacity-50">|</span>
       </div>
       
