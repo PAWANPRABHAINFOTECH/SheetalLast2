@@ -14,7 +14,7 @@ export const Route = createFileRoute('/admin/login')({
   ssr: false,
   head: () => ({
     meta: [
-      { title: 'एडमिन लॉगिन | शीतल शिवालय समिति' },
+      { title: 'शीतल शिवालय समिति | एडमिन लॉगिन' },
       { name: 'robots', content: 'noindex, nofollow' },
       { name: 'description', content: 'अधिकृत प्रशासक के लिए सुरक्षित लॉगिन।' },
     ],

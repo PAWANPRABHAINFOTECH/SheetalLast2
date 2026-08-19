@@ -21,17 +21,17 @@ export function NewsSection() {
             अपडेट्स
           </div>
           <h2 className="font-hindi text-3xl md:text-5xl font-bold text-primary">
-            महत्वपूर्ण समाचार
+            महत्वपूर्ण विशेष सूचना
           </h2>
         </div>
         <Button variant="outline" className="border-primary text-primary font-hindi rounded-full" asChild>
-          <Link to="/news">सभी समाचार देखें</Link>
+          <Link to="/news">सभी विशेष सूचना देखें</Link>
         </Button>
       </div>
 
       {displayNews.length === 0 ? (
         <div className="bg-muted/30 rounded-3xl p-12 text-center">
-          <p className="font-hindi text-lg text-muted-foreground">अभी कोई समाचार उपलब्ध नहीं है।</p>
+          <p className="font-hindi text-lg text-muted-foreground">अभी कोई विशेष सूचना उपलब्ध नहीं है।</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

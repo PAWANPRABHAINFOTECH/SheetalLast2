@@ -14,11 +14,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 
 const CARDS = [
-  { table: "news", label: "कुल समाचार", icon: Newspaper },
+  { table: "news", label: "कुल विशेष सूचना", icon: Newspaper },
   { table: "gallery", label: "कुल गैलरी फोटो", icon: Images },
   { table: "members", label: "कुल सदस्य", icon: Users },
   { table: "hero_slides", label: "कुल स्लाइडर", icon: GalleryHorizontal },
-  { table: "advertisements", label: "कुल विज्ञापन", icon: Megaphone },
+  
   { table: "notices", label: "महत्वपूर्ण सूचनाएँ", icon: Bell },
   { table: "live_darshan", label: "लाइव दर्शन", icon: Video },
   { table: "temple_timings", label: "दर्शन / आरती समय", icon: Clock },
@@ -43,7 +43,7 @@ export function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-primary">डैशबोर्ड</h2>
+      <h2 className="text-2xl font-bold text-primary">शीतल शिवालय समिति</h2>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {CARDS.map(({ table, label, icon: Icon }) => (
           <Card key={table} className="border-primary/10 shadow-sm">

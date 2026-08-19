@@ -11,7 +11,7 @@ export function QuickActions() {
     { icon: Video, label: "लाइव दर्शन", to: "/live-darshan", color: "bg-accent/10 text-accent" },
     { icon: Heart, label: "दान करें", color: "bg-red-500/10 text-red-500", onClick: openModal },
     { icon: MapPin, label: "मंदिर लोकेशन", to: "/location", color: "bg-blue-500/10 text-blue-500" },
-    { icon: Newspaper, label: "समाचार", to: "/news", color: "bg-orange-500/10 text-orange-500" },
+    { icon: Newspaper, label: "विशेष सूचना", to: "/news", color: "bg-orange-500/10 text-orange-500" },
     { icon: ImageIcon, label: "गैलरी", to: "/gallery", color: "bg-purple-500/10 text-purple-500" },
     { icon: Phone, label: "संपर्क करें", to: "/contact", color: "bg-green-500/10 text-green-500" },
   ];

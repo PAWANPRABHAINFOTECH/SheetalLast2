@@ -25,7 +25,7 @@ export function Footer() {
     { name: "मुख्य पृष्ठ", to: "/" },
     { name: "मंदिर के बारे में", to: "/about" },
     { name: "लाइव दर्शन", to: "/live-darshan" },
-    { name: "समाचार", to: "/news" },
+    { name: "विशेष सूचना", to: "/news" },
     { name: "गैलरी", to: "/gallery" },
     { name: "सदस्य सूची", to: "/members" },
     { name: "संपर्क", to: "/contact" },

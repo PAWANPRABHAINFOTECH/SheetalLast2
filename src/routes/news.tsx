@@ -18,7 +18,7 @@ function NewsPage() {
     <div className="min-h-screen bg-background font-hindi">
       <Header />
       <main className="py-16 container mx-auto px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-12 text-center">महत्वपूर्ण समाचार</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-12 text-center">महत्वपूर्ण विशेष सूचना</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {news?.map((item) => (
             <Card key={item.id} className="overflow-hidden border-primary/10">

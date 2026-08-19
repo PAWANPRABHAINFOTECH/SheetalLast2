@@ -1,4 +1,4 @@
-import { useTempleInfo } from "@/lib/temple.hooks";
+import { useTempleInfo, useSiteSettings } from "@/lib/temple.hooks";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 
@@ -37,8 +37,8 @@ export function AboutTempleSection() {
           <p className="font-hindi text-sm text-muted-foreground">आध्यात्मिक सेवा</p>
         </div>
         <div>
-          <p className="text-3xl font-bold text-primary">1000+</p>
-          <p className="font-hindi text-sm text-muted-foreground">भक्त जुड़ाव</p>
+          <p className="text-3xl font-bold text-primary">{useSiteSettings().data?.devotee_count || "1000+"}</p>
+          <p className="font-hindi text-sm text-muted-foreground">भक्त जुड़ाव</p>
         </div>
       </div>
     </div>

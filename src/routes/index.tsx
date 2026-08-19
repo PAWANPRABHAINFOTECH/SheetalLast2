@@ -48,9 +48,6 @@ function Index() {
           <NewsSection />
         </section>
 
-        <section className="py-12">
-          <Advertisements />
-        </section>
 
         <section className="bg-primary/5 py-16">
           <div className="container mx-auto px-4">

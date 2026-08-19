@@ -42,7 +42,7 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
     <div className="space-y-3">
       <div className="flex gap-2">
         <Input
-          value={value ?? ""}
+          value={value || ""}
           onChange={(e) => onChange(e.target.value)}
           placeholder="URL या फ़ाइल अपलोड करें"
         />

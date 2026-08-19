@@ -13,6 +13,7 @@ type Settings = Record<string, unknown>;
 
 const TEXT_FIELDS: { name: string; label: string; long?: boolean }[] = [
   { name: "site_name", label: "साइट का नाम" },
+  { name: "devotee_count", label: "भक्त जुड़ाव" },
   { name: "address", label: "पता", long: true },
   { name: "registration_no", label: "पंजीयन क्रमांक" },
   { name: "phone", label: "फ़ोन नंबर" },
