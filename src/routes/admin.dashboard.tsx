@@ -48,17 +48,18 @@ function NoAccess() {
 
   const claim = async () => {
     setClaiming(true)
-    const { data, error } = await supabase.rpc('claim_first_admin' as any) // Moved to private schema or renamed
-    setClaiming(false)
-    if (error) {
-      toast.error(error.message)
-      return
-    }
-    if (data) {
-      toast.success('आप एडमिन बन गए हैं')
-      window.location.reload()
-    } else {
-      toast.error('एडमिन पहले से मौजूद है — कृपया अधिकृत खाते से लॉगिन करें')
+    try {
+      const data = await claimFirstAdmin()
+      setClaiming(false)
+      if (data) {
+        toast.success('आप एडमिन बन गए हैं')
+        window.location.reload()
+      } else {
+        toast.error('एडमिन पहले से मौजूद है — कृपया अधिकृत खाते से लॉगिन करें')
+      }
+    } catch (err: any) {
+      setClaiming(false)
+      toast.error(err.message || 'त्रुटि हुई')
     }
   }
 
