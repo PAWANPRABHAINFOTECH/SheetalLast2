@@ -1,0 +1,1 @@
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS show_mobile_number BOOLEAN DEFAULT FALSE;
