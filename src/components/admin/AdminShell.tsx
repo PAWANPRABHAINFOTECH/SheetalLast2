@@ -119,6 +119,7 @@ const SECTIONS: SectionConfig[] = [
       { name: "designation", label: "पद", type: "text" },
       { name: "mobile_number", label: "मोबाइल नंबर", type: "text" },
       { name: "photo_url", label: "फ़ोटो", type: "image", folder: "members" },
+      { name: "show_mobile_number", label: "मोबाइल नंबर दिखाएँ", type: "boolean" },
       { name: "category", label: "श्रेणी", type: "select", options: MEMBER_CATEGORIES },
       { name: "display_order", label: "क्रम", type: "number" },
       { name: "show_on_home", label: "होम पेज पर दिखाएँ", type: "boolean" },

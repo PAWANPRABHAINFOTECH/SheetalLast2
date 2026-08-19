@@ -229,6 +229,7 @@ export type Database = {
           mobile_number: string | null
           name: string
           photo_url: string | null
+          show_mobile_number: boolean | null
           show_on_home: boolean | null
         }
         Insert: {
@@ -241,6 +242,7 @@ export type Database = {
           mobile_number?: string | null
           name: string
           photo_url?: string | null
+          show_mobile_number?: boolean | null
           show_on_home?: boolean | null
         }
         Update: {
@@ -253,6 +255,7 @@ export type Database = {
           mobile_number?: string | null
           name?: string
           photo_url?: string | null
+          show_mobile_number?: boolean | null
           show_on_home?: boolean | null
         }
         Relationships: []
