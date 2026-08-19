@@ -38,7 +38,15 @@ function MembersPage() {
                         <AvatarFallback>{member.name[0]}</AvatarFallback>
                       </Avatar>
                       <h3 className="font-bold text-primary text-sm">{member.name}</h3>
-                      <p className="text-secondary text-xs">{member.designation}</p>
+                      <p className="text-secondary text-xs mb-2">{member.designation}</p>
+                      {member.mobile_number && member.show_mobile_number && (
+                        <a 
+                          href={`tel:${member.mobile_number}`}
+                          className="block text-[10px] text-primary hover:text-secondary transition-colors mb-2 flex items-center justify-center gap-1"
+                        >
+                          <span>📱</span> {member.mobile_number}
+                        </a>
+                      )}
                     </CardContent>
                   </Card>
                 ))}
