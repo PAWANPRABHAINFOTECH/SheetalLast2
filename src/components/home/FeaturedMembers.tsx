@@ -3,9 +3,13 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useLanguage } from "@/lib/i18n";
+
 
 export function FeaturedMembers() {
   const { data: members, isLoading } = useMembers();
+  const { t } = useLanguage();
+
 
   if (isLoading) return <div className="h-96 w-full animate-pulse bg-muted rounded-3xl" />;
 
@@ -22,11 +26,13 @@ export function FeaturedMembers() {
     <div>
       <div className="text-center mb-12">
         <h2 className="font-hindi text-3xl md:text-5xl font-bold text-primary mb-4">
-          प्रमुख पदाधिकारी
+          {t('members.officials')}
         </h2>
+
         <p className="font-hindi text-lg text-foreground/70 max-w-2xl mx-auto">
-          मंदिर समिति के समर्पित सदस्य जो व्यवस्था और निर्माण कार्यों की देखरेख कर रहे हैं।
+          {t('members.desc')}
         </p>
+
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -55,8 +61,9 @@ export function FeaturedMembers() {
 
       <div className="text-center">
         <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-hindi rounded-full px-8" asChild>
-          <Link to="/members">सभी पदाधिकारी एवं सदस्य देखें</Link>
+          <Link to="/members">{t('members.viewAll')}</Link>
         </Button>
+
       </div>
     </div>
   );

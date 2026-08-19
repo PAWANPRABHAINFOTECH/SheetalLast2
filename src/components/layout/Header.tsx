@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Menu, X, Heart, Mail, MessageCircle, Youtube, Instagram, Facebook } from "lucide-react";
+import { Phone, Menu, X, Heart, Mail, MessageCircle, Youtube, Instagram, Facebook, Languages } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n";
+
 import logoAsset from "@/assets/logo.png.asset.json";
 import { useSiteSettings } from "@/lib/temple.hooks";
 import { Button } from "@/components/ui/button";
@@ -8,16 +10,18 @@ import { Button } from "@/components/ui/button";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: settings } = useSiteSettings();
+  const { language, setLanguage, t } = useLanguage();
 
   const navLinks = [
-    { name: "होम", to: "/" },
-    { name: "मंदिर के बारे में", to: "/about" },
-    { name: "लाइव दर्शन", to: "/live-darshan" },
-    { name: "विशेष सूचना", to: "/news" },
-    { name: "गैलरी", to: "/gallery" },
-    { name: "सदस्य", to: "/members" },
-    { name: "संपर्क", to: "/contact" },
+    { name: t('nav.home'), to: "/" },
+    { name: t('nav.about'), to: "/about" },
+    { name: t('nav.live'), to: "/live-darshan" },
+    { name: t('nav.news'), to: "/news" },
+    { name: t('nav.gallery'), to: "/gallery" },
+    { name: t('nav.members'), to: "/members" },
+    { name: t('nav.contact'), to: "/contact" },
   ];
+
 
   return (
     <header className="z-50 w-full border-b border-primary/10 bg-background">
@@ -105,14 +109,32 @@ export function Header() {
               )}
             </div>
 
+            <div className="flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-1 shadow-sm">
+              <Languages className="h-3.5 w-3.5 text-primary" />
+              <button
+                onClick={() => setLanguage('hi')}
+                className={`text-[11px] font-bold transition-colors ${language === 'hi' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+              >
+                हिन्दी
+              </button>
+              <span className="text-[10px] text-primary/30">|</span>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`text-[11px] font-bold transition-colors ${language === 'en' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+              >
+                EN
+              </button>
+            </div>
+
             <Button
               size="sm"
               className="font-hindi bg-accent px-3 text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
               onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
             >
               <Heart className="mr-1.5 h-4 w-4 fill-current md:mr-2" />
-              दान करें
+              {t('action.donate')}
             </Button>
+
 
             <button
               className="p-2 text-foreground lg:hidden"

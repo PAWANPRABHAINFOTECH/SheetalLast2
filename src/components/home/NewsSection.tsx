@@ -3,9 +3,13 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+
 
 export function NewsSection() {
   const { data: news, isLoading } = useNews();
+  const { t, language } = useLanguage();
+
 
   if (isLoading) {
     return <div className="h-96 w-full animate-pulse bg-muted rounded-3xl" />;
@@ -18,21 +22,25 @@ export function NewsSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
         <div>
           <div className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-hindi text-sm font-semibold mb-2">
-            अपडेट्स
+            {t('news.updates')}
           </div>
+
           <h2 className="font-hindi text-3xl md:text-5xl font-bold text-primary">
-            महत्वपूर्ण विशेष सूचना
+            {t('news.important')}
           </h2>
+
         </div>
         <Button variant="outline" className="border-primary text-primary font-hindi rounded-full" asChild>
-          <Link to="/news">सभी विशेष सूचना देखें</Link>
+          <Link to="/news">{t('news.viewAll')}</Link>
         </Button>
+
       </div>
 
       {displayNews.length === 0 ? (
         <div className="bg-muted/30 rounded-3xl p-12 text-center">
-          <p className="font-hindi text-lg text-muted-foreground">अभी कोई विशेष सूचना उपलब्ध नहीं है।</p>
+          <p className="font-hindi text-lg text-muted-foreground">{t('news.empty')}</p>
         </div>
+
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {displayNews.map((item) => (
@@ -47,8 +55,9 @@ export function NewsSection() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
                   <Calendar className="h-4 w-4" />
-                  <span className="font-inter">{new Date(item.publish_date || Date.now()).toLocaleDateString('hi-IN')}</span>
+                  <span className="font-inter">{new Date(item.publish_date || Date.now()).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN')}</span>
                 </div>
+
                 <h3 className="font-hindi text-xl font-bold text-primary mb-3 line-clamp-2">
                   {item.title}
                 </h3>
@@ -58,9 +67,10 @@ export function NewsSection() {
               </CardContent>
               <CardFooter className="px-6 pb-6 pt-0">
                 <Link to="/news" className="text-primary font-hindi font-bold text-sm hover:underline">
-                  विस्तार से पढ़ें →
+                  {t('news.readMore')} →
                 </Link>
               </CardFooter>
+
             </Card>
           ))}
         </div>

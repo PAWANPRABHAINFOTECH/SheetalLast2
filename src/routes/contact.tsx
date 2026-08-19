@@ -12,6 +12,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useSiteSettings } from '@/lib/temple.hooks'
 import { supabase } from '@/integrations/supabase/client'
+import { useLanguage } from '@/lib/i18n'
+
 
 export const Route = createFileRoute('/contact')({
   head: () => ({
@@ -46,6 +48,8 @@ const enquirySchema = z.object({
 
 function ContactPage() {
   const { data: settings } = useSiteSettings()
+  const { t } = useLanguage()
+
   const [form, setForm] = useState({ full_name: '', mobile: '', email: '', message: '' })
   const [submitting, setSubmitting] = useState(false)
 
@@ -53,7 +57,7 @@ function ContactPage() {
     event.preventDefault()
     const parsed = enquirySchema.safeParse(form)
     if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? 'कृपया विवरण जाँचें')
+      toast.error(parsed.error.issues[0]?.message ?? t('contact.validate.check'))
       return
     }
     setSubmitting(true)
@@ -65,10 +69,10 @@ function ContactPage() {
     })
     setSubmitting(false)
     if (error) {
-      toast.error('संदेश भेजने में त्रुटि हुई, कृपया पुनः प्रयास करें')
+      toast.error(t('contact.error'))
       return
     }
-    toast.success('आपका संदेश प्राप्त हो गया, धन्यवाद!')
+    toast.success(t('contact.success'))
     setForm({ full_name: '', mobile: '', email: '', message: '' })
   }
 
@@ -76,10 +80,10 @@ function ContactPage() {
     <div className="min-h-screen bg-background font-hindi">
       <Header />
       <main className="py-16 container mx-auto px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-12 text-center">संपर्क करें</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-12 text-center">{t('contact.title')}</h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-primary">हमसे संपर्क करें</h2>
+            <h2 className="text-3xl font-bold text-primary">{t('contact.subtitle')}</h2>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <MapPin className="h-6 w-6 text-secondary shrink-0" />
@@ -100,46 +104,47 @@ function ContactPage() {
             className="space-y-6 bg-card p-8 rounded-3xl shadow-xl border border-primary/10"
           >
             <div className="space-y-2">
-              <label className="font-bold">पूरा नाम</label>
+              <label className="font-bold">{t('contact.name')}</label>
               <Input
                 value={form.full_name}
                 onChange={(e) => setForm({ ...form, full_name: e.target.value })}
                 maxLength={100}
-                placeholder="अपना नाम लिखें"
+                placeholder={t('contact.placeholder.name')}
               />
             </div>
             <div className="space-y-2">
-              <label className="font-bold">मोबाइल नंबर</label>
+              <label className="font-bold">{t('contact.mobile')}</label>
               <Input
                 value={form.mobile}
                 onChange={(e) => setForm({ ...form, mobile: e.target.value })}
                 maxLength={15}
-                placeholder="अपना मोबाइल नंबर लिखें"
+                placeholder={t('contact.placeholder.mobile')}
               />
             </div>
             <div className="space-y-2">
-              <label className="font-bold">ईमेल (वैकल्पिक)</label>
+              <label className="font-bold">{t('contact.email')}</label>
               <Input
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 maxLength={255}
-                placeholder="अपना ईमेल लिखें"
+                placeholder={t('contact.placeholder.email')}
               />
             </div>
             <div className="space-y-2">
-              <label className="font-bold">संदेश</label>
+              <label className="font-bold">{t('contact.message')}</label>
               <Textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 maxLength={1000}
-                placeholder="अपना संदेश यहाँ लिखें"
+                placeholder={t('contact.placeholder.message')}
                 className="min-h-[150px]"
               />
             </div>
             <Button type="submit" disabled={submitting} className="w-full py-6 text-lg bg-primary">
               {submitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-              संदेश भेजें
+              {t('contact.submit')}
+
             </Button>
           </form>
         </div>

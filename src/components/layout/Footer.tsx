@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useSiteSettings, useTempleInfo } from "@/lib/temple.hooks";
+import { useLanguage } from "@/lib/i18n";
+
 import logoAsset from "@/assets/logo.png.asset.json";
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, ChevronRight, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -7,6 +9,8 @@ import { cn } from "@/lib/utils";
 export function Footer() {
   const { data: settings } = useSiteSettings();
   const { data: templeInfo } = useTempleInfo();
+  const { t } = useLanguage();
+
   
   const aboutContent = templeInfo?.find(info => info.section_name === 'about')?.content || 
     "यह मुख्य रूप से भगवान शिव का मंदिर है जो शीतल सिटी मंडीदीप में स्थित है। मंदिर समिति के मार्गदर्शन में निरंतर सेवा कार्य जारी हैं।";
@@ -22,14 +26,15 @@ export function Footer() {
   ].filter(link => link.enabled && link.url);
 
   const quickLinks = [
-    { name: "मुख्य पृष्ठ", to: "/" },
-    { name: "मंदिर के बारे में", to: "/about" },
-    { name: "लाइव दर्शन", to: "/live-darshan" },
-    { name: "विशेष सूचना", to: "/news" },
-    { name: "गैलरी", to: "/gallery" },
-    { name: "सदस्य सूची", to: "/members" },
-    { name: "संपर्क", to: "/contact" },
+    { name: t('nav.home'), to: "/" },
+    { name: t('nav.about'), to: "/about" },
+    { name: t('nav.live'), to: "/live-darshan" },
+    { name: t('nav.news'), to: "/news" },
+    { name: t('nav.gallery'), to: "/gallery" },
+    { name: t('nav.members'), to: "/members" },
+    { name: t('nav.contact'), to: "/contact" },
   ];
+
 
   return (
     <footer className="bg-primary text-primary-foreground pt-16 pb-8 border-t border-secondary/20">
@@ -39,8 +44,9 @@ export function Footer() {
           {/* Column 1: About Us */}
           <div className="space-y-6">
             <h4 className="font-hindi text-xl font-bold text-secondary flex items-center gap-2">
-              About Us
+              {t('footer.about')}
             </h4>
+
             <div className="bg-white/5 p-4 rounded-2xl border border-white/5">
               <p className="font-hindi text-primary-foreground/90 leading-relaxed line-clamp-4">
                 {aboutContent}
@@ -49,7 +55,7 @@ export function Footer() {
                 to="/about" 
                 className="inline-flex items-center gap-1 mt-4 text-secondary hover:text-secondary/80 font-hindi text-sm font-bold transition-colors"
               >
-                और पढ़ें <ChevronRight className="h-4 w-4" />
+                {t('footer.readMore')} <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -57,8 +63,9 @@ export function Footer() {
           {/* Column 2: त्वरित लिंक */}
           <div>
             <h4 className="font-hindi text-xl font-bold text-secondary mb-6 flex items-center gap-2">
-              त्वरित लिंक
+              {t('footer.quickLinks')}
             </h4>
+
             <ul className="space-y-3 font-hindi">
               {quickLinks.map((link) => (
                 <li key={link.to}>
@@ -77,15 +84,16 @@ export function Footer() {
           {/* Column 3: संपर्क विवरण */}
           <div className="space-y-6">
             <h4 className="font-hindi text-xl font-bold text-secondary flex items-center gap-2">
-              संपर्क विवरण
+              {t('footer.contact')}
             </h4>
+
             <ul className="space-y-4 font-hindi">
               <li className="flex gap-4">
                 <div className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
                   <MapPin className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">पता</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">{t('footer.address')}</span>
                   <span className="text-sm leading-relaxed">{settings?.address || "शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046"}</span>
                 </div>
               </li>
@@ -95,7 +103,7 @@ export function Footer() {
                   <Phone className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">मोबाइल नंबर</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">{t('footer.mobile')}</span>
                   <a href={`tel:${settings?.phone?.replace(/\s/g, "") || "+918319322374"}`} className="text-sm hover:text-secondary transition-colors font-inter">
                     {settings?.phone || "+91 831 932 2374"}
                   </a>
@@ -126,7 +134,7 @@ export function Footer() {
                   <Mail className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">ईमेल</span>
+                  <span className="text-[10px] text-white/50 block uppercase tracking-wider">{t('footer.email')}</span>
                   <a href={`mailto:${settings?.email || "info@sheetalshivayalaya.org"}`} className="text-sm hover:text-secondary transition-colors font-inter">
                     {settings?.email || "info@sheetalshivayalaya.org"}
                   </a>
@@ -138,24 +146,26 @@ export function Footer() {
           {/* Column 4: सहयोग करें */}
           <div className="space-y-6">
             <h4 className="font-hindi text-xl font-bold text-secondary flex items-center gap-2">
-              सहयोग करें
+              {t('footer.support')}
             </h4>
+
             <div className="space-y-4">
               <p className="font-hindi text-sm text-primary-foreground/90 leading-relaxed italic border-l-2 border-secondary/30 pl-4">
-                मंदिर के विकास और धार्मिक कार्यों में अपना योगदान देकर पुण्य के भागी बनें।
+                {t('footer.supportMsg')}
               </p>
+
               
               <button 
                 onClick={handleDonateClick}
                 className="w-full flex items-center justify-center gap-2 font-hindi bg-accent hover:bg-accent/90 text-accent-foreground py-4 px-6 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 group"
               >
                 <Heart className="h-5 w-5 fill-current group-hover:animate-pulse" />
-                ऑनलाइन दान दें
+                {t('footer.donateOnline')}
               </button>
 
               <div className="pt-6 border-t border-white/5">
                 <div className="flex items-center gap-4">
-                  <h5 className="font-hindi text-sm font-bold text-secondary">फॉलो करें</h5>
+                  <h5 className="font-hindi text-sm font-bold text-secondary">{t('footer.followUs')}</h5>
                   <div className="flex items-center gap-3">
                     {socialLinks.map((link) => {
                       const Icon = link.icon;
@@ -191,8 +201,9 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left space-y-2">
               <p className="font-hindi text-sm text-primary-foreground/60">
-                © 2026 शीतल शिवालय समिति. सर्वाधिकार सुरक्षित।
+                © 2026 {t('footer.rights')}
               </p>
+
               <div className="text-[10px] md:text-xs font-inter tracking-[0.2em] text-primary-foreground/30 text-center md:text-left uppercase">
                 Designed & Developed by{" "}
                 <a 
@@ -213,7 +224,7 @@ export function Footer() {
               <span className="opacity-20 hidden md:inline">|</span>
               <Link to="/refund-policy" className="hover:text-secondary transition-colors">Refund Policy</Link>
               <span className="opacity-20 hidden md:inline">|</span>
-              <Link to="/admin/login" className="hover:text-secondary transition-colors font-medium opacity-80">Admin Login</Link>
+              <Link to="/admin/login" className="hover:text-secondary transition-colors font-medium opacity-80">{t('footer.admin')}</Link>
             </div>
           </div>
         </div>
