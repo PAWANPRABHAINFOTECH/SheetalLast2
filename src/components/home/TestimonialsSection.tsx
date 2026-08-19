@@ -26,7 +26,7 @@ export function TestimonialsSection() {
     <section className="py-16 container mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="font-hindi text-3xl md:text-4xl font-bold text-primary mb-4">
-          {t('testimonials.title', 'भक्तों के अनुभव')}
+          {t('testimonials.title')}
         </h2>
         <div className="h-1 w-20 bg-secondary mx-auto rounded-full"></div>
       </div>
