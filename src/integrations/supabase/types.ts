@@ -226,6 +226,7 @@ export type Database = {
           display_order: number | null
           id: string
           is_active: boolean | null
+          mobile_number: string | null
           name: string
           photo_url: string | null
           show_on_home: boolean | null
@@ -237,6 +238,7 @@ export type Database = {
           display_order?: number | null
           id?: string
           is_active?: boolean | null
+          mobile_number?: string | null
           name: string
           photo_url?: string | null
           show_on_home?: boolean | null
@@ -248,6 +250,7 @@ export type Database = {
           display_order?: number | null
           id?: string
           is_active?: boolean | null
+          mobile_number?: string | null
           name?: string
           photo_url?: string | null
           show_on_home?: boolean | null
@@ -359,6 +362,7 @@ export type Database = {
           bank_ifsc: string | null
           bank_name: string | null
           created_at: string | null
+          devotee_count: string | null
           donation_qr_url: string | null
           email: string | null
           facebook_enabled: boolean | null
@@ -387,6 +391,7 @@ export type Database = {
           bank_ifsc?: string | null
           bank_name?: string | null
           created_at?: string | null
+          devotee_count?: string | null
           donation_qr_url?: string | null
           email?: string | null
           facebook_enabled?: boolean | null
@@ -415,6 +420,7 @@ export type Database = {
           bank_ifsc?: string | null
           bank_name?: string | null
           created_at?: string | null
+          devotee_count?: string | null
           donation_qr_url?: string | null
           email?: string | null
           facebook_enabled?: boolean | null
