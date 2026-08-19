@@ -15,6 +15,8 @@ import { GalleryPreview } from '@/components/home/GalleryPreview'
 import { Footer } from '@/components/layout/Footer'
 import { DonationModal } from '@/components/shared/DonationModal'
 import { FloatingActions } from '@/components/shared/FloatingActions'
+import { TestimonialsSection } from '@/components/home/TestimonialsSection'
+import { CommentsSection } from '@/components/home/CommentsSection'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -68,6 +70,10 @@ function Index() {
         <section className="py-16 container mx-auto px-4">
           <GalleryPreview />
         </section>
+
+        <TestimonialsSection />
+        
+        <CommentsSection />
       </main>
       
       <Footer />
