@@ -277,7 +277,8 @@ export function AdminShell({ email }: { email: string }) {
           )}
         </main>
       </div>
-      <footer className="mt-auto border-t py-4 text-center">
+      <footer className="mt-auto border-t py-6 flex flex-col items-center gap-3">
+        <img src="/pawanprabha_logo.jpg" alt="PAWANPRABHA INFOTECH" className="h-12 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all" />
         <p className="text-[10px] font-bold text-muted-foreground tracking-widest">
           DESIGNED & DEVELOPED BY PAWANPRABHA INFOTECH
         </p>
