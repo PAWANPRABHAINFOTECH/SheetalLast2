@@ -40,7 +40,9 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.supportMsg': 'मंदिर के विकास और धार्मिक कार्यों में अपना योगदान देकर पुण्य के भागी बनें।',
     'news.readMore': 'विस्तार से पढ़ें',
     'news.empty': 'अभी कोई विशेष सूचना उपलब्ध नहीं है।',
+    'members.desc': 'मंदिर समिति के समर्पित सदस्य जो व्यवस्था और निर्माण कार्यों की देखरेख कर रहे हैं।',
   },
+
 
   en: {
     'nav.home': 'Home',
@@ -73,7 +75,9 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.supportMsg': 'Contribute to temple development and religious activities to earn merit.',
     'news.readMore': 'Read More',
     'news.empty': 'No updates available at the moment.',
+    'members.desc': 'Dedicated members of the temple committee overseeing management and construction activities.',
   },
+
 
 
 };
