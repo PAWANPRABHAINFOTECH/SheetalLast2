@@ -21,7 +21,7 @@ export function NewsSection() {
             अपडेट्स
           </div>
           <h2 className="font-hindi text-3xl md:text-5xl font-bold text-primary">
-            महत्वपूर्ण समाचार
+            महत्वपूर्ण विशेष सूचना
           </h2>
         </div>
         <Button variant="outline" className="border-primary text-primary font-hindi rounded-full" asChild>

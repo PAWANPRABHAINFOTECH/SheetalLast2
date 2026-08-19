@@ -20,7 +20,7 @@ const GALLERY_CATEGORIES = [
   "सामाजिक गतिविधियाँ",
   "अन्य",
 ];
-const MEMBER_CATEGORIES = ["संरक्षक", "पदाधिकारी", "स्थाई कार्यकारिणी", "कार्यकारी सदस्य"];
+const MEMBER_CATEGORIES = ["संरक्षक", "पदाधिकारी", "स्थाई कार्यकारिणी", "कार्यकारी सदस्य", "विशेष सदस्य", "सदस्य"];
 
 interface CrudConfig {
   kind: "crud";
@@ -74,7 +74,7 @@ const SECTIONS: SectionConfig[] = [
   },
   {
     id: "news",
-    label: "समाचार",
+    label: "विशेष सूचना",
     kind: "crud",
     table: "news",
     primaryField: "title",
@@ -117,30 +117,11 @@ const SECTIONS: SectionConfig[] = [
     fields: [
       { name: "name", label: "नाम", type: "text" },
       { name: "designation", label: "पद", type: "text" },
+      { name: "mobile_number", label: "मोबाइल नंबर", type: "text" },
       { name: "photo_url", label: "फ़ोटो", type: "image", folder: "members" },
       { name: "category", label: "श्रेणी", type: "select", options: MEMBER_CATEGORIES },
       { name: "display_order", label: "क्रम", type: "number" },
       { name: "show_on_home", label: "होम पेज पर दिखाएँ", type: "boolean" },
-      { name: "is_active", label: "सक्रिय", type: "boolean" },
-    ],
-  },
-  {
-    id: "advertisements",
-    label: "विज्ञापन / कार्यक्रम",
-    kind: "crud",
-    table: "advertisements",
-    primaryField: "title",
-    imageField: "image_url",
-    orderBy: { column: "display_order" },
-    fields: [
-      { name: "image_url", label: "छवि", type: "image", folder: "ads" },
-      { name: "title", label: "शीर्षक", type: "text" },
-      { name: "description", label: "विवरण", type: "textarea" },
-      { name: "button_text", label: "बटन टेक्स्ट", type: "text" },
-      { name: "button_url", label: "बटन लिंक", type: "text" },
-      { name: "display_order", label: "क्रम", type: "number" },
-      { name: "start_date", label: "प्रारंभ तिथि", type: "date" },
-      { name: "end_date", label: "अंतिम तिथि", type: "date" },
       { name: "is_active", label: "सक्रिय", type: "boolean" },
     ],
   },
@@ -265,7 +246,7 @@ export function AdminShell({ email }: { email: string }) {
         </Sheet>
         <img src={logoAsset.url} alt="लोगो" className="h-10 w-10" />
         <div className="min-w-0">
-          <p className="truncate font-bold text-primary">एडमिन पैनल</p>
+          <p className="truncate font-bold text-primary">शीतल शिवालय समिति</p>
           <p className="truncate text-xs text-muted-foreground">{email}</p>
         </div>
         <Button variant="outline" size="sm" className="ml-auto gap-2" onClick={() => void signOut()}>
@@ -296,6 +277,11 @@ export function AdminShell({ email }: { email: string }) {
           )}
         </main>
       </div>
+      <footer className="mt-auto border-t py-4 text-center">
+        <p className="text-[10px] font-bold text-muted-foreground tracking-widest">
+          DESIGNED & DEVELOPED BY PAWANPRABHA INFOTECH
+        </p>
+      </footer>
     </div>
   );
 }
