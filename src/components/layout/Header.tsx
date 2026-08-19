@@ -111,18 +111,18 @@ export function Header() {
               )}
             </div>
 
-            <div className="flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-1 shadow-sm">
-              <Languages className="h-3.5 w-3.5 text-primary" />
+            <div className="flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm">
+              <Languages className="h-3 w-3 text-primary shrink-0" />
               <button
                 onClick={() => setLanguage('hi')}
-                className={`text-[11px] font-bold transition-colors ${language === 'hi' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+                className={`text-[10px] font-bold transition-colors ${language === 'hi' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
               >
                 हिन्दी
               </button>
-              <span className="text-[10px] text-primary/30">|</span>
+              <span className="text-[9px] text-primary/30">|</span>
               <button
                 onClick={() => setLanguage('en')}
-                className={`text-[11px] font-bold transition-colors ${language === 'en' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+                className={`text-[10px] font-bold transition-colors ${language === 'en' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
               >
                 EN
               </button>
