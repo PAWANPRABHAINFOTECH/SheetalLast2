@@ -56,6 +56,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('temple_lang') as Language;
     if (saved && (saved === 'hi' || saved === 'en')) {
       setLanguageState(saved);
+      document.documentElement.lang = saved;
     }
   }, []);
 
