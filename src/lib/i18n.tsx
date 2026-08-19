@@ -38,7 +38,10 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.followUs': 'फॉलो करें',
     'footer.rights': 'शीतल शिवालय समिति. सर्वाधिकार सुरक्षित।',
     'footer.supportMsg': 'मंदिर के विकास और धार्मिक कार्यों में अपना योगदान देकर पुण्य के भागी बनें।',
+    'news.readMore': 'विस्तार से पढ़ें',
+    'news.empty': 'अभी कोई विशेष सूचना उपलब्ध नहीं है।',
   },
+
   en: {
     'nav.home': 'Home',
     'nav.about': 'About Temple',
@@ -68,7 +71,10 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.followUs': 'Follow Us',
     'footer.rights': 'Shital Shivalaya Samiti. All Rights Reserved.',
     'footer.supportMsg': 'Contribute to temple development and religious activities to earn merit.',
+    'news.readMore': 'Read More',
+    'news.empty': 'No updates available at the moment.',
   },
+
 
 };
 
