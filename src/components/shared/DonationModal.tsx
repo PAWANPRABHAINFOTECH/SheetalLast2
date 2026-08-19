@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/logo.png.asset.json";
 import { useState, useEffect } from "react";
 import { Copy, Check, QrCode, Building2 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+
 
 // Hook-like event listener for opening the modal from anywhere
 export function useDonationModal() {
@@ -23,6 +25,8 @@ export function DonationModal() {
   const [activeTab, setActiveTab] = useState<'qr' | 'bank'>('qr');
   const [copied, setCopied] = useState(false);
   const { data: settings } = useSiteSettings();
+  const { t } = useLanguage();
+
 
   useEffect(() => {
     const handleOpen = () => setIsOpen(true);
@@ -52,10 +56,11 @@ export function DonationModal() {
 
         <div className="p-8 space-y-8">
           <div className="text-center space-y-4">
-            <h3 className="font-hindi text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">आपका योगदान</h3>
+            <h3 className="font-hindi text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">{t('donation.title')}</h3>
             <p className="font-hindi text-foreground/80 leading-relaxed italic">
-              "आपके योगदान से प्रभु की पूजा, आयोजन और सामाजिक गतिविधियाँ पूरी होती हैं। आपका दान मंदिर के विकास और सेवाओं को बेहतर बनाने में मदद करता है।"
+              {t('donation.msg')}
             </p>
+
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -65,7 +70,7 @@ export function DonationModal() {
               onClick={() => setActiveTab('qr')}
             >
               <QrCode className="mr-2 h-6 w-6" />
-              QR कोड
+              {t('donation.qrTab')}
             </Button>
             <Button 
               variant={activeTab === 'bank' ? 'default' : 'outline'} 
@@ -73,7 +78,7 @@ export function DonationModal() {
               onClick={() => setActiveTab('bank')}
             >
               <Building2 className="mr-2 h-6 w-6" />
-              बैंक विवरण
+              {t('donation.bankTab')}
             </Button>
           </div>
 
@@ -87,7 +92,7 @@ export function DonationModal() {
                 />
               </div>
               <div className="text-center">
-                <p className="font-hindi text-lg font-bold text-primary mb-2">UPI / QR द्वारा दान करें</p>
+                <p className="font-hindi text-lg font-bold text-primary mb-2">{t('donation.qrMethod')}</p>
                 {settings?.upi_id && (
                   <Button 
                     variant="ghost" 
@@ -105,15 +110,15 @@ export function DonationModal() {
               <div className="bg-secondary/5 border-2 border-secondary/20 rounded-3xl p-6 space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">खाता धारक</label>
+                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.holder')}</label>
                     <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_account_name || "शीतल शिवालय समिति"}</p>
                   </div>
                   <div>
-                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">बैंक का नाम</label>
+                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.bankName')}</label>
                     <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_name || "---"}</p>
                   </div>
                   <div>
-                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">खाता संख्या</label>
+                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.accountNo')}</label>
                     <div className="flex items-center justify-between">
                       <p className="font-inter text-lg font-bold text-primary tracking-wider">{settings?.bank_account_number || "---"}</p>
                       <Button variant="ghost" size="sm" onClick={() => copyToClipboard(settings?.bank_account_number || "")}>
@@ -122,7 +127,7 @@ export function DonationModal() {
                     </div>
                   </div>
                   <div>
-                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">IFSC कोड</label>
+                    <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.ifsc')}</label>
                     <div className="flex items-center justify-between">
                       <p className="font-inter text-lg font-bold text-primary">{settings?.bank_ifsc || "---"}</p>
                       <Button variant="ghost" size="sm" onClick={() => copyToClipboard(settings?.bank_ifsc || "")}>
@@ -136,10 +141,11 @@ export function DonationModal() {
           )}
 
           <div className="bg-muted/30 p-6 rounded-3xl text-center space-y-2">
-            <p className="font-hindi text-sm font-bold text-primary">आपके योगदान का महत्व</p>
+            <p className="font-hindi text-sm font-bold text-primary">{t('donation.importance')}</p>
             <p className="font-hindi text-xs text-foreground/70 leading-relaxed">
-              आपका दान भगवान के आशीर्वाद से समाज के उत्थान में सहायक होगा। हम आपके योगदान के लिए हमेशा आभारी रहेंगे।
+              {t('donation.importanceMsg')}
             </p>
+
           </div>
         </div>
       </DialogContent>

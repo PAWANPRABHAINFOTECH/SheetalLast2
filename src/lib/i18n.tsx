@@ -46,7 +46,19 @@ const translations: Record<Language, Record<string, string>> = {
     'about.readMore': 'विस्तार से पढ़ें',
     'about.year': 'निर्माण वर्ष',
     'about.service': 'आध्यात्मिक सेवा',
+    'donation.title': 'आपका योगदान',
+    'donation.msg': '"आपके योगदान से प्रभु की पूजा, आयोजन और सामाजिक गतिविधियाँ पूरी होती हैं। आपका दान मंदिर के विकास और सेवाओं को बेहतर बनाने में मदद करता है।"',
+    'donation.qrTab': 'QR कोड',
+    'donation.bankTab': 'बैंक विवरण',
+    'donation.qrMethod': 'UPI / QR द्वारा दान करें',
+    'donation.holder': 'खाता धारक',
+    'donation.bankName': 'बैंक का नाम',
+    'donation.accountNo': 'खाता संख्या',
+    'donation.ifsc': 'IFSC कोड',
+    'donation.importance': 'आपके योगदान का महत्व',
+    'donation.importanceMsg': 'आपका दान भगवान के आशीर्वाद से समाज के उत्थान में सहायक होगा। हम आपके योगदान के लिए हमेशा आभारी रहेंगे।',
   },
+
 
 
 
@@ -87,7 +99,19 @@ const translations: Record<Language, Record<string, string>> = {
     'about.readMore': 'Read More',
     'about.year': 'Est. Year',
     'about.service': 'Spiritual Service',
+    'donation.title': 'Your Contribution',
+    'donation.msg': '"Your contribution fulfills the Lord\'s worship, events, and social activities. Your donation helps in temple development and improving services."',
+    'donation.qrTab': 'QR Code',
+    'donation.bankTab': 'Bank Details',
+    'donation.qrMethod': 'Donate via UPI / QR',
+    'donation.holder': 'Account Holder',
+    'donation.bankName': 'Bank Name',
+    'donation.accountNo': 'Account Number',
+    'donation.ifsc': 'IFSC Code',
+    'donation.importance': 'Importance of Your Contribution',
+    'donation.importanceMsg': 'Your donation will help in the upliftment of society with the Lord\'s blessings. We will always be grateful for your contribution.',
   },
+
 
 
 
