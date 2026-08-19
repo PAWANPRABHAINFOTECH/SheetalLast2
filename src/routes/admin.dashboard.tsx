@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { supabase } from '@/integrations/supabase/client'
 import { useAdminAuth } from '@/lib/admin/useAdminAuth'
 import { AdminShell } from '@/components/admin/AdminShell'
+import { claimFirstAdmin } from '@/lib/admin.functions'
+
 
 export const Route = createFileRoute('/admin/dashboard')({
   ssr: false,
