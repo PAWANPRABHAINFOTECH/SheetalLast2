@@ -18,7 +18,7 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
   const [uploading, setUploading] = useState(false);
   const [urlInput, setUrlInput] = useState(value || "");
   const [isValidUrl, setIsValidUrl] = useState(true);
-  const [isImageLink, setIsImageLink] = useState(true);
+  const [previewError, setPreviewError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Sync internal state if prop value changes externally
@@ -34,9 +34,10 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
       return true;
     }
     try {
-      new URL(url);
-      setIsValidUrl(true);
-      return true;
+      const parsed = new URL(url);
+      const isHttp = parsed.protocol === "http:" || parsed.protocol === "https:";
+      setIsValidUrl(isHttp);
+      return isHttp;
     } catch {
       setIsValidUrl(false);
       return false;
@@ -45,10 +46,8 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
 
   const handleUrlChange = (val: string) => {
     setUrlInput(val);
-    const valid = validateUrl(val);
-    if (valid) {
-      setIsImageLink(true); // Reset so it tries to load again
-    }
+    validateUrl(val);
+    setPreviewError(false); // Reset error status on change
     onChange(val);
   };
 
@@ -65,6 +64,7 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
       const url = await uploadMedia(file, folder ?? kind);
       setUrlInput(url);
       setIsValidUrl(true);
+      setPreviewError(false);
       onChange(url);
       toast.success("फ़ाइल अपलोड हो गई");
     } catch (error) {
@@ -111,16 +111,16 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
           <Alert variant="destructive" className="py-2">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription className="text-xs">
-              कृपया एक वैध URL डालें
+              कृपया एक वैध HTTP/HTTPS URL डालें
             </AlertDescription>
           </Alert>
         )}
 
-        {isValidUrl && !isImageLink && urlInput && kind === "image" && (
+        {isValidUrl && previewError && urlInput && kind === "image" && (
           <Alert className="py-2 border-amber-500 bg-amber-50 dark:bg-amber-950/20">
             <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
             <AlertDescription className="text-xs text-amber-700 dark:text-amber-300">
-              यह लिंक इमेज के रूप में उपलब्ध नहीं है। कृपया direct image link दें।
+              Preview उपलब्ध नहीं है, लेकिन लिंक सेव किया जा सकता है।
             </AlertDescription>
           </Alert>
         )}
@@ -146,12 +146,17 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
             <img 
               src={urlInput} 
               alt="preview" 
-              className="max-h-48 w-full rounded object-contain bg-white"
-              onError={() => setIsImageLink(false)}
-              onLoad={() => setIsImageLink(true)}
+              className={`max-h-48 w-full rounded object-contain bg-white ${previewError ? 'hidden' : 'block'}`}
+              onError={() => setPreviewError(true)}
+              onLoad={() => setPreviewError(false)}
             />
           ) : (
             <video src={urlInput} controls className="max-h-48 w-full rounded" />
+          )}
+          {previewError && kind === "image" && (
+            <div className="flex h-20 items-center justify-center text-xs text-muted-foreground italic">
+              Preview loading error
+            </div>
           )}
         </div>
       )}
