@@ -31,7 +31,7 @@ export function NewsSection() {
 
       {displayNews.length === 0 ? (
         <div className="bg-muted/30 rounded-3xl p-12 text-center">
-          <p className="font-hindi text-lg text-muted-foreground">अभी कोई समाचार उपलब्ध नहीं है।</p>
+          <p className="font-hindi text-lg text-muted-foreground">अभी कोई विशेष सूचना उपलब्ध नहीं है।</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

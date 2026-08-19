@@ -13,7 +13,7 @@ export const Route = createFileRoute('/admin/dashboard')({
   ssr: false,
   head: () => ({
     meta: [
-      { title: 'एडमिन डैशबोर्ड | शीतल शिवालय समिति' },
+      { title: 'शीतल शिवालय समिति | डैशबोर्ड' },
       { name: 'robots', content: 'noindex, nofollow' },
       { name: 'description', content: 'शीतल शिवालय समिति वेबसाइट प्रबंधन डैशबोर्ड।' },
     ],
