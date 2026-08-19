@@ -97,7 +97,9 @@
   --sidebar-ring: oklch(0.35 0.15 25);
 }
 
-html.dark {
+@variant dark (&:is(.dark *));
+
+.dark {
   --background: oklch(0.15 0.02 20); /* Deep dark brown/black */
   --foreground: oklch(0.95 0.01 85); /* Ivory text */
   --card: oklch(0.18 0.02 20);
