@@ -11,7 +11,7 @@ export const Route = createFileRoute('/admin/reset-password')({
   ssr: false,
   head: () => ({
     meta: [
-      { title: 'पासवर्ड बदलें | शीतल शिवालय समिति' },
+      { title: 'शीतल शिवालय समिति | पासवर्ड बदलें' },
       { name: 'robots', content: 'noindex, nofollow' },
     ],
   }),
