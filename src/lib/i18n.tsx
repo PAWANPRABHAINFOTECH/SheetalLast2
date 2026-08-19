@@ -57,7 +57,26 @@ const translations: Record<Language, Record<string, string>> = {
     'donation.ifsc': 'IFSC कोड',
     'donation.importance': 'आपके योगदान का महत्व',
     'donation.importanceMsg': 'आपका दान भगवान के आशीर्वाद से समाज के उत्थान में सहायक होगा। हम आपके योगदान के लिए हमेशा आभारी रहेंगे।',
+    'contact.title': 'संपर्क करें',
+    'contact.subtitle': 'हमसे संपर्क करें',
+    'contact.name': 'पूरा नाम',
+    'contact.mobile': 'मोबाइल नंबर',
+    'contact.email': 'ईमेल (वैकल्पिक)',
+    'contact.message': 'संदेश',
+    'contact.submit': 'संदेश भेजें',
+    'contact.placeholder.name': 'अपना नाम लिखें',
+    'contact.placeholder.mobile': 'अपना मोबाइल नंबर लिखें',
+    'contact.placeholder.email': 'अपना ईमेल लिखें',
+    'contact.placeholder.message': 'अपना संदेश यहाँ लिखें',
+    'contact.success': 'आपका संदेश प्राप्त हो गया, धन्यवाद!',
+    'contact.error': 'संदेश भेजने में त्रुटि हुई, कृपया पुनः प्रयास करें',
+    'contact.validate.name': 'कृपया अपना नाम लिखें',
+    'contact.validate.mobile': 'कृपया सही मोबाइल नंबर लिखें',
+    'contact.validate.email': 'कृपया सही ईमेल लिखें',
+    'contact.validate.message': 'कृपया संदेश लिखें',
+    'contact.validate.check': 'कृपया विवरण जाँचें',
   },
+
 
 
 
@@ -110,7 +129,26 @@ const translations: Record<Language, Record<string, string>> = {
     'donation.ifsc': 'IFSC Code',
     'donation.importance': 'Importance of Your Contribution',
     'donation.importanceMsg': 'Your donation will help in the upliftment of society with the Lord\'s blessings. We will always be grateful for your contribution.',
+    'contact.title': 'Contact Us',
+    'contact.subtitle': 'Get in Touch',
+    'contact.name': 'Full Name',
+    'contact.mobile': 'Mobile Number',
+    'contact.email': 'Email (Optional)',
+    'contact.message': 'Message',
+    'contact.submit': 'Send Message',
+    'contact.placeholder.name': 'Enter your name',
+    'contact.placeholder.mobile': 'Enter your mobile number',
+    'contact.placeholder.email': 'Enter your email',
+    'contact.placeholder.message': 'Enter your message here',
+    'contact.success': 'Your message has been received, thank you!',
+    'contact.error': 'Error sending message, please try again',
+    'contact.validate.name': 'Please enter your name',
+    'contact.validate.mobile': 'Please enter a valid mobile number',
+    'contact.validate.email': 'Please enter a valid email',
+    'contact.validate.message': 'Please enter a message',
+    'contact.validate.check': 'Please check details',
   },
+
 
 
 
@@ -155,3 +193,6 @@ export function useLanguage() {
   }
   return context;
 }
+
+export const useI18n = useLanguage;
+
