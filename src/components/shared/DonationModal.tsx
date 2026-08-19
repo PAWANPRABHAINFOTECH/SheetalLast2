@@ -42,12 +42,12 @@ export function DonationModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-2xl sm:max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none">
+      <DialogContent className="max-w-2xl sm:max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none bg-background">
         <div className="bg-primary text-primary-foreground p-8 text-center relative overflow-hidden">
           {/* Decorative Pattern */}
           <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           
-          <img src={logoAsset.url} alt="Logo" className="h-20 w-20 mx-auto mb-4 bg-white rounded-full p-2 relative z-10" />
+          <img src={logoAsset.url} alt="Logo" className="h-20 w-20 mx-auto mb-4 bg-white dark:bg-primary/20 rounded-full p-2 relative z-10" />
           <DialogTitle className="font-hindi text-3xl font-bold mb-2 relative z-10">शीतल शिवालय समिति</DialogTitle>
           <p className="font-hindi text-sm text-primary-foreground/80 relative z-10">
             शीतल सिटी, मंडीदीप, जिला-रायसेन (मध्यप्रदेश) – 462046
@@ -84,7 +84,7 @@ export function DonationModal() {
 
           {activeTab === 'qr' ? (
             <div className="flex flex-col items-center gap-6 animate-in fade-in duration-500">
-              <div className="bg-white p-6 rounded-3xl shadow-2xl border-4 border-secondary/20">
+              <div className="bg-white dark:bg-primary/5 p-6 rounded-3xl shadow-2xl border-4 border-secondary/20">
                 <img 
                   src={settings?.donation_qr_url || "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=UPI_ID_HERE"} 
                   alt="Donation QR" 

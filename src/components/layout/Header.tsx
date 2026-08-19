@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Menu, X, Heart, Mail, MessageCircle, Youtube, Instagram, Facebook, Languages } from "lucide-react";
+import { Phone, Menu, X, Heart, Mail, MessageCircle, Youtube, Instagram, Facebook, Languages, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme-provider";
 
 import logoAsset from "@/assets/logo.png.asset.json";
 import { useSiteSettings } from "@/lib/temple.hooks";
@@ -11,6 +12,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: settings } = useSiteSettings();
   const { language, setLanguage, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   const navLinks = [
     { name: t('nav.home'), to: "/" },
@@ -29,7 +31,7 @@ export function Header() {
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:gap-6">
           {/* Logo & Branding */}
           <Link to="/" className="flex min-w-0 items-center gap-3 lg:shrink-0">
-            <div className="aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20">
+            <div className="aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
                 alt="Shital Shivalaya Samiti Logo"
@@ -125,6 +127,18 @@ export function Header() {
                 EN
               </button>
             </div>
+            
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10"
+              title={theme === "dark" ? "Light Mode" : "Dark Mode"}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-3.5 w-3.5" />
+              ) : (
+                <Moon className="h-3.5 w-3.5" />
+              )}
+            </button>
 
             <Button
               size="sm"

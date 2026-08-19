@@ -39,7 +39,7 @@ export function FeaturedMembers() {
         {featured.map((member) => (
           <Card key={member.id} className="text-center p-8 border-primary/10 hover:shadow-2xl transition-all hover:-translate-y-2">
             <CardContent className="p-0">
-              <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 border-4 border-white shadow-lg ring-4 ring-primary/5">
+              <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 border-4 border-white dark:border-primary/20 shadow-lg ring-4 ring-primary/5">
                 <AvatarImage src={member.photo_url || ""} className="object-cover" />
                 <AvatarFallback className="font-hindi text-2xl">{member.name[0]}</AvatarFallback>
               </Avatar>
