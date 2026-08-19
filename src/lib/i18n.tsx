@@ -41,7 +41,13 @@ const translations: Record<Language, Record<string, string>> = {
     'news.readMore': 'विस्तार से पढ़ें',
     'news.empty': 'अभी कोई विशेष सूचना उपलब्ध नहीं है।',
     'members.desc': 'मंदिर समिति के समर्पित सदस्य जो व्यवस्था और निर्माण कार्यों की देखरेख कर रहे हैं।',
+    'about.intro': 'परिचय',
+    'about.title': 'शीतल शिवालय मंदिर के बारे में जानें',
+    'about.readMore': 'विस्तार से पढ़ें',
+    'about.year': 'निर्माण वर्ष',
+    'about.service': 'आध्यात्मिक सेवा',
   },
+
 
 
   en: {
@@ -76,7 +82,13 @@ const translations: Record<Language, Record<string, string>> = {
     'news.readMore': 'Read More',
     'news.empty': 'No updates available at the moment.',
     'members.desc': 'Dedicated members of the temple committee overseeing management and construction activities.',
+    'about.intro': 'Introduction',
+    'about.title': 'Know about Shital Shivalaya Temple',
+    'about.readMore': 'Read More',
+    'about.year': 'Est. Year',
+    'about.service': 'Spiritual Service',
   },
+
 
 
 
