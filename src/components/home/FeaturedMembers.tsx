@@ -38,7 +38,15 @@ export function FeaturedMembers() {
                 <AvatarFallback className="font-hindi text-2xl">{member.name[0]}</AvatarFallback>
               </Avatar>
               <h3 className="font-hindi text-xl font-bold text-primary mb-2">{member.name}</h3>
-              <p className="font-hindi text-secondary font-semibold mb-4">{member.designation}</p>
+              <p className="font-hindi text-secondary font-semibold mb-2">{member.designation}</p>
+              {member.mobile_number && member.show_mobile_number && (
+                <a 
+                  href={`tel:${member.mobile_number}`}
+                  className="block font-hindi text-sm text-primary hover:text-secondary transition-colors mb-4 flex items-center justify-center gap-1"
+                >
+                  <span>📱</span> {member.mobile_number}
+                </a>
+              )}
               <div className="h-1 w-12 bg-secondary/30 mx-auto rounded-full" />
             </CardContent>
           </Card>
