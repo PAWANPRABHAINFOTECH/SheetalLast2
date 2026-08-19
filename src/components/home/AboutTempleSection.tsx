@@ -1,4 +1,4 @@
-import { useTempleInfo } from "@/lib/temple.hooks";
+import { useTempleInfo, useSiteSettings } from "@/lib/temple.hooks";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 
