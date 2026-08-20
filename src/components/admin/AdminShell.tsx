@@ -92,7 +92,6 @@ const SECTIONS: SectionConfig[] = [
       { name: "content", label: "सूचना", type: "textarea" },
       { name: "link_url", label: "लिंक", type: "text" },
       { name: "link_text", label: "लिंक टेक्स्ट", type: "text" },
-      { name: "priority", label: "प्राथमिकता", type: "select", options: ["low", "medium", "high"] },
       { name: "start_date", label: "प्रारंभ तिथि", type: "date" },
       { name: "end_date", label: "अंतिम तिथि", type: "date" },
       { name: "is_active", label: "सक्रिय", type: "boolean" },
