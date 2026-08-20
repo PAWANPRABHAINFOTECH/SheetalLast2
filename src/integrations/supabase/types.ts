@@ -602,6 +602,7 @@ export type Database = {
         | "पदाधिकारी"
         | "स्थाई कार्यकारिणी"
         | "कार्यकारी सदस्य"
+        | "संस्थापक सदस्य"
       notice_priority: "low" | "medium" | "high"
     }
     CompositeTypes: {
@@ -744,6 +745,7 @@ export const Constants = {
         "पदाधिकारी",
         "स्थाई कार्यकारिणी",
         "कार्यकारी सदस्य",
+        "संस्थापक सदस्य",
       ],
       notice_priority: ["low", "medium", "high"],
     },
