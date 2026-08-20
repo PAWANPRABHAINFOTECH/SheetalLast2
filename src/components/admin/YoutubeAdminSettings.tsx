@@ -61,31 +61,17 @@ export function YoutubeAdminSettings() {
         </div>
 
         {settings?.youtube_channel_name && (
-          <div className="grid gap-4 rounded-xl border border-primary/5 bg-primary/5 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 rounded-xl border border-primary/5 bg-primary/5 p-4 sm:grid-cols-2 lg:grid-cols-3">
             <div className="flex items-center gap-3">
-              {settings.youtube_channel_logo && (
-                <img 
-                  src={settings.youtube_channel_logo} 
-                  alt="Channel Logo" 
-                  className="h-10 w-10 rounded-full"
-                />
-              )}
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background">
+                <Youtube className="h-5 w-5 text-[#FF0000]" />
+              </div>
               <div className="min-w-0">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">चैनल का नाम</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">कनेक्टेड चैनल</p>
                 <p className="truncate font-bold">{settings.youtube_channel_name}</p>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background">
-                <Users className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">सदस्य (Subscribers)</p>
-                <p className="font-bold">{settings.youtube_subscriber_count || "—"}</p>
-              </div>
-            </div>
-
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background">
                 <CheckCircle2 className="h-5 w-5 text-green-500" />
@@ -111,6 +97,7 @@ export function YoutubeAdminSettings() {
             </div>
           </div>
         )}
+
 
         {!settings?.youtube_channel_name && !sync.isPending && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
