@@ -338,18 +338,7 @@ export function AdminShell({ email }: { email: string }) {
           {active.id === "youtube_sync" && (
             <div className="space-y-8">
               <YoutubeAdminSettings />
-              <CrudSection
-                key={active.id}
-                table="youtube_videos"
-                title="सिंक किए गए वीडियो"
-                fields={[
-                  { name: "title", label: "शीर्षक", type: "text" },
-                  { name: "youtube_id", label: "Video ID", type: "text" },
-                  { name: "is_active", label: "सक्रिय", type: "boolean" },
-                ]}
-                primaryField="title"
-                filter={{ source_type: "synced" }}
-              />
+              {/* Removed redundant CrudSection for synced videos as requested */}
             </div>
           )}
           {active.id === "youtube_special" && active.kind === "crud" && (
