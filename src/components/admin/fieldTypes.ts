@@ -18,4 +18,5 @@ export interface AdminField {
   placeholder?: string;
   /** max duration in seconds for video uploads */
   maxDuration?: number;
+  defaultValue?: any;
 }
