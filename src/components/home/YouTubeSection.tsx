@@ -9,12 +9,12 @@ export function YouTubeSection() {
   const { data: specialVideos, isLoading: loadingSpecial } = useYoutubeVideos("special");
   const { data: settings } = useSiteSettings();
   const { t } = useI18n();
-  const [displayCountSynced, setDisplayCountSynced] = useState(4);
-  const [displayCountSpecial, setDisplayCountSpecial] = useState(4);
+  const [displayCountSynced, setDisplayCountSynced] = useState(8);
+  const [displayCountSpecial, setDisplayCountSpecial] = useState(8);
 
   const renderVideoGrid = (videos: any[], count: number, setCount: React.Dispatch<React.SetStateAction<number>>) => {
-    const visibleVideos = videos.slice(0, count);
-    const hasMore = videos.length > count;
+    const visibleVideos = videos.filter(v => v.is_active !== false).slice(0, count);
+    const hasMore = videos.filter(v => v.is_active !== false).length > count;
 
     return (
       <>
@@ -27,13 +27,25 @@ export function YouTubeSection() {
               rel="noopener noreferrer"
               className="group flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="relative aspect-video overflow-hidden">
-                <img
-                  src={video.thumbnail || ""}
-                  alt={video.title || ""}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
+              <div className="relative aspect-video overflow-hidden bg-muted">
+                {video.youtube_id ? (
+                  <img
+                    src={`https://img.youtube.com/vi/${video.youtube_id}/hqdefault.jpg`}
+                    alt={video.title || ""}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://i.ytimg.com/vi/placeholder/hqdefault.jpg';
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={video.thumbnail || ""}
+                    alt={video.title || ""}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                )}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FF0000] text-white shadow-lg">
                     <Youtube className="h-6 w-6" />
@@ -72,7 +84,7 @@ export function YouTubeSection() {
               variant="outline"
               size="sm"
               className="rounded-full border-primary/20 text-primary hover:bg-primary/5"
-              onClick={() => setCount((prev) => prev + 4)}
+              onClick={() => setCount((prev) => prev + 8)}
             >
               {t("और वीडियो देखें")}
             </Button>
