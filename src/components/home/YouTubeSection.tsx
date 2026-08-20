@@ -102,15 +102,16 @@ export function YouTubeSection() {
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-primary/10 pb-6">
             <div className="space-y-2">
               <h2 className="flex items-center gap-3 font-hindi text-3xl md:text-4xl font-bold text-primary">
-                <Youtube className="h-8 w-8 text-[#FF0000]" /> {t("यूट्यूब चैनल")}
+                {t("यूट्यूब चैनल")}
               </h2>
+              <div className="h-0.5 bg-black w-full" />
               <p className="font-hindi text-lg text-foreground/70 italic">
                 {settings?.youtube_channel_name || "शीतल शिवालय समिति"} - नवीनतम वीडियो
               </p>
             </div>
             {settings?.youtube_channel_url && (
               <Button variant="outline" className="gap-2 rounded-full border-primary/20 hover:bg-primary/5" asChild>
-                <a href={settings.youtube_channel_url} target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/@SheetalShivalayaSamiti" target="_blank" rel="noopener noreferrer">
                   {t("चैनल देखें")} <ExternalLink className="h-4 w-4" />
                 </a>
               </Button>
@@ -126,11 +127,8 @@ export function YouTubeSection() {
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-primary/10 pb-6">
             <div className="space-y-2">
               <h2 className="flex items-center gap-3 font-hindi text-3xl md:text-4xl font-bold text-primary">
-                <Star className="h-8 w-8 text-[#C99A3A]" fill="#C99A3A" /> {t("विशेष वीडियो")}
+                ⭐ {t("विशेष झलकियां")}
               </h2>
-              <p className="font-hindi text-lg text-foreground/70 italic">
-                समिति द्वारा चयनित कुछ खास वीडियो
-              </p>
             </div>
           </div>
           {renderVideoGrid(specialVideos, displayCountSpecial, setDisplayCountSpecial)}

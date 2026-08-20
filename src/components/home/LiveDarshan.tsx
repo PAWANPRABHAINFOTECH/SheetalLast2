@@ -56,12 +56,16 @@ export function LiveDarshan() {
       </div>
       
       <div className="mt-10 flex flex-wrap justify-center gap-4">
-        <Button size="lg" className="bg-red-600 hover:bg-red-700 font-hindi rounded-full">
-          <Youtube className="mr-2 h-5 w-5" />
-          YouTube पर देखें
+        <Button size="lg" className="bg-red-600 hover:bg-red-700 font-hindi rounded-full" asChild>
+          <a href="https://www.youtube.com/@SheetalShivalayaSamiti" target="_blank" rel="noopener noreferrer">
+            <Youtube className="mr-2 h-5 w-5" />
+            YouTube पर देखें
+          </a>
         </Button>
-        <Button size="lg" variant="outline" className="border-primary text-primary font-hindi rounded-full">
-          सभी आरती वीडियो
+        <Button size="lg" variant="outline" className="border-primary text-primary font-hindi rounded-full" asChild>
+          <a href="https://www.youtube.com/playlist?list=PLAS4PAq755Gw" target="_blank" rel="noopener noreferrer">
+            सभी आरती वीडियो
+          </a>
         </Button>
       </div>
     </div>
