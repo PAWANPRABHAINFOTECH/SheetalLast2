@@ -86,8 +86,9 @@ const SECTIONS: SectionConfig[] = [
     kind: "crud",
     table: "notices",
     primaryField: "content",
-    orderBy: { column: "created_at", ascending: false },
+    orderBy: { column: "sort_order", ascending: true },
     fields: [
+      { name: "sort_order", label: "क्रमांक", type: "number", placeholder: "उदा: 1, 2, 3..." },
       { name: "content", label: "सूचना", type: "textarea" },
       { name: "link_url", label: "लिंक", type: "text" },
       { name: "link_text", label: "लिंक टेक्स्ट", type: "text" },

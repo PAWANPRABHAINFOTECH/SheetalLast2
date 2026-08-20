@@ -333,6 +333,7 @@ export type Database = {
           link_text: string | null
           link_url: string | null
           priority: Database["public"]["Enums"]["notice_priority"] | null
+          sort_order: number
           start_date: string | null
         }
         Insert: {
@@ -344,6 +345,7 @@ export type Database = {
           link_text?: string | null
           link_url?: string | null
           priority?: Database["public"]["Enums"]["notice_priority"] | null
+          sort_order?: number
           start_date?: string | null
         }
         Update: {
@@ -355,6 +357,7 @@ export type Database = {
           link_text?: string | null
           link_url?: string | null
           priority?: Database["public"]["Enums"]["notice_priority"] | null
+          sort_order?: number
           start_date?: string | null
         }
         Relationships: []
