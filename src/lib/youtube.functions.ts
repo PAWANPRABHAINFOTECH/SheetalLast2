@@ -27,9 +27,13 @@ async function resolveChannelId(url: string): Promise<string> {
     const externalIdMatch = html.match(/"externalId":"(UC[a-zA-Z0-9_-]{22})"/);
     if (externalIdMatch?.[1]) return externalIdMatch[1];
 
-    // Canonical link
+    // Try to extract from canonical link
     const canonicalMatch = html.match(/link rel="canonical" href="https:\/\/www\.youtube\.com\/channel\/(UC[a-zA-Z0-9_-]{22})"/);
     if (canonicalMatch?.[1]) return canonicalMatch[1];
+
+    // Generic channel ID match in the body
+    const genericMatch = html.match(/(UC[a-zA-Z0-9_-]{22})/);
+    if (genericMatch?.[1]) return genericMatch[1];
 
   } catch (error) {
     console.error("Error resolving channel ID:", error);
