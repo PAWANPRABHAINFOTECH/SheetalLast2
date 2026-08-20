@@ -15,7 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.live': 'लाइव दर्शन',
     'nav.news': 'विशेष सूचना',
     'nav.gallery': 'गैलरी',
-    'nav.members': 'सदस्य',
+    'nav.members': 'पोस्टर',
     'nav.contact': 'संपर्क',
     'action.donate': 'दान करें',
     'footer.admin': 'एडमिन लॉगिन',

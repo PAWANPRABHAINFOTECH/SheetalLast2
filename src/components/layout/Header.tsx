@@ -20,7 +20,7 @@ export function Header() {
     { name: t('nav.live'), to: "/live-darshan" },
     { name: t('nav.news'), to: "/news" },
     { name: t('nav.gallery'), to: "/gallery" },
-    { name: "Poster", to: "/members" },
+    { name: t('nav.members'), to: "/members" },
     { name: t('nav.contact'), to: "/contact" },
   ];
 
