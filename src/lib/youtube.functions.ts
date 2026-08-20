@@ -79,10 +79,10 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     let newCount = 0;
     
     for (const entry of entries) {
-      const videoId = entry["yt:videoId"] || entry.id?.toString().split(":").pop();
+      const videoId = entry["yt:videoId"] || (typeof entry.id === 'string' ? entry.id.split(":").pop() : entry.id?.toString().split(":").pop());
       if (!videoId) continue;
 
-      const title = entry.title || "";
+      const title = typeof entry.title === 'object' ? (entry.title['#text'] || entry.title.toString()) : (entry.title || "");
       const published = entry.published || entry.updated;
       const url = `https://www.youtube.com/watch?v=${videoId}`;
       
