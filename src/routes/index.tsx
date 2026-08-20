@@ -7,7 +7,8 @@ import { AboutTempleSection } from '@/components/home/AboutTempleSection'
 import { TempleTimings } from '@/components/home/TempleTimings'
 import { LiveDarshan } from '@/components/home/LiveDarshan'
 import { NewsSection } from '@/components/home/NewsSection'
-import { Advertisements } from '@/components/home/Advertisements'
+import { YouTubeSection } from '@/components/home/YouTubeSection'
+import { EventFloatingSlider } from '@/components/home/EventFloatingSlider'
 import { ChairmanMessage } from '@/components/home/ChairmanMessage'
 import { FeaturedMembers } from '@/components/home/FeaturedMembers'
 import { LocationSection } from '@/components/home/LocationSection'
@@ -79,6 +80,7 @@ function Index() {
       <Footer />
       <DonationModal />
       <FloatingActions />
+      <EventFloatingSlider />
     </div>
   )
 }

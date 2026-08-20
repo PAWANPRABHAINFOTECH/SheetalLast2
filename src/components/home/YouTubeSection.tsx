@@ -20,7 +20,7 @@ export function YouTubeSection() {
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-primary/10 pb-6">
         <div className="space-y-2">
           <h2 className="flex items-center gap-3 font-hindi text-3xl md:text-4xl font-bold text-primary">
-            <Youtube className="h-8 w-8 text-[#FF0000]" /> {t("यूट्यूब चैनल", "YouTube Channel")}
+            <Youtube className="h-8 w-8 text-[#FF0000]" /> {t("यूट्यूब चैनल")}
           </h2>
           <p className="font-hindi text-lg text-foreground/70 italic">
             {settings?.youtube_channel_name || "शीतल शिवालय समिति"} - नवीनतम वीडियो
@@ -83,7 +83,7 @@ export function YouTubeSection() {
             className="min-w-[200px] rounded-full border-primary font-hindi text-primary hover:bg-primary hover:text-white"
             onClick={() => setDisplayCount((prev) => prev + 4)}
           >
-            {t("और वीडियो देखें", "More Videos")}
+            {t("और वीडियो देखें")}
           </Button>
         </div>
       )}
