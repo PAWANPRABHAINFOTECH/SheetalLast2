@@ -49,12 +49,17 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     
     // Fetch RSS Feed
     const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-    const res = await fetch(rssUrl);
+    const res = await fetch(rssUrl, { cache: 'no-store' });
     if (!res.ok) {
+      console.error("RSS fetch failed:", res.status, res.statusText);
       throw new Error("YouTube से डेटा प्राप्त नहीं हो सका। कृपया कुछ देर बाद पुनः प्रयास करें।");
     }
     
     const xmlData = await res.text();
+    if (!xmlData || xmlData.length < 100) {
+       console.error("RSS data too short:", xmlData);
+       throw new Error("YouTube से डेटा प्राप्त नहीं हो सका।");
+    }
     const parser = new XMLParser({
       ignoreAttributes: false,
       attributeNamePrefix: "@_"
@@ -91,6 +96,7 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
 
       const description = mediaGroup?.["media:description"] || "";
 
+      // We use a manual check before upsert to correctly count new videos
       const { data: existing } = await supabase
         .from("youtube_videos")
         .select("id")
@@ -112,10 +118,11 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
           is_active: true
         }, { onConflict: "youtube_id,source_type" });
       
-      if (!upsertError && !existing) {
+      if (upsertError) {
+        console.error("Error upserting video:", upsertError);
+      } else if (!existing) {
         newCount++;
       }
-      if (upsertError) console.error("Error upserting video:", upsertError);
     }
 
     // Update Site Settings

@@ -9,8 +9,8 @@ export function YouTubeSection() {
   const { data: specialVideos, isLoading: loadingSpecial } = useYoutubeVideos("special");
   const { data: settings } = useSiteSettings();
   const { t } = useI18n();
-  const [displayCountSynced, setDisplayCountSynced] = useState(4);
-  const [displayCountSpecial, setDisplayCountSpecial] = useState(4);
+  const [displayCountSynced, setDisplayCountSynced] = useState(8);
+  const [displayCountSpecial, setDisplayCountSpecial] = useState(8);
 
   const renderVideoGrid = (videos: any[], count: number, setCount: React.Dispatch<React.SetStateAction<number>>) => {
     const visibleVideos = videos.filter(v => v.is_active !== false).slice(0, count);
@@ -84,7 +84,7 @@ export function YouTubeSection() {
               variant="outline"
               size="sm"
               className="rounded-full border-primary/20 text-primary hover:bg-primary/5"
-              onClick={() => setCount((prev) => prev + 4)}
+              onClick={() => setCount((prev) => prev + 8)}
             >
               {t("और वीडियो देखें")}
             </Button>
