@@ -78,6 +78,26 @@ export function CrudSection({
 
   const save = useMutation({
     mutationFn: async (values: Row) => {
+      // Rule 4 & 5: Validation for sort_order uniqueness and positive whole number
+      if (table === "notices" && values['sort_order'] !== undefined) {
+        const val = Number(values['sort_order']);
+        if (!Number.isInteger(val) || val <= 0) {
+          throw new Error("क्रमांक केवल एक सकारात्मक पूर्णांक होना चाहिए (1, 2, 3...)");
+        }
+
+        // Check for conflicts
+        const { data: conflict } = await db()
+          .from(table)
+          .select("id")
+          .eq("sort_order", val)
+          .neq("id", values['id'] || '00000000-0000-0000-0000-000000000000')
+          .maybeSingle();
+
+        if (conflict) {
+          toast.warning("चेतावनी: यह क्रमांक पहले से उपयोग में है!");
+        }
+      }
+
       const payload: Row = { ...defaultValues };
       for (const field of fields) {
         payload[field.name] = values[field.name] ?? null;

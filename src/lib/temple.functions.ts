@@ -31,7 +31,7 @@ export const getActiveNotices = createServerFn({ method: "GET" })
       .from("notices")
       .select("*")
       .eq("is_active", true)
-      .order("priority", { ascending: false });
+      .order("sort_order", { ascending: true });
     
     if (error) throw error;
     return data;
