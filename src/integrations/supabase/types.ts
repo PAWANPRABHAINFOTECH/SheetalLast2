@@ -598,8 +598,11 @@ export type Database = {
           channel_name: string | null
           created_at: string | null
           description: string | null
+          display_order: number | null
           id: string
+          is_active: boolean | null
           published_at: string | null
+          source_type: string | null
           thumbnail: string | null
           title: string | null
           url: string | null
@@ -609,8 +612,11 @@ export type Database = {
           channel_name?: string | null
           created_at?: string | null
           description?: string | null
+          display_order?: number | null
           id?: string
+          is_active?: boolean | null
           published_at?: string | null
+          source_type?: string | null
           thumbnail?: string | null
           title?: string | null
           url?: string | null
@@ -620,8 +626,11 @@ export type Database = {
           channel_name?: string | null
           created_at?: string | null
           description?: string | null
+          display_order?: number | null
           id?: string
+          is_active?: boolean | null
           published_at?: string | null
+          source_type?: string | null
           thumbnail?: string | null
           title?: string | null
           url?: string | null

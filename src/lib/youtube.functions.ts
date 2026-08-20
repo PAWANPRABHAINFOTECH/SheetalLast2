@@ -91,6 +91,7 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
         .from("youtube_videos")
         .select("id")
         .eq("youtube_id", videoId)
+        .eq("source_type", "synced")
         .maybeSingle();
 
       const { error: upsertError } = await supabase
@@ -103,7 +104,9 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
           url: url,
           description: description,
           channel_name: channelName,
-        }, { onConflict: "youtube_id" });
+          source_type: "synced",
+          is_active: true
+        }, { onConflict: "youtube_id,source_type" });
       
       if (!upsertError && !existing) {
         newCount++;

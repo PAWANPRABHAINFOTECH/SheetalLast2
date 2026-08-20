@@ -18,9 +18,8 @@ const CARDS = [
   { table: "gallery", label: "कुल गैलरी फोटो", icon: Images },
   { table: "members", label: "कुल सदस्य", icon: Users },
   { table: "hero_slides", label: "कुल स्लाइडर", icon: GalleryHorizontal },
-  
+  { table: "youtube_videos", label: "कुल वीडियो (YouTube)", icon: Video },
   { table: "notices", label: "महत्वपूर्ण सूचनाएँ", icon: Bell },
-  { table: "live_darshan", label: "लाइव दर्शन", icon: Video },
   { table: "temple_timings", label: "दर्शन / आरती समय", icon: Clock },
   { table: "contact_enquiries", label: "संपर्क संदेश", icon: MessageSquare },
 ] as const;

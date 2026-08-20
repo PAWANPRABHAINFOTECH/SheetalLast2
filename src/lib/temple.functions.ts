@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
 
 export const getSiteSettings = createServerFn({ method: "GET" })
   .handler(async () => {
@@ -132,12 +133,24 @@ export const getAdvertisements = createServerFn({ method: "GET" })
   });
 
 export const getYoutubeVideos = createServerFn({ method: "GET" })
-  .handler(async () => {
-    const { data, error } = await supabase
+  .inputValidator((data) => z.object({ 
+    source_type: z.enum(["synced", "special"]).optional() 
+  }).optional().parse(data))
+  .handler(async ({ data }) => {
+    let query = supabase
       .from("youtube_videos")
       .select("*")
-      .order("published_at", { ascending: false });
+      .eq("is_active", true);
+    
+    if (data?.source_type) {
+      query = query.eq("source_type", data.source_type);
+    }
+    
+    const { data: videos, error } = await query.order(
+      data?.source_type === "special" ? "display_order" : "published_at", 
+      { ascending: data?.source_type === "special" }
+    );
     
     if (error) throw error;
-    return data;
+    return videos;
   });

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { Loader2, Upload, Link as LinkIcon, AlertCircle } from "lucide-react";
+import { Loader2, Upload, Link as LinkIcon, AlertCircle, Youtube } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,9 +12,10 @@ interface Props {
   kind: "image" | "video";
   folder?: string;
   maxDuration?: number;
+  onYoutubeData?: (data: { id: string; thumbnail: string; title?: string }) => void;
 }
 
-export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props) {
+export function MediaInput({ value, onChange, kind, folder, maxDuration, onYoutubeData }: Props) {
   const [uploading, setUploading] = useState(false);
   const [urlInput, setUrlInput] = useState(value || "");
   const [isValidUrl, setIsValidUrl] = useState(true);
@@ -27,6 +28,12 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
       setUrlInput(value || "");
     }
   }, [value]);
+
+  const extractYoutubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2] && match[2].length === 11) ? match[2] : null;
+  };
 
   const validateUrl = (url: string) => {
     if (!url) {
@@ -47,8 +54,19 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
   const handleUrlChange = (val: string) => {
     setUrlInput(val);
     validateUrl(val);
-    setPreviewError(false); // Reset error status on change
+    setPreviewError(false);
     onChange(val);
+
+    // Auto-detect YouTube for Special Videos
+    if (onYoutubeData) {
+      const ytId = extractYoutubeId(val);
+      if (ytId) {
+        onYoutubeData({
+          id: ytId,
+          thumbnail: `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`,
+        });
+      }
+    }
   };
 
   const handleFile = async (file: File) => {
@@ -74,6 +92,8 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
       if (inputRef.current) inputRef.current.value = "";
     }
   };
+
+  const ytId = extractYoutubeId(urlInput);
 
   return (
     <div className="space-y-3">
@@ -116,7 +136,7 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
           </Alert>
         )}
 
-        {isValidUrl && previewError && urlInput && kind === "image" && (
+        {isValidUrl && previewError && urlInput && kind === "image" && !ytId && (
           <Alert className="py-2 border-amber-500 bg-amber-50 dark:bg-amber-950/20">
             <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
             <AlertDescription className="text-xs text-amber-700 dark:text-amber-300">
@@ -141,8 +161,21 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
         <div className="mt-2 overflow-hidden rounded-lg border bg-muted/30 p-1">
           <div className="flex items-center justify-between px-2 py-1">
             <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Preview</span>
+            {ytId && (
+              <span className="flex items-center gap-1 text-[10px] font-bold text-[#FF0000] uppercase">
+                <Youtube className="h-3 w-3" /> YouTube Detect
+              </span>
+            )}
           </div>
-          {kind === "image" ? (
+          {ytId ? (
+            <div className="relative aspect-video w-full bg-black">
+              <iframe
+                src={`https://www.youtube.com/embed/${ytId}`}
+                className="absolute inset-0 h-full w-full rounded"
+                allowFullScreen
+              />
+            </div>
+          ) : kind === "image" ? (
             <img 
               src={urlInput} 
               alt="preview" 
@@ -153,7 +186,7 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration }: Props
           ) : (
             <video src={urlInput} controls className="max-h-48 w-full rounded" />
           )}
-          {previewError && kind === "image" && (
+          {previewError && kind === "image" && !ytId && (
             <div className="flex h-20 items-center justify-center text-xs text-muted-foreground italic">
               Preview loading error
             </div>

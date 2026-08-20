@@ -16,7 +16,7 @@ export function YoutubeAdminSettings() {
   const sync = useMutation({
     mutationFn: (channelUrl: string) => syncYoutubeVideos({ data: { channelUrl } }),
     onSuccess: (data) => {
-      toast.success(data.newCount > 0 ? `सिंक सफल — ${data.newCount} नए वीडियो मिले।` : "सिंक सफल — कोई नया वीडियो नहीं मिला।");
+      toast.success(data.newCount > 0 ? `सिंक सफल — ${data.newCount} नए वीडियो प्राप्त हुए।` : (data.videoCount > 0 ? "चैनल उपलब्ध है, लेकिन कोई नया वीडियो प्राप्त नहीं हुआ।" : "चैनल उपलब्ध है, लेकिन कोई वीडियो प्राप्त नहीं हुआ।"));
       void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
       void queryClient.invalidateQueries({ queryKey: ["admin", "youtube_videos"] });
       void queryClient.invalidateQueries({ queryKey: ["youtube-videos"] });

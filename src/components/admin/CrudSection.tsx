@@ -34,6 +34,8 @@ interface Props {
   primaryField: string;
   imageField?: string;
   singleRow?: boolean;
+  filter?: Record<string, any>;
+  defaultValues?: Record<string, any>;
 }
 
 // The admin panel is client-only and every write is enforced by admin RLS policies.
@@ -49,6 +51,8 @@ export function CrudSection({
   primaryField,
   imageField,
   singleRow,
+  filter,
+  defaultValues,
 }: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
@@ -60,6 +64,11 @@ export function CrudSection({
     queryKey,
     queryFn: async () => {
       let query = db().from(table).select("*");
+      if (filter) {
+        Object.entries(filter).forEach(([key, val]) => {
+          query = query.eq(key, val);
+        });
+      }
       if (orderBy) query = query.order(orderBy.column, { ascending: orderBy.ascending ?? true });
       const { data, error } = await query;
       if (error) throw error;
@@ -69,7 +78,7 @@ export function CrudSection({
 
   const save = useMutation({
     mutationFn: async (values: Row) => {
-      const payload: Row = {};
+      const payload: Row = { ...defaultValues };
       for (const field of fields) {
         payload[field.name] = values[field.name] ?? null;
       }
@@ -102,9 +111,9 @@ export function CrudSection({
   });
 
   const openNew = () => {
-    const initial: Row = {};
+    const initial: Row = { ...defaultValues };
     for (const field of fields) {
-      initial[field.name] = field.type === "boolean" ? true : field.type === "number" ? 0 : "";
+      initial[field.name] = field.defaultValue !== undefined ? field.defaultValue : (field.type === "boolean" ? true : field.type === "number" ? 0 : "");
     }
     setDraft(initial);
     setOpen(true);
@@ -196,17 +205,30 @@ export function CrudSection({
                     />
                   )}
                   {(field.type === "text" || field.type === "date" || field.type === "number") && (
-                    <Input
-                      type={field.type === "text" ? "text" : field.type}
-                      value={String(value ?? "")}
-                      onChange={(e) =>
-                        setValue(
-                          field.name,
-                          field.type === "number" ? Number(e.target.value) : e.target.value,
-                        )
-                      }
-                      placeholder={field.placeholder ?? ""}
-                    />
+                    <div className="space-y-2">
+                      <Input
+                        type={field.type === "text" ? "text" : field.type}
+                        value={String(value ?? "")}
+                        onChange={(e) =>
+                          setValue(
+                            field.name,
+                            field.type === "number" ? Number(e.target.value) : e.target.value,
+                          )
+                        }
+                        placeholder={field.placeholder ?? ""}
+                      />
+                      {field.name === "url" && table === "youtube_videos" && field.type === "text" && (
+                        <MediaInput
+                          kind="video"
+                          value={String(value ?? "")}
+                          onChange={(val) => setValue(field.name, val)}
+                          onYoutubeData={(ytData: any) => {
+                            if (!draft['youtube_id']) setValue('youtube_id', ytData.id);
+                            if (!draft['thumbnail']) setValue('thumbnail', ytData.thumbnail);
+                          }}
+                        />
+                      )}
+                    </div>
                   )}
                   {field.type === "boolean" && (
                     <div>
