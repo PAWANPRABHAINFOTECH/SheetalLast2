@@ -40,7 +40,7 @@ const SECTIONS: SectionConfig[] = [
   { id: "dashboard", label: "डैशबोर्ड", kind: "dashboard" },
   {
     id: "youtube_sync",
-    label: "यूट्यूब चैनल",
+    label: "यूट्यूब चैनल (सिंक)",
     kind: "crud",
     table: "youtube_videos",
     primaryField: "title",
@@ -50,6 +50,26 @@ const SECTIONS: SectionConfig[] = [
       { name: "youtube_id", label: "Video ID", type: "text" },
       { name: "thumbnail", label: "थंबनेल", type: "text" },
       { name: "url", label: "URL", type: "text" },
+      { name: "is_active", label: "सक्रिय", type: "boolean" },
+    ],
+  },
+  {
+    id: "youtube_special",
+    label: "विशेष वीडियो",
+    kind: "crud",
+    table: "youtube_videos",
+    primaryField: "title",
+    imageField: "thumbnail",
+    orderBy: { column: "display_order" },
+    fields: [
+      { name: "url", label: "यूट्यूब वीडियो लिंक", type: "text", placeholder: "उदा: https://www.youtube.com/watch?v=..." },
+      { name: "youtube_id", label: "Video ID (लिंक से स्वतः)", type: "text" },
+      { name: "thumbnail", label: "थंबनेल URL (लिंक से स्वतः)", type: "text" },
+      { name: "title", label: "शीर्षक", type: "text" },
+      { name: "description", label: "संक्षिप्त विवरण", type: "textarea" },
+      { name: "display_order", label: "क्रम", type: "number" },
+      { name: "source_type", label: "प्रकार", type: "text", placeholder: "special", defaultValue: "special" },
+      { name: "is_active", label: "सक्रिय", type: "boolean" },
     ],
   },
   {
@@ -335,8 +355,22 @@ export function AdminShell({ email }: { email: string }) {
                 fields={active.fields}
                 primaryField={active.primaryField}
                 {...(active.imageField ? { imageField: active.imageField } : {})}
+                filter={{ source_type: "synced" }}
               />
             </div>
+          )}
+          {active.id === "youtube_special" && active.kind === "crud" && (
+            <CrudSection
+              key={active.id}
+              table={active.table}
+              title={active.label}
+              fields={active.fields.filter(f => f.name !== 'source_type')}
+              primaryField={active.primaryField}
+              {...(active.imageField ? { imageField: active.imageField } : {})}
+              {...(active.orderBy ? { orderBy: active.orderBy } : {})}
+              filter={{ source_type: "special" }}
+              defaultValues={{ source_type: "special" }}
+            />
           )}
           {active.kind === "enquiries" && <EnquiriesSection />}
           {active.kind === "settings" && <SiteSettingsSection />}
