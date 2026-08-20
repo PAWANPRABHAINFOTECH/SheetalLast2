@@ -10,6 +10,7 @@ import { AdminDashboard } from "./AdminDashboard";
 import { EnquiriesSection } from "./EnquiriesSection";
 import { SiteSettingsSection } from "./SiteSettingsSection";
 import { CrudSection } from "./CrudSection";
+import { YoutubeAdminSettings } from "./YoutubeAdminSettings";
 import type { AdminField } from "./fieldTypes";
 
 const GALLERY_CATEGORIES = [
@@ -37,6 +38,20 @@ type SectionConfig =
 
 const SECTIONS: SectionConfig[] = [
   { id: "dashboard", label: "डैशबोर्ड", kind: "dashboard" },
+  {
+    id: "youtube_sync",
+    label: "यूट्यूब चैनल",
+    kind: "crud",
+    table: "youtube_videos",
+    primaryField: "title",
+    imageField: "thumbnail",
+    fields: [
+      { name: "title", label: "शीर्षक", type: "text" },
+      { name: "youtube_id", label: "Video ID", type: "text" },
+      { name: "thumbnail", label: "थंबनेल", type: "text" },
+      { name: "url", label: "URL", type: "text" },
+    ],
+  },
   {
     id: "hero_slides",
     label: "होम स्लाइडर",
@@ -222,6 +237,24 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   { id: "enquiries", label: "संपर्क पूछताछ", kind: "enquiries" },
+  {
+    id: "advertisements",
+    label: "आयोजन",
+    kind: "crud",
+    table: "advertisements",
+    primaryField: "title",
+    imageField: "image_url",
+    orderBy: { column: "display_order" },
+    fields: [
+      { name: "title", label: "शीर्षक", type: "text" },
+      { name: "description", label: "विवरण", type: "textarea" },
+      { name: "image_url", label: "छवि", type: "image", folder: "events" },
+      { name: "button_text", label: "बटन टेक्स्ट", type: "text" },
+      { name: "button_url", label: "लिंक", type: "text" },
+      { name: "display_order", label: "क्रम", type: "number" },
+      { name: "is_active", label: "सक्रिय", type: "boolean" },
+    ],
+  },
   { id: "settings", label: "साइट सेटिंग्स", kind: "settings" },
 ];
 
@@ -292,9 +325,22 @@ export function AdminShell({ email }: { email: string }) {
         </aside>
         <main className="min-w-0 flex-1 rounded-2xl border border-primary/10 bg-card p-5 shadow-sm lg:p-8">
           {active.kind === "dashboard" && <AdminDashboard />}
+          {active.id === "youtube_sync" && active.kind === "crud" && (
+            <div className="space-y-8">
+              <YoutubeAdminSettings />
+              <CrudSection
+                key={active.id}
+                table={active.table}
+                title={active.label}
+                fields={active.fields}
+                primaryField={active.primaryField}
+                {...(active.imageField ? { imageField: active.imageField } : {})}
+              />
+            </div>
+          )}
           {active.kind === "enquiries" && <EnquiriesSection />}
           {active.kind === "settings" && <SiteSettingsSection />}
-          {active.kind === "crud" && (
+          {active.kind === "crud" && active.id !== "youtube_sync" && (
             <CrudSection
               key={active.id}
               table={active.table}

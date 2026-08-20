@@ -130,3 +130,14 @@ export const getAdvertisements = createServerFn({ method: "GET" })
     if (error) throw error;
     return data;
   });
+
+export const getYoutubeVideos = createServerFn({ method: "GET" })
+  .handler(async () => {
+    const { data, error } = await supabase
+      .from("youtube_videos")
+      .select("*")
+      .order("published_at", { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  });

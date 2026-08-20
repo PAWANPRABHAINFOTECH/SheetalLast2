@@ -413,8 +413,14 @@ export type Database = {
           updated_at: string | null
           upi_id: string | null
           whatsapp: string | null
+          youtube_channel_logo: string | null
+          youtube_channel_name: string | null
+          youtube_channel_url: string | null
           youtube_enabled: boolean | null
+          youtube_last_sync_at: string | null
+          youtube_subscriber_count: string | null
           youtube_url: string | null
+          youtube_video_count: number | null
         }
         Insert: {
           address?: string | null
@@ -442,8 +448,14 @@ export type Database = {
           updated_at?: string | null
           upi_id?: string | null
           whatsapp?: string | null
+          youtube_channel_logo?: string | null
+          youtube_channel_name?: string | null
+          youtube_channel_url?: string | null
           youtube_enabled?: boolean | null
+          youtube_last_sync_at?: string | null
+          youtube_subscriber_count?: string | null
           youtube_url?: string | null
+          youtube_video_count?: number | null
         }
         Update: {
           address?: string | null
@@ -471,8 +483,14 @@ export type Database = {
           updated_at?: string | null
           upi_id?: string | null
           whatsapp?: string | null
+          youtube_channel_logo?: string | null
+          youtube_channel_name?: string | null
+          youtube_channel_url?: string | null
           youtube_enabled?: boolean | null
+          youtube_last_sync_at?: string | null
+          youtube_subscriber_count?: string | null
           youtube_url?: string | null
+          youtube_video_count?: number | null
         }
         Relationships: []
       }
@@ -572,6 +590,42 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      youtube_videos: {
+        Row: {
+          channel_name: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          published_at: string | null
+          thumbnail: string | null
+          title: string | null
+          url: string | null
+          youtube_id: string
+        }
+        Insert: {
+          channel_name?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          published_at?: string | null
+          thumbnail?: string | null
+          title?: string | null
+          url?: string | null
+          youtube_id: string
+        }
+        Update: {
+          channel_name?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          published_at?: string | null
+          thumbnail?: string | null
+          title?: string | null
+          url?: string | null
+          youtube_id?: string
         }
         Relationships: []
       }
