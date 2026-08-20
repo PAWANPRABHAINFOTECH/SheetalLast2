@@ -40,18 +40,8 @@ const SECTIONS: SectionConfig[] = [
   { id: "dashboard", label: "डैशबोर्ड", kind: "dashboard" },
   {
     id: "youtube_sync",
-    label: "यूट्यूब चैनल (सिंक)",
-    kind: "crud",
-    table: "youtube_videos",
-    primaryField: "title",
-    imageField: "thumbnail",
-    fields: [
-      { name: "title", label: "शीर्षक", type: "text" },
-      { name: "youtube_id", label: "Video ID", type: "text" },
-      { name: "thumbnail", label: "थंबनेल", type: "text" },
-      { name: "url", label: "URL", type: "text" },
-      { name: "is_active", label: "सक्रिय", type: "boolean" },
-    ],
+    label: "यूट्यूब चैनल सिंक",
+    kind: "settings",
   },
   {
     id: "youtube_special",
@@ -345,19 +335,8 @@ export function AdminShell({ email }: { email: string }) {
         </aside>
         <main className="min-w-0 flex-1 rounded-2xl border border-primary/10 bg-card p-5 shadow-sm lg:p-8">
           {active.kind === "dashboard" && <AdminDashboard />}
-          {active.id === "youtube_sync" && active.kind === "crud" && (
-            <div className="space-y-8">
-              <YoutubeAdminSettings />
-              <CrudSection
-                key={active.id}
-                table={active.table}
-                title={active.label}
-                fields={active.fields}
-                primaryField={active.primaryField}
-                {...(active.imageField ? { imageField: active.imageField } : {})}
-                filter={{ source_type: "synced" }}
-              />
-            </div>
+          {active.id === "youtube_sync" && (
+            <YoutubeAdminSettings />
           )}
           {active.id === "youtube_special" && active.kind === "crud" && (
             <CrudSection
