@@ -205,17 +205,30 @@ export function CrudSection({
                     />
                   )}
                   {(field.type === "text" || field.type === "date" || field.type === "number") && (
-                    <Input
-                      type={field.type === "text" ? "text" : field.type}
-                      value={String(value ?? "")}
-                      onChange={(e) =>
-                        setValue(
-                          field.name,
-                          field.type === "number" ? Number(e.target.value) : e.target.value,
-                        )
-                      }
-                      placeholder={field.placeholder ?? ""}
-                    />
+                    <div className="space-y-2">
+                      <Input
+                        type={field.type === "text" ? "text" : field.type}
+                        value={String(value ?? "")}
+                        onChange={(e) =>
+                          setValue(
+                            field.name,
+                            field.type === "number" ? Number(e.target.value) : e.target.value,
+                          )
+                        }
+                        placeholder={field.placeholder ?? ""}
+                      />
+                      {field.name === "url" && table === "youtube_videos" && field.type === "text" && (
+                        <MediaInput
+                          kind="video"
+                          value={String(value ?? "")}
+                          onChange={(val) => setValue(field.name, val)}
+                          onYoutubeData={(ytData: any) => {
+                            if (!draft['youtube_id']) setValue('youtube_id', ytData.id);
+                            if (!draft['thumbnail']) setValue('thumbnail', ytData.thumbnail);
+                          }}
+                        />
+                      )}
+                    </div>
                   )}
                   {field.type === "boolean" && (
                     <div>
@@ -249,12 +262,6 @@ export function CrudSection({
                       onChange={(url) => setValue(field.name, url)}
                       {...(field.folder ? { folder: field.folder } : {})}
                       {...(field.maxDuration ? { maxDuration: field.maxDuration } : {})}
-                      {...(field.type === "text" && field.name === "url" && table === "youtube_videos" ? {
-                        onYoutubeData: (ytData: any) => {
-                          if (!draft['youtube_id']) setValue('youtube_id', ytData.id);
-                          if (!draft['thumbnail']) setValue('thumbnail', ytData.thumbnail);
-                        }
-                      } : {})}
                     />
                   )}
                 </div>
