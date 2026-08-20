@@ -14,7 +14,8 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     let channelId = "";
     if (channelUrl.includes("/channel/")) {
       const parts = channelUrl.split("/channel/");
-      channelId = parts[1] ? parts[1].split("/")[0] : "";
+      const suffix = parts[1];
+      channelId = suffix ? suffix.split("/")[0] : "";
     } else if (channelUrl.includes("/@")) {
       const parts = channelUrl.split("/@");
       const handle = parts[1] ? parts[1].split("/")[0] : "";
