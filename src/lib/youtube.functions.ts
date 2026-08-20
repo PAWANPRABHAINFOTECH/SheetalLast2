@@ -31,7 +31,6 @@ async function resolveChannelId(url: string): Promise<string> {
     const canonicalMatch = html.match(/link rel="canonical" href="https:\/\/www\.youtube\.com\/channel\/(UC[a-zA-Z0-9_-]{22})"/);
     if (canonicalMatch?.[1]) return canonicalMatch[1];
 
-
   } catch (error) {
     console.error("Error resolving channel ID:", error);
   }
@@ -64,8 +63,6 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     }
 
     const channelName = feed.title || "";
-    // RSS doesn't give subscriber count easily, but we can get channel logo from author or link
-    const channelLogo = `https://www.youtube.com/s/desktop/82d00881/img/favicon_144x144.png`; // Fallback favicon
     
     let entries = feed.entry || [];
     if (!Array.isArray(entries)) entries = [entries];
@@ -73,14 +70,22 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     let newCount = 0;
     
     for (const entry of entries) {
-      const videoId = entry["yt:videoId"] || entry.id?.split(":").pop();
+      const videoId = entry["yt:videoId"] || entry.id?.toString().split(":").pop();
       if (!videoId) continue;
 
       const title = entry.title || "";
       const published = entry.published || entry.updated;
       const url = `https://www.youtube.com/watch?v=${videoId}`;
-      const thumbnail = entry["media:group"]?.["media:thumbnail"]?.["@_url"] || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-      const description = entry["media:group"]?.["media:description"] || "";
+      
+      const mediaGroup = entry["media:group"];
+      let thumbnail = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      
+      if (mediaGroup?.["media:thumbnail"]) {
+        const thumb = mediaGroup["media:thumbnail"];
+        thumbnail = Array.isArray(thumb) ? thumb[0]["@_url"] : thumb["@_url"];
+      }
+
+      const description = mediaGroup?.["media:description"] || "";
 
       const { data: existing } = await supabase
         .from("youtube_videos")
@@ -112,7 +117,6 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
       await supabase.from("site_settings").update({
         youtube_channel_url: channelUrl,
         youtube_channel_name: channelName,
-        // Keep logo and subscriber count if they already exist, or use defaults
         youtube_last_sync_at: new Date().toISOString(),
         youtube_video_count: entries.length
       }).eq("id", settings.id);
