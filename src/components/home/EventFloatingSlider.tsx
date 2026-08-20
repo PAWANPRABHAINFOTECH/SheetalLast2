@@ -25,6 +25,7 @@ export function EventFloatingSlider() {
   if (isLoading || activeAds.length === 0 || !isVisible) return null;
 
   const currentAd = activeAds[currentIndex];
+  if (!currentAd) return null;
 
   return (
     <div className="fixed bottom-24 left-4 z-40 w-40 sm:w-56 lg:w-64">
