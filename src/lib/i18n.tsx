@@ -87,6 +87,10 @@ const translations: Record<Language, Record<string, string>> = {
     'comments.error_fields': 'कृपया नाम और टिप्पणी भरें',
     'comments.recent': 'हालिया प्रतिक्रियाएँ',
     'comments.empty': 'अभी तक कोई प्रतिक्रिया नहीं है। पहली प्रतिक्रिया आप दें!',
+    'यूट्यूब चैनल': 'यूट्यूब चैनल',
+    'विशेष वीडियो': 'विशेष वीडियो',
+    'चैनल देखें': 'चैनल देखें',
+    'और वीडियो देखें': 'और वीडियो देखें',
   },
 
 
@@ -171,6 +175,10 @@ const translations: Record<Language, Record<string, string>> = {
     'comments.error_fields': 'Please fill name and comment',
     'comments.recent': 'Recent Feedback',
     'comments.empty': 'No feedback yet. Be the first to give one!',
+    'यूट्यूब चैनल': 'YouTube Channel',
+    'विशेष वीडियो': 'Special Videos',
+    'चैनल देखें': 'View Channel',
+    'और वीडियो देखें': 'More Videos',
   },
 
 
