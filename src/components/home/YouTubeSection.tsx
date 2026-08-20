@@ -13,8 +13,8 @@ export function YouTubeSection() {
   const [displayCountSpecial, setDisplayCountSpecial] = useState(8);
 
   const renderVideoGrid = (videos: any[], count: number, setCount: React.Dispatch<React.SetStateAction<number>>) => {
-    const visibleVideos = videos.filter(v => v.is_active !== false && v.youtube_id).slice(0, count);
-    const hasMore = videos.filter(v => v.is_active !== false && v.youtube_id).length > count;
+    const visibleVideos = videos.filter(v => v.is_active !== false && v.youtube_id && v.source_type === (videos === syncedVideos ? 'synced' : 'special')).slice(0, count);
+    const hasMore = videos.filter(v => v.is_active !== false && v.youtube_id && v.source_type === (videos === syncedVideos ? 'synced' : 'special')).length > count;
 
     return (
       <>

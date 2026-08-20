@@ -356,7 +356,7 @@ export function AdminShell({ email }: { email: string }) {
           )}
           {active.kind === "enquiries" && <EnquiriesSection />}
           {active.kind === "settings" && <SiteSettingsSection />}
-          {active.kind === "crud" && active.id !== "youtube_sync" && (
+          {active.kind === "crud" && active.id !== "youtube_sync" && active.id !== "youtube_special" && (
             <CrudSection
               key={active.id}
               table={active.table}
