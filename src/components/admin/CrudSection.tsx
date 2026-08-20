@@ -113,7 +113,7 @@ export function CrudSection({
   const openNew = () => {
     const initial: Row = { ...defaultValues };
     for (const field of fields) {
-      initial[field.name] = field.type === "boolean" ? true : field.type === "number" ? 0 : "";
+      initial[field.name] = field.defaultValue !== undefined ? field.defaultValue : (field.type === "boolean" ? true : field.type === "number" ? 0 : "");
     }
     setDraft(initial);
     setOpen(true);
