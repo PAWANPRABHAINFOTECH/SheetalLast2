@@ -14,7 +14,7 @@ export const Route = createFileRoute('/members')({
 function MembersPage() {
   const { data: members } = useMembers()
   
-  const categories = ["संरक्षक", "पदाधिकारी", "स्थाई कार्यकारिणी", "कार्यकारी सदस्य"];
+  const categories = ["संरक्षक", "संस्थापक सदस्य", "पदाधिकारी", "कार्यकारी सदस्य", "स्थाई कार्यकारिणी"];
 
   return (
     <div className="min-h-screen bg-background font-hindi">
