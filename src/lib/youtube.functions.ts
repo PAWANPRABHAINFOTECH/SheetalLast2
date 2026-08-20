@@ -5,7 +5,7 @@ import { z } from "zod";
 export const syncYoutubeVideos = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({ channelUrl: z.string() }).parse(data))
   .handler(async ({ data: { channelUrl } }) => {
-    const API_KEY = process.env.YOUTUBE_API_KEY;
+    const API_KEY = process.env['YOUTUBE_API_KEY'];
     if (!API_KEY) {
       throw new Error("YOUTUBE_API_KEY is not configured in environment variables.");
     }
@@ -13,9 +13,11 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     // Extract Channel ID or Username
     let channelId = "";
     if (channelUrl.includes("/channel/")) {
-      channelId = channelUrl.split("/channel/")[1].split("/")[0];
+      const parts = channelUrl.split("/channel/");
+      channelId = parts[1] ? parts[1].split("/")[0] : "";
     } else if (channelUrl.includes("/@")) {
-      const handle = channelUrl.split("/@")[1].split("/")[0];
+      const parts = channelUrl.split("/@");
+      const handle = parts[1] ? parts[1].split("/")[0] : "";
       // Need to resolve handle to channel ID
       const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id,snippet,statistics&forHandle=@${handle}&key=${API_KEY}`);
       const json = await res.json();

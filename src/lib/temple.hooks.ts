@@ -10,7 +10,8 @@ import {
   getGallery,
   getLiveDarshan,
   getChairmanMessage,
-  getAdvertisements
+  getAdvertisements,
+  getYoutubeVideos
 } from "@/lib/temple.functions";
 
 export function useSiteSettings() {
@@ -87,5 +88,12 @@ export function useAdvertisements() {
   return useQuery({
     queryKey: ["advertisements"],
     queryFn: () => getAdvertisements(),
+  });
+}
+
+export function useYoutubeVideos() {
+  return useQuery({
+    queryKey: ["youtube-videos"],
+    queryFn: () => getYoutubeVideos(),
   });
 }
