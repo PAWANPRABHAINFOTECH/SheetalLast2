@@ -148,7 +148,7 @@ export const getYoutubeVideos = createServerFn({ method: "GET" })
     
     const { data: videos, error } = await query.order(
       data?.source_type === "special" ? "display_order" : "published_at", 
-      { ascending: data?.source_type === "special" }
+      { ascending: data?.source_type === "special" ? true : false }
     );
     
     if (error) throw error;
