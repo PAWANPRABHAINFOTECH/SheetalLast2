@@ -139,8 +139,12 @@ export const getYoutubeVideos = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     let query = supabase
       .from("youtube_videos")
-      .select("*")
-      .eq("is_active", true);
+      .select("*");
+    
+    // In production, we usually want active videos, but let's check if they are being marked correctly
+    // The previous implementation had .eq("is_active", true) here.
+    // Let's make it more flexible or ensure the sync sets it correctly.
+    query = query.eq("is_active", true);
     
     if (data?.source_type) {
       query = query.eq("source_type", data.source_type);
