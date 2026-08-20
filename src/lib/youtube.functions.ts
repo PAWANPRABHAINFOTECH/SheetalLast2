@@ -6,7 +6,7 @@ import { XMLParser } from "fast-xml-parser";
 async function resolveChannelId(url: string): Promise<string> {
   // 1. Direct ID in URL
   const idMatch = url.match(/(?:channel\/|UC)([a-zA-Z0-9_-]{22})/);
-  if (idMatch) return idMatch[1];
+  if (idMatch?.[1]) return idMatch[1];
 
   // 2. Fetch page and extract ID for handles/custom URLs
   try {
@@ -19,17 +19,18 @@ async function resolveChannelId(url: string): Promise<string> {
     
     // Look for externalId or browseId in the ytInitialData or meta tags
     const metaMatch = html.match(/meta itemprop="identifier" content="(UC[a-zA-Z0-9_-]{22})"/);
-    if (metaMatch) return metaMatch[1];
+    if (metaMatch?.[1]) return metaMatch[1];
 
     const browseIdMatch = html.match(/"browseId":"(UC[a-zA-Z0-9_-]{22})"/);
-    if (browseIdMatch) return browseIdMatch[1];
+    if (browseIdMatch?.[1]) return browseIdMatch[1];
 
     const externalIdMatch = html.match(/"externalId":"(UC[a-zA-Z0-9_-]{22})"/);
-    if (externalIdMatch) return externalIdMatch[1];
+    if (externalIdMatch?.[1]) return externalIdMatch[1];
 
     // Canonical link
     const canonicalMatch = html.match(/link rel="canonical" href="https:\/\/www\.youtube\.com\/channel\/(UC[a-zA-Z0-9_-]{22})"/);
-    if (canonicalMatch) return canonicalMatch[1];
+    if (canonicalMatch?.[1]) return canonicalMatch[1];
+
 
   } catch (error) {
     console.error("Error resolving channel ID:", error);
