@@ -99,7 +99,7 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
       // We use a manual check before upsert to correctly count new videos
       const { data: existing } = await supabase
         .from("youtube_videos")
-        .select("id")
+        .select("id, is_active")
         .eq("youtube_id", videoId)
         .eq("source_type", "synced")
         .maybeSingle();

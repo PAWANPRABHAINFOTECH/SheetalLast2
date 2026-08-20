@@ -22,7 +22,7 @@ export function YouTubeSection() {
           {visibleVideos.map((video) => (
             <a
               key={video.id}
-              href={video.url || "#"}
+              href={video.url || `https://www.youtube.com/watch?v=${video.youtube_id}`}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
@@ -54,7 +54,7 @@ export function YouTubeSection() {
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="line-clamp-2 font-hindi text-lg font-bold leading-snug group-hover:text-primary transition-colors">
-                  {video.title}
+                  {video.title || (video.source_type === 'special' ? 'विशेष वीडियो' : 'यूट्यूब वीडियो')}
                 </h3>
                 {(video.published_at || video.description) && (
                   <div className="mt-auto pt-3 flex flex-col gap-1">
