@@ -224,11 +224,11 @@ export function CrudSection({
                             kind="video"
                             value={String(value ?? "")}
                             onChange={(val) => setValue(field.name, val)}
-                            onYoutubeData={(ytData: any) => {
-                              setValue('youtube_id', ytData.id);
-                              setValue('thumbnail', ytData.thumbnail);
-                              if (!draft['title']) setValue('title', ytData.title || "");
-                            }}
+                          onYoutubeData={(ytData: any) => {
+                            setValue('youtube_id', ytData.id);
+                            setValue('thumbnail', ytData.thumbnail);
+                            if (!draft['title']) setValue('title', ytData.title || "");
+                          }}
                           />
                         </div>
                       )}
