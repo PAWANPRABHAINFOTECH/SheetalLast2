@@ -51,6 +51,8 @@ function Index() {
           <NewsSection />
         </section>
 
+        <YouTubeSection />
+
 
         <section className="bg-primary/5 py-16">
           <div className="container mx-auto px-4">
