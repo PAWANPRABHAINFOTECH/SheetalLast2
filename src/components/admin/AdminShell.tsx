@@ -377,7 +377,7 @@ export function AdminShell({ email }: { email: string }) {
             DESIGNED & DEVELOPED BY PAWANPRABHA INFOTECH
           </p>
           <a 
-            href="https://wa.me/916262013335"
+            href="https://wa.me/916262013335?text=नमस्कार, शीतल शिवालय समिति"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-[10px] font-bold text-muted-foreground hover:text-primary transition-colors"
