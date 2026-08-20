@@ -44,8 +44,14 @@ async function resolveChannelId(url: string): Promise<string> {
 
 export const syncYoutubeVideos = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data) => z.object({ channelUrl: z.string() }).parse(data))
-  .handler(async ({ data: { channelUrl }, context }) => {
+  .inputValidator((data) => z.object({ 
+    channelUrl: z.string(),
+    verificationCode: z.string().optional()
+  }).parse(data))
+  .handler(async ({ data: { channelUrl, verificationCode }, context }) => {
+    // Security Check: requireSupabaseAuth ensures only admins can call this.
+    // If a verification code is provided, we can validate it here.
+    
     const { supabase } = context;
     const channelId = await resolveChannelId(channelUrl);
     

@@ -11,18 +11,33 @@ import { syncYoutubeVideos } from "@/lib/youtube.functions";
 export function YoutubeAdminSettings() {
   const { data: settings, isLoading } = useSiteSettings();
   const [url, setUrl] = useState(settings?.youtube_channel_url || "");
+  const [verificationInput, setVerificationInput] = useState("");
+  const [generatedCode, setGeneratedCode] = useState("");
   const queryClient = useQueryClient();
 
+  const generateNewCode = () => {
+    const code = Math.floor(1000 + Math.random() * 9000).toString();
+    setGeneratedCode(code);
+    setVerificationInput("");
+  };
+
   const sync = useMutation({
-    mutationFn: (channelUrl: string) => syncYoutubeVideos({ data: { channelUrl } }),
+    mutationFn: (channelUrl: string) => {
+      if (verificationInput !== generatedCode) {
+        throw new Error("सत्यापन कोड गलत है।");
+      }
+      return syncYoutubeVideos({ data: { channelUrl, verificationCode: verificationInput } });
+    },
     onSuccess: (data) => {
       if (data.newCount > 0) {
         toast.success(`सिंक सफल — ${data.newCount} नए वीडियो प्राप्त हुए।`);
       } else if (data.videoCount > 0) {
         toast.success(`सिंक सफल — ${data.videoCount} वीडियो उपलब्ध हैं।`);
       } else {
-        toast.info("चैनल उपलब्ध है, लेकिन कोई सार्वजनिक वीडियो नहीं मिला।");
+        toast.info("चैनल उपलब्ध है, लेकिन कोई नया सार्वजनिक वीडियो नहीं मिला।");
       }
+      setGeneratedCode("");
+      setVerificationInput("");
       void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
       void queryClient.invalidateQueries({ queryKey: ["admin", "youtube_videos"] });
       void queryClient.invalidateQueries({ queryKey: ["youtube-videos"] });
@@ -52,18 +67,37 @@ export function YoutubeAdminSettings() {
               onChange={(e) => setUrl(e.target.value)}
             />
           </div>
-          <Button 
-            onClick={() => sync.mutate(url)} 
-            disabled={sync.isPending || !url}
-            className="gap-2"
-          >
-            {sync.isPending ? (
-              <RefreshCw className="h-4 w-4 animate-spin" />
-            ) : (
-              <RefreshCw className="h-4 w-4" />
-            )}
-            सिंक करें
-          </Button>
+          {!generatedCode ? (
+            <Button onClick={generateNewCode} className="gap-2">
+              सिंक प्रारंभ करें
+            </Button>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <div className="rounded bg-primary/10 px-3 py-2 font-mono text-lg font-bold text-primary">
+                  {generatedCode}
+                </div>
+                <Input
+                  placeholder="सुरक्षा कोड"
+                  value={verificationInput}
+                  onChange={(e) => setVerificationInput(e.target.value)}
+                  className="w-32"
+                />
+              </div>
+              <Button 
+                onClick={() => sync.mutate(url)} 
+                disabled={sync.isPending || !url || verificationInput !== generatedCode}
+                className="gap-2"
+              >
+                {sync.isPending ? (
+                  <RefreshCw className="h-4 w-4 animate-spin" />
+                ) : (
+                  <RefreshCw className="h-4 w-4" />
+                )}
+                सिंक की पुष्टि करें
+              </Button>
+            </div>
+          )}
         </div>
 
         {settings?.youtube_channel_name && (
