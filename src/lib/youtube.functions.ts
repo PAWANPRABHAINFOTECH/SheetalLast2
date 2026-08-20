@@ -134,7 +134,8 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
         youtube_channel_url: channelUrl,
         youtube_channel_name: channelName,
         youtube_last_sync_at: new Date().toISOString(),
-        youtube_video_count: entries.length
+        youtube_video_count: entries.length,
+        devotee_count: settings.devotee_count // Preserve existing fields if any
       }).eq("id", settings.id);
       
       if (settingsUpdateError) {
