@@ -249,7 +249,7 @@ const SECTIONS: SectionConfig[] = [
   { id: "enquiries", label: "संपर्क पूछताछ", kind: "enquiries" },
   {
     id: "advertisements",
-    label: "Poster",
+    label: "आयोजन",
     kind: "crud",
     table: "advertisements",
     primaryField: "title",
