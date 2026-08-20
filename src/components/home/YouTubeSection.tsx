@@ -127,7 +127,7 @@ export function YouTubeSection() {
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-primary/10 pb-6">
             <div className="space-y-2">
               <h2 className="flex items-center gap-3 font-hindi text-3xl md:text-4xl font-bold text-primary">
-                {t("विशेष झलकियां")}
+                ⭐ {t("विशेष झलकियां")}
               </h2>
             </div>
           </div>
