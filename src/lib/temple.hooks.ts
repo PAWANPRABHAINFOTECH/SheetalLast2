@@ -91,9 +91,9 @@ export function useAdvertisements() {
   });
 }
 
-export function useYoutubeVideos() {
+export function useYoutubeVideos(source_type?: "synced" | "special") {
   return useQuery({
-    queryKey: ["youtube-videos"],
-    queryFn: () => getYoutubeVideos(),
+    queryKey: ["youtube-videos", source_type],
+    queryFn: () => getYoutubeVideos({ data: { source_type } }),
   });
 }
