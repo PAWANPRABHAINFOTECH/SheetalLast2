@@ -18,7 +18,8 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
       channelId = suffix ? suffix.split("/")[0] : "";
     } else if (channelUrl.includes("/@")) {
       const parts = channelUrl.split("/@");
-      const handle = parts[1] ? parts[1].split("/")[0] : "";
+      const handlePart = parts[1];
+      const handle = handlePart ? handlePart.split("/")[0] : "";
       // Need to resolve handle to channel ID
       const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id,snippet,statistics&forHandle=@${handle}&key=${API_KEY}`);
       const json = await res.json();
