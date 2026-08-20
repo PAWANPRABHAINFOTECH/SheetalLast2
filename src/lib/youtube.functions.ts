@@ -1,83 +1,108 @@
 import { createServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { XMLParser } from "fast-xml-parser";
+
+async function resolveChannelId(url: string): Promise<string> {
+  // 1. Direct ID in URL
+  const idMatch = url.match(/(?:channel\/|UC)([a-zA-Z0-9_-]{22})/);
+  if (idMatch?.[1]) return idMatch[1];
+
+  // 2. Fetch page and extract ID for handles/custom URLs
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+      }
+    });
+    const html = await res.text();
+    
+    // Look for externalId or browseId in the ytInitialData or meta tags
+    const metaMatch = html.match(/meta itemprop="identifier" content="(UC[a-zA-Z0-9_-]{22})"/);
+    if (metaMatch?.[1]) return metaMatch[1];
+
+    const browseIdMatch = html.match(/"browseId":"(UC[a-zA-Z0-9_-]{22})"/);
+    if (browseIdMatch?.[1]) return browseIdMatch[1];
+
+    const externalIdMatch = html.match(/"externalId":"(UC[a-zA-Z0-9_-]{22})"/);
+    if (externalIdMatch?.[1]) return externalIdMatch[1];
+
+    // Canonical link
+    const canonicalMatch = html.match(/link rel="canonical" href="https:\/\/www\.youtube\.com\/channel\/(UC[a-zA-Z0-9_-]{22})"/);
+    if (canonicalMatch?.[1]) return canonicalMatch[1];
+
+
+  } catch (error) {
+    console.error("Error resolving channel ID:", error);
+  }
+
+  throw new Error("चैनल ID प्राप्त नहीं हो सकी। कृपया सही YouTube Channel URL डालें।");
+}
 
 export const syncYoutubeVideos = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({ channelUrl: z.string() }).parse(data))
   .handler(async ({ data: { channelUrl } }) => {
-    const API_KEY = process.env['YOUTUBE_API_KEY'];
-    if (!API_KEY) {
-      throw new Error("YOUTUBE_API_KEY is not configured in environment variables.");
-    }
-
-    // Extract Channel ID or Username
-    let channelId = "";
-    if (channelUrl.includes("/channel/")) {
-      const parts = channelUrl.split("/channel/");
-      const suffix = parts[1];
-      channelId = suffix ? (suffix.split("/")[0] || "") : "";
-    } else if (channelUrl.includes("/@")) {
-      const parts = channelUrl.split("/@");
-      const handlePart = parts[1];
-      const handle = handlePart ? (handlePart.split("/")[0] || "") : "";
-      // Need to resolve handle to channel ID
-      const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id,snippet,statistics&forHandle=@${handle}&key=${API_KEY}`);
-      const json = await res.json();
-      if (json.items && json.items.length > 0) {
-        channelId = json.items[0].id;
-      }
-    } else if (channelUrl.includes("/c/") || channelUrl.includes("/user/")) {
-      // Simplification: try searching for channel if it's a custom URL
-      const parts = channelUrl.split("/");
-      const name = parts[parts.length - 1];
-      const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id,snippet,statistics&forUsername=${name}&key=${API_KEY}`);
-      const json = await res.json();
-      if (json.items && json.items.length > 0) {
-        channelId = json.items[0].id;
-      }
-    }
-
-    if (!channelId) {
-      throw new Error("Could not resolve YouTube Channel ID from URL.");
-    }
-
-    // Fetch Channel Details
-    const channelRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${API_KEY}`);
-    const channelJson = await channelRes.json();
-    if (!channelJson.items || channelJson.items.length === 0) {
-      throw new Error("YouTube Channel not found.");
-    }
-
-    const channelData = channelJson.items[0];
-    const channelName = channelData.snippet.title;
-    const channelLogo = channelData.snippet.thumbnails.default.url;
-    const subscriberCount = channelData.statistics.subscriberCount;
-
-    // Fetch Videos
-    const videosRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&order=date&type=video&key=${API_KEY}`);
-    const videosJson = await videosRes.json();
+    const channelId = await resolveChannelId(channelUrl);
     
-    if (videosJson.error) {
-      throw new Error(videosJson.error.message);
+    // Fetch RSS Feed
+    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    const res = await fetch(rssUrl);
+    if (!res.ok) {
+      throw new Error("YouTube से डेटा प्राप्त नहीं हो सका। कृपया कुछ देर बाद पुनः प्रयास करें।");
+    }
+    
+    const xmlData = await res.text();
+    const parser = new XMLParser({
+      ignoreAttributes: false,
+      attributeNamePrefix: "@_"
+    });
+    const jsonObj = parser.parse(xmlData);
+
+    const feed = jsonObj.feed;
+    if (!feed) {
+      throw new Error("RSS feed parse error: No feed found.");
     }
 
-    const videos = videosJson.items || [];
+    const channelName = feed.title || "";
+    // RSS doesn't give subscriber count easily, but we can get channel logo from author or link
+    const channelLogo = `https://www.youtube.com/s/desktop/82d00881/img/favicon_144x144.png`; // Fallback favicon
     
-    // Upsert Videos
-    for (const v of videos) {
-      const videoId = v.id.videoId;
+    let entries = feed.entry || [];
+    if (!Array.isArray(entries)) entries = [entries];
+
+    let newCount = 0;
+    
+    for (const entry of entries) {
+      const videoId = entry["yt:videoId"] || entry.id?.split(":").pop();
+      if (!videoId) continue;
+
+      const title = entry.title || "";
+      const published = entry.published || entry.updated;
+      const url = `https://www.youtube.com/watch?v=${videoId}`;
+      const thumbnail = entry["media:group"]?.["media:thumbnail"]?.["@_url"] || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      const description = entry["media:group"]?.["media:description"] || "";
+
+      const { data: existing } = await supabase
+        .from("youtube_videos")
+        .select("id")
+        .eq("youtube_id", videoId)
+        .maybeSingle();
+
       const { error: upsertError } = await supabase
         .from("youtube_videos")
         .upsert({
           youtube_id: videoId,
-          title: v.snippet.title,
-          thumbnail: v.snippet.thumbnails.high?.url || v.snippet.thumbnails.default?.url,
-          published_at: v.snippet.publishedAt,
-          url: `https://www.youtube.com/watch?v=${videoId}`,
-          description: v.snippet.description,
+          title: title,
+          thumbnail: thumbnail,
+          published_at: published,
+          url: url,
+          description: description,
           channel_name: channelName,
         }, { onConflict: "youtube_id" });
       
+      if (!upsertError && !existing) {
+        newCount++;
+      }
       if (upsertError) console.error("Error upserting video:", upsertError);
     }
 
@@ -87,16 +112,16 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
       await supabase.from("site_settings").update({
         youtube_channel_url: channelUrl,
         youtube_channel_name: channelName,
-        youtube_channel_logo: channelLogo,
-        youtube_subscriber_count: subscriberCount,
+        // Keep logo and subscriber count if they already exist, or use defaults
         youtube_last_sync_at: new Date().toISOString(),
-        youtube_video_count: videos.length
+        youtube_video_count: entries.length
       }).eq("id", settings.id);
     }
 
     return { 
       success: true, 
       channelName, 
-      videoCount: videos.length 
+      videoCount: entries.length,
+      newCount
     };
   });

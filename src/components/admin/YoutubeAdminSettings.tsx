@@ -16,7 +16,7 @@ export function YoutubeAdminSettings() {
   const sync = useMutation({
     mutationFn: (channelUrl: string) => syncYoutubeVideos({ data: { channelUrl } }),
     onSuccess: (data) => {
-      toast.success(`${data.channelName} के ${data.videoCount} वीडियो सिंक किए गए।`);
+      toast.success(data.newCount > 0 ? `सिंक सफल — ${data.newCount} नए वीडियो मिले।` : "सिंक सफल — कोई नया वीडियो नहीं मिला।");
       void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
       void queryClient.invalidateQueries({ queryKey: ["admin", "youtube_videos"] });
       void queryClient.invalidateQueries({ queryKey: ["youtube-videos"] });
