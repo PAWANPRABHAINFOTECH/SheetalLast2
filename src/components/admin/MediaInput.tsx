@@ -30,9 +30,15 @@ export function MediaInput({ value, onChange, kind, folder, maxDuration, onYoutu
   }, [value]);
 
   const extractYoutubeId = (url: string) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
     const match = url.match(regExp);
-    return (match && match[2] && match[2].length === 11) ? match[2] : null;
+    const id = (match && match[2] && match[2].length === 11) ? match[2] : null;
+    if (id) return id;
+    
+    // Handle cases like youtube.com/shorts/ID
+    const shortsMatch = url.match(/\/shorts\/([a-zA-Z0-9_-]{11})/);
+    return shortsMatch ? shortsMatch[1] : null;
   };
 
   const validateUrl = (url: string) => {
