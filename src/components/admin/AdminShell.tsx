@@ -41,17 +41,7 @@ const SECTIONS: SectionConfig[] = [
   {
     id: "youtube_sync",
     label: "यूट्यूब चैनल (सिंक)",
-    kind: "crud",
-    table: "youtube_videos",
-    primaryField: "title",
-    imageField: "thumbnail",
-    fields: [
-      { name: "title", label: "शीर्षक", type: "text" },
-      { name: "youtube_id", label: "Video ID", type: "text" },
-      { name: "thumbnail", label: "थंबनेल", type: "text" },
-      { name: "url", label: "URL", type: "text" },
-      { name: "is_active", label: "सक्रिय", type: "boolean" },
-    ],
+    kind: "dashboard", // Temporary kind to satisfy type, we will handle it in the render logic
   },
   {
     id: "youtube_special",
@@ -344,19 +334,11 @@ export function AdminShell({ email }: { email: string }) {
           </div>
         </aside>
         <main className="min-w-0 flex-1 rounded-2xl border border-primary/10 bg-card p-5 shadow-sm lg:p-8">
-          {active.kind === "dashboard" && <AdminDashboard />}
-          {active.id === "youtube_sync" && active.kind === "crud" && (
+          {active.id === "dashboard" && <AdminDashboard />}
+          {active.id === "youtube_sync" && (
             <div className="space-y-8">
               <YoutubeAdminSettings />
-              <CrudSection
-                key={active.id}
-                table={active.table}
-                title={active.label}
-                fields={active.fields}
-                primaryField={active.primaryField}
-                {...(active.imageField ? { imageField: active.imageField } : {})}
-                filter={{ source_type: "synced" }}
-              />
+              {/* Removed redundant CrudSection for synced videos as requested */}
             </div>
           )}
           {active.id === "youtube_special" && active.kind === "crud" && (
