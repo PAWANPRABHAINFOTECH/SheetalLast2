@@ -101,9 +101,6 @@ export function YouTubeSection() {
         <section className="py-16 container mx-auto px-4 border-b border-primary/5">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-primary/10 pb-6">
             <div className="space-y-2">
-              <h2 className="flex items-center gap-3 font-hindi text-3xl md:text-4xl font-bold text-primary">
-                {t("यूट्यूब चैनल")}
-              </h2>
               <div className="h-0.5 bg-black w-full" />
               <p className="font-hindi text-lg text-foreground/70 italic">
                 {settings?.youtube_channel_name || "शीतल शिवालय समिति"} - नवीनतम वीडियो
