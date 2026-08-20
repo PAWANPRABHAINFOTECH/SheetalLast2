@@ -161,9 +161,16 @@ export function CrudSection({
                 />
               ) : null}
               <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold">
-                  {String(row[primaryField] ?? "—")}
-                </p>
+                <div className="flex items-center gap-2">
+                  {row['sort_order'] !== undefined && (
+                    <span className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">
+                      #{String(row['sort_order'])}
+                    </span>
+                  )}
+                  <p className="truncate font-semibold">
+                    {String(row[primaryField] ?? "—")}
+                  </p>
+                </div>
                 <p className="truncate text-sm text-muted-foreground">
                   {"is_active" in row ? (row['is_active'] ? "सक्रिय" : "निष्क्रिय") : ""}
                 </p>
