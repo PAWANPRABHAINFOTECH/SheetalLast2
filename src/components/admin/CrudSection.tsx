@@ -218,15 +218,19 @@ export function CrudSection({
                         placeholder={field.placeholder ?? ""}
                       />
                       {field.name === "url" && table === "youtube_videos" && field.type === "text" && (
-                        <MediaInput
-                          kind="video"
-                          value={String(value ?? "")}
-                          onChange={(val) => setValue(field.name, val)}
-                          onYoutubeData={(ytData: any) => {
-                            if (!draft['youtube_id']) setValue('youtube_id', ytData.id);
-                            if (!draft['thumbnail']) setValue('thumbnail', ytData.thumbnail);
-                          }}
-                        />
+                        <div className="rounded-lg border bg-muted/20 p-2">
+                          <p className="mb-2 text-[10px] font-bold text-muted-foreground uppercase">URL Helper / Preview</p>
+                          <MediaInput
+                            kind="video"
+                            value={String(value ?? "")}
+                            onChange={(val) => setValue(field.name, val)}
+                            onYoutubeData={(ytData: any) => {
+                              setValue('youtube_id', ytData.id);
+                              setValue('thumbnail', ytData.thumbnail);
+                              if (!draft['title']) setValue('title', ytData.title || "");
+                            }}
+                          />
+                        </div>
                       )}
                     </div>
                   )}
