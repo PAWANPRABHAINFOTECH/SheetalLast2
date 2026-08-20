@@ -20,6 +20,11 @@ export function NoticeTicker() {
 
   if (isLoading) return null;
 
+  // Master/locked speed: the current 2-notice ticker runs one full loop in 25s.
+  // Keep pixels-per-second constant by scaling duration with the number of notices.
+  const SECONDS_PER_NOTICE = 12.5;
+  const marqueeDuration = `${Math.max(activeNotices.length, 2) * SECONDS_PER_NOTICE}s`;
+
   return (
     <div className="bg-primary text-primary-foreground h-[36px] md:h-[42px] overflow-hidden flex items-center relative z-[60]">
       <div className="flex items-center h-full px-4 bg-primary z-10 shadow-[4px_0_8px_rgba(0,0,0,0.2)] dark:shadow-none">
@@ -29,7 +34,8 @@ export function NoticeTicker() {
       </div>
       
       <div className="flex-1 overflow-hidden relative h-full flex items-center">
-        <div className="flex animate-marquee hover:pause-marquee whitespace-nowrap">
+        <div className="flex animate-marquee hover:pause-marquee whitespace-nowrap" style={{ animationDuration: marqueeDuration }}>
+
           {activeNotices.length > 0 ? activeNotices.map((notice, idx) => (
             <div key={notice.id} className="inline-flex items-center px-4">
               {notice.link_url ? (
