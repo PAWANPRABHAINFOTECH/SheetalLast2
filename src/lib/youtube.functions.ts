@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { XMLParser } from "fast-xml-parser";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 async function resolveChannelId(url: string): Promise<string> {
   // 1. Direct ID in URL
@@ -43,8 +43,10 @@ async function resolveChannelId(url: string): Promise<string> {
 }
 
 export const syncYoutubeVideos = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data) => z.object({ channelUrl: z.string() }).parse(data))
-  .handler(async ({ data: { channelUrl } }) => {
+  .handler(async ({ data: { channelUrl }, context }) => {
+    const { supabase } = context;
     const channelId = await resolveChannelId(channelUrl);
     
     // Fetch RSS Feed
@@ -126,14 +128,18 @@ export const syncYoutubeVideos = createServerFn({ method: "POST" })
     }
 
     // Update Site Settings
-    const { data: settings } = await supabase.from("site_settings").select("id").single();
-    if (settings) {
-      await supabase.from("site_settings").update({
+    const { data: settings, error: settingsFetchError } = await supabase.from("site_settings").select("id").single();
+    if (!settingsFetchError && settings) {
+      const { error: settingsUpdateError } = await supabase.from("site_settings").update({
         youtube_channel_url: channelUrl,
         youtube_channel_name: channelName,
         youtube_last_sync_at: new Date().toISOString(),
         youtube_video_count: entries.length
       }).eq("id", settings.id);
+      
+      if (settingsUpdateError) {
+        console.error("Error updating site settings:", settingsUpdateError);
+      }
     }
 
     return { 
