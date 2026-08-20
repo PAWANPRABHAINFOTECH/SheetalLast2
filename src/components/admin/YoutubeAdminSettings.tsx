@@ -14,7 +14,7 @@ export function YoutubeAdminSettings() {
   const queryClient = useQueryClient();
 
   const sync = useMutation({
-    mutationFn: (channelUrl: string) => syncYoutubeVideos({ channelUrl }),
+    mutationFn: (channelUrl: string) => syncYoutubeVideos({ data: { channelUrl } }),
     onSuccess: (data) => {
       toast.success(`${data.channelName} के ${data.videoCount} वीडियो सिंक किए गए।`);
       void queryClient.invalidateQueries({ queryKey: ["site-settings"] });

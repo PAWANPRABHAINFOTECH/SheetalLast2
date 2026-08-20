@@ -39,6 +39,20 @@ type SectionConfig =
 const SECTIONS: SectionConfig[] = [
   { id: "dashboard", label: "डैशबोर्ड", kind: "dashboard" },
   {
+    id: "youtube_sync",
+    label: "यूट्यूब चैनल",
+    kind: "crud",
+    table: "youtube_videos",
+    primaryField: "title",
+    imageField: "thumbnail",
+    fields: [
+      { name: "title", label: "शीर्षक", type: "text" },
+      { name: "youtube_id", label: "Video ID", type: "text" },
+      { name: "thumbnail", label: "थंबनेल", type: "text" },
+      { name: "url", label: "URL", type: "text" },
+    ],
+  },
+  {
     id: "hero_slides",
     label: "होम स्लाइडर",
     kind: "crud",
@@ -222,20 +236,6 @@ const SECTIONS: SectionConfig[] = [
       { name: "status", label: "स्थिति", type: "select", options: ["pending", "approved", "rejected"] },
     ],
   },
-  {
-    id: "youtube_sync",
-    label: "यूट्यूब चैनल",
-    kind: "crud",
-    table: "youtube_videos",
-    primaryField: "title",
-    imageField: "thumbnail",
-    fields: [
-      { name: "title", label: "शीर्षक", type: "text" },
-      { name: "youtube_id", label: "Video ID", type: "text" },
-      { name: "thumbnail", label: "थंबनेल", type: "text" },
-      { name: "url", label: "URL", type: "text" },
-    ],
-  },
   { id: "enquiries", label: "संपर्क पूछताछ", kind: "enquiries" },
   {
     id: "advertisements",
@@ -325,7 +325,7 @@ export function AdminShell({ email }: { email: string }) {
         </aside>
         <main className="min-w-0 flex-1 rounded-2xl border border-primary/10 bg-card p-5 shadow-sm lg:p-8">
           {active.kind === "dashboard" && <AdminDashboard />}
-          {active.id === "youtube_sync" && (
+          {active.id === "youtube_sync" && active.kind === "crud" && (
             <div className="space-y-8">
               <YoutubeAdminSettings />
               <CrudSection
@@ -334,13 +334,13 @@ export function AdminShell({ email }: { email: string }) {
                 title={active.label}
                 fields={active.fields}
                 primaryField={active.primaryField}
-                imageField={active.imageField}
+                {...(active.imageField ? { imageField: active.imageField } : {})}
               />
             </div>
           )}
           {active.kind === "enquiries" && <EnquiriesSection />}
           {active.kind === "settings" && <SiteSettingsSection />}
-          {active.kind === "crud" && (
+          {active.kind === "crud" && active.id !== "youtube_sync" && (
             <CrudSection
               key={active.id}
               table={active.table}
