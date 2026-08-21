@@ -28,7 +28,7 @@ export function Header() {
   return (
     <header className="z-50 w-full border-b border-primary/10 bg-background">
       <div className="container mx-auto px-4 py-2 lg:py-3">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:gap-6">
+        <div className="flex items-center justify-between gap-3 lg:gap-4 xl:gap-8">
           {/* Logo & Branding */}
           <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0">
             <div className="aspect-square h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 min-[360px]:h-11 min-[360px]:w-11 sm:h-14 sm:w-14 border-secondary shadow-md md:h-20 md:w-20 bg-white">
@@ -38,23 +38,23 @@ export function Header() {
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
-            <div className="flex min-w-0 flex-col">
-              <span className="font-hindi text-[12px] font-bold leading-tight text-primary whitespace-nowrap min-[360px]:text-[14px] min-[400px]:text-[15px] sm:text-lg md:text-xl">
+            <div className="flex min-w-0 flex-col justify-center">
+              <span className="font-hindi text-[13px] font-bold leading-none text-primary whitespace-nowrap min-[360px]:text-[15px] min-[400px]:text-[16px] sm:text-lg md:text-2xl lg:text-xl xl:text-2xl">
                 {t('brand.name')}
               </span>
-              <span className="font-hindi hidden truncate text-[9px] text-foreground/70 min-[360px]:block sm:text-[10px] md:text-xs">
+              <span className="font-hindi mt-0.5 text-[9px] leading-tight text-muted-foreground/90 whitespace-normal line-clamp-1 min-[360px]:text-[10px] sm:text-xs md:text-sm lg:text-[11px] xl:text-xs">
                 {t('brand.subtitle')}
               </span>
             </div>
           </Link>
 
           {/* Inline navigation - desktop */}
-          <nav className="hidden min-w-0 flex-1 flex-wrap items-center justify-center gap-x-4 gap-y-1 lg:flex xl:gap-x-5">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-3 lg:flex xl:gap-x-5">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="font-hindi whitespace-nowrap text-sm font-semibold text-foreground/80 transition-colors hover:text-primary"
+                className="font-hindi whitespace-nowrap text-[13px] font-bold text-foreground/80 transition-colors hover:text-primary xl:text-[15px]"
                 activeProps={{ className: "text-primary font-bold" }}
               >
                 {link.name}
@@ -111,7 +111,7 @@ export function Header() {
               )}
             </div>
 
-            <div className="hidden items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm lg:flex">
+            <div className="hidden items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm min-[1100px]:flex">
               <Languages className="h-3 w-3 text-primary shrink-0" />
               <button
                 onClick={() => setLanguage('hi')}
@@ -130,7 +130,7 @@ export function Header() {
             
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="hidden items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10 lg:flex"
+              className="hidden items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10 min-[1150px]:flex"
               title={theme === "dark" ? "Light Mode" : "Dark Mode"}
             >
               {theme === "dark" ? (
