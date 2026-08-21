@@ -91,6 +91,7 @@ const translations: Record<Language, Record<string, string>> = {
     'विशेष झलकियां': 'विशेष झलकियां',
     'चैनल देखें': 'चैनल देखें',
     'और वीडियो देखें': 'और वीडियो देखें',
+    'brand.name': "'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\\n                                        \\n                                            \\n                                            hi",
   },
 
 
@@ -179,6 +180,7 @@ const translations: Record<Language, Record<string, string>> = {
     'विशेष झलकियां': 'Special Highlights',
     'चैनल देखें': 'View Channel',
     'और वीडियो देखें': 'More Videos',
+    'brand.name': "'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\\n                                        \\n                                            \\n                                            hi",
   },
 
 
