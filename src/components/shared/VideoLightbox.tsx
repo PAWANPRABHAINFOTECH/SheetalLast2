@@ -2,9 +2,10 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 interface VideoLightboxProps {
   youtubeId: string | null;
-  title?: string | null;
+  title?: string | null | undefined;
   onClose: () => void;
 }
+
 
 export function VideoLightbox({ youtubeId, title, onClose }: VideoLightboxProps) {
   return (

@@ -2,9 +2,10 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 interface ImageLightboxProps {
   src: string | null;
-  alt?: string | null;
+  alt?: string | null | undefined;
   onClose: () => void;
 }
+
 
 export function ImageLightbox({ src, alt, onClose }: ImageLightboxProps) {
   return (
