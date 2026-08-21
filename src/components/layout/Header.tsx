@@ -39,10 +39,10 @@ export function Header() {
               />
             </div>
             <div className="flex min-w-0 flex-col">
-              <span className="font-hindi text-[13px] font-bold leading-tight text-primary whitespace-nowrap min-[360px]:text-[15px] sm:text-lg md:text-xl">
+              <span className="font-hindi text-[12px] font-bold leading-tight text-primary whitespace-nowrap min-[360px]:text-[14px] min-[400px]:text-[15px] sm:text-lg md:text-xl">
                 शीतल शिवालय समिति
               </span>
-              <span className="font-hindi truncate text-[9px] text-foreground/70 sm:text-[10px] md:text-xs">
+              <span className="font-hindi hidden truncate text-[9px] text-foreground/70 min-[360px]:block sm:text-[10px] md:text-xs">
                 शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
               </span>
             </div>
@@ -146,7 +146,7 @@ export function Header() {
               onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
             >
               <Heart className="h-4 w-4 fill-current min-[360px]:mr-1.5 md:mr-2" />
-              <span className="hidden min-[360px]:inline">{t('action.donate')}</span>
+              <span className="hidden min-[400px]:inline">{t('action.donate')}</span>
             </Button>
 
 
