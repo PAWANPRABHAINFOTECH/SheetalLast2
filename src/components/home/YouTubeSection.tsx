@@ -2,6 +2,7 @@ import { useYoutubeVideos, useSiteSettings } from "@/lib/temple.hooks";
 import { Youtube, ExternalLink, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { VideoLightbox } from "@/components/shared/VideoLightbox";
 import { useI18n } from "@/lib/i18n";
 
 export function YouTubeSection() {
@@ -11,6 +12,7 @@ export function YouTubeSection() {
   const { t } = useI18n();
   const [displayCountSynced, setDisplayCountSynced] = useState(8);
   const [displayCountSpecial, setDisplayCountSpecial] = useState(8);
+  const [activeVideo, setActiveVideo] = useState<{ id: string; title?: string | null } | null>(null);
 
   const renderVideoGrid = (videos: any[], count: number, setCount: React.Dispatch<React.SetStateAction<number>>) => {
     const visibleVideos = videos.filter(v => v.is_active !== false && v.youtube_id && v.source_type === (videos === syncedVideos ? 'synced' : 'special')).slice(0, count);
@@ -20,12 +22,11 @@ export function YouTubeSection() {
       <>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {visibleVideos.map((video) => (
-            <a
+            <button
               key={video.id}
-              href={video.url || `https://www.youtube.com/watch?v=${video.youtube_id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              type="button"
+              onClick={() => setActiveVideo({ id: video.youtube_id, title: video.title })}
+              className="group flex w-full flex-col overflow-hidden rounded-2xl border border-primary/10 bg-card text-left shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="relative aspect-video overflow-hidden bg-muted">
                 {video.youtube_id ? (
@@ -46,7 +47,7 @@ export function YouTubeSection() {
                     loading="lazy"
                   />
                 )}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FF0000] text-white shadow-lg">
                     <Youtube className="h-6 w-6" />
                   </div>
@@ -75,7 +76,7 @@ export function YouTubeSection() {
                   </div>
                 )}
               </div>
-            </a>
+            </button>
           ))}
         </div>
         {hasMore && (
@@ -96,6 +97,11 @@ export function YouTubeSection() {
 
   return (
     <div className="space-y-16">
+      <VideoLightbox
+        youtubeId={activeVideo?.id ?? null}
+        title={activeVideo?.title}
+        onClose={() => setActiveVideo(null)}
+      />
       {/* Synced Videos Section */}
       {syncedVideos && syncedVideos.length > 0 && (
         <section className="py-16 container mx-auto px-4 border-b border-primary/5">

@@ -30,8 +30,8 @@ export function Header() {
       <div className="container mx-auto px-4 py-2 lg:py-3">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:gap-6">
           {/* Logo & Branding */}
-          <Link to="/" className="flex min-w-0 items-center gap-3 lg:shrink-0">
-            <div className="aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
+          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0">
+            <div className="aspect-square h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 min-[360px]:h-11 min-[360px]:w-11 sm:h-14 sm:w-14 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
                 alt="Shital Shivalaya Samiti Logo"
@@ -39,10 +39,10 @@ export function Header() {
               />
             </div>
             <div className="flex min-w-0 flex-col">
-              <span className="font-hindi truncate text-base font-bold leading-tight text-primary md:text-xl">
+              <span className="font-hindi text-[12px] font-bold leading-tight text-primary whitespace-nowrap min-[360px]:text-[14px] min-[400px]:text-[15px] sm:text-lg md:text-xl">
                 शीतल शिवालय समिति
               </span>
-              <span className="font-hindi truncate text-[10px] text-foreground/70 md:text-xs">
+              <span className="font-hindi hidden truncate text-[9px] text-foreground/70 min-[360px]:block sm:text-[10px] md:text-xs">
                 शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
               </span>
             </div>
@@ -111,7 +111,7 @@ export function Header() {
               )}
             </div>
 
-            <div className="flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm">
+            <div className="hidden items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm lg:flex">
               <Languages className="h-3 w-3 text-primary shrink-0" />
               <button
                 onClick={() => setLanguage('hi')}
@@ -130,7 +130,7 @@ export function Header() {
             
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10"
+              className="hidden items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10 lg:flex"
               title={theme === "dark" ? "Light Mode" : "Dark Mode"}
             >
               {theme === "dark" ? (
@@ -142,16 +142,16 @@ export function Header() {
 
             <Button
               size="sm"
-              className="font-hindi bg-accent px-3 text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
+              className="font-hindi shrink-0 bg-accent px-2 text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
               onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
             >
-              <Heart className="mr-1.5 h-4 w-4 fill-current md:mr-2" />
-              {t('action.donate')}
+              <Heart className="h-4 w-4 fill-current min-[360px]:mr-1.5 md:mr-2" />
+              <span className="hidden min-[400px]:inline">{t('action.donate')}</span>
             </Button>
 
 
             <button
-              className="p-2 text-foreground lg:hidden"
+              className="-mr-1 p-1.5 text-foreground lg:hidden"
               aria-label="Menu"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -165,6 +165,31 @@ export function Header() {
       {isMenuOpen && (
         <div className="animate-in fade-in slide-in-from-top-4 border-b bg-background lg:hidden">
           <nav className="container mx-auto flex flex-col gap-2 px-4 py-4">
+            <div className="flex flex-wrap items-center gap-3 border-b border-border/50 pb-4">
+              <div className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5">
+                <Languages className="h-4 w-4 shrink-0 text-primary" />
+                <button
+                  onClick={() => setLanguage('hi')}
+                  className={`text-xs font-bold transition-colors ${language === 'hi' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  हिन्दी
+                </button>
+                <span className="text-[10px] text-primary/30">|</span>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`text-xs font-bold transition-colors ${language === 'en' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  EN
+                </button>
+              </div>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-bold text-primary"
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              </button>
+            </div>
             {navLinks.map((link) => (
               <Link
                 key={link.to}

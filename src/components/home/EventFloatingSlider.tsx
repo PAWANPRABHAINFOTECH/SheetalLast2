@@ -4,11 +4,14 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
+import { ImageLightbox } from "@/components/shared/ImageLightbox";
 
 export function EventFloatingSlider() {
   const { data: ads, isLoading } = useAdvertisements();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxAlt, setLightboxAlt] = useState<string | null>(null);
 
   const activeAds = ads?.filter(ad => ad.is_active) || [];
 
@@ -28,7 +31,8 @@ export function EventFloatingSlider() {
   if (!currentAd) return null;
 
   return (
-    <div className="fixed bottom-24 left-4 z-40 w-40 sm:w-56 lg:w-64">
+    <div className="fixed bottom-24 left-4 z-40 w-32 sm:w-56 lg:w-64">
+      <ImageLightbox src={lightboxSrc} alt={lightboxAlt} onClose={() => setLightboxSrc(null)} />
       <AnimatePresence mode="wait">
         <motion.div
           key={currentAd.id}
@@ -51,10 +55,13 @@ export function EventFloatingSlider() {
             <X className="h-3 w-3" />
           </Button>
 
-          <a
-            href={currentAd.button_url || "#"}
-            target={currentAd.button_url?.startsWith('http') ? "_blank" : "_self"}
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            aria-label={currentAd.title || "Poster"}
+            onClick={() => {
+              setLightboxSrc(currentAd.image_url);
+              setLightboxAlt(currentAd.title ?? null);
+            }}
             className="block h-full w-full"
           >
             <img
@@ -69,7 +76,7 @@ export function EventFloatingSlider() {
                 </p>
               </div>
             )}
-          </a>
+          </button>
         </motion.div>
       </AnimatePresence>
       <div className="mt-2 flex justify-center gap-1.5">
