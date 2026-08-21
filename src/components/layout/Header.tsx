@@ -30,8 +30,8 @@ export function Header() {
       <div className="container mx-auto px-4 py-2 lg:py-3">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:gap-6">
           {/* Logo & Branding */}
-          <Link to="/" className="flex min-w-0 items-center gap-3 lg:shrink-0">
-            <div className="aspect-square h-11 w-11 shrink-0 overflow-hidden rounded-full border-2 sm:h-14 sm:w-14 border-secondary shadow-md md:h-20 md:w-20 bg-white">
+          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0">
+            <div className="aspect-square h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 min-[360px]:h-11 min-[360px]:w-11 sm:h-14 sm:w-14 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
                 alt="Shital Shivalaya Samiti Logo"
@@ -39,7 +39,7 @@ export function Header() {
               />
             </div>
             <div className="flex min-w-0 flex-col">
-              <span className="font-hindi text-[15px] font-bold leading-tight text-primary whitespace-nowrap sm:text-lg md:text-xl">
+              <span className="font-hindi text-[13px] font-bold leading-tight text-primary whitespace-nowrap min-[360px]:text-[15px] sm:text-lg md:text-xl">
                 शीतल शिवालय समिति
               </span>
               <span className="font-hindi truncate text-[9px] text-foreground/70 sm:text-[10px] md:text-xs">
