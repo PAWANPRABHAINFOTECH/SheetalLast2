@@ -9,7 +9,7 @@ interface VideoLightboxProps {
 export function VideoLightbox({ youtubeId, title, onClose }: VideoLightboxProps) {
   return (
     <Dialog open={!!youtubeId} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="w-[95vw] max-w-3xl overflow-hidden rounded-2xl border-none bg-black p-0 sm:w-full">
+      <DialogContent className="w-[95vw] max-w-3xl overflow-hidden rounded-2xl border-none bg-black p-0 text-white sm:w-full">
         <DialogTitle className="sr-only">{title || "Video"}</DialogTitle>
         {youtubeId && (
           <div className="aspect-video w-full">
