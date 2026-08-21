@@ -147,6 +147,23 @@ export function DonationModal() {
             </p>
 
           </div>
+
+          <div className="border-t border-border/60 pt-4 sm:pt-5">
+            <a
+              href="https://wa.me/916262013335?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%2C%20%E0%A4%B6%E0%A5%80%E0%A4%A4%E0%A4%B2%20%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%B2%E0%A4%AF%20%E0%A4%B8%E0%A4%AE%E0%A4%BF%E0%A4%A4%E0%A4%BF"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-center text-[10px] sm:text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              <span className="font-semibold tracking-wide uppercase">DESIGNED & DEVELOPED BY PAWANPRABHA INFOTECH</span>
+              <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-500 hover:text-green-700 dark:hover:text-green-400">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5 sm:h-4 sm:w-4">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.95.5 3.83 1.46 5.5L2.13 22l4.78-1.35c1.62.88 3.45 1.35 5.32 1.35h.04c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.59 13.66c-.24.68-1.38 1.29-1.92 1.37-.51.08-1 .19-3.35-.69-2.84-1.1-4.66-3.9-4.8-4.09-.14-.18-1.15-1.53-1.15-2.92 0-1.39.72-2.06.98-2.34.26-.28.56-.35.75-.35.18 0 .37 0 .53.01.17 0 .4-.06.62.47.22.54.75 1.91.82 2.05.07.14.12.3.02.48-.1.18-.15.29-.3.45-.15.15-.31.32-.44.43-.14.12-.28.25-.19.49.09.24.42 1.39 1.13 2.04.78.72 1.44.95 1.92 1.05.31.07.58-.04.74-.15.22-.15.95-1.11 1.18-1.49.24-.37.47-.31.62-.25.15.06.98.46 1.15.54.17.08.29.12.33.19.04.06.04.36-.09.75z" />
+                </svg>
+                <span className="font-inter font-medium">6262013335</span>
+              </span>
+            </a>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
