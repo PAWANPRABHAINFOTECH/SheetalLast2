@@ -145,8 +145,8 @@ export function Header() {
               className="font-hindi shrink-0 bg-accent px-2 text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
               onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
             >
-              <Heart className="mr-1.5 h-4 w-4 fill-current md:mr-2" />
-              {t('action.donate')}
+              <Heart className="h-4 w-4 fill-current min-[360px]:mr-1.5 md:mr-2" />
+              <span className="hidden min-[360px]:inline">{t('action.donate')}</span>
             </Button>
 
 
