@@ -42,31 +42,31 @@ export function DonationModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-2xl sm:max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none bg-background">
-        <div className="bg-primary text-primary-foreground p-8 text-center relative overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[92vh] overflow-y-auto overflow-x-hidden rounded-2xl p-0 border-none bg-background sm:w-full sm:rounded-3xl">
+        <div className="bg-primary text-primary-foreground p-5 sm:p-8 text-center relative overflow-hidden">
           {/* Decorative Pattern */}
           <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           
-          <img src={logoAsset.url} alt="Logo" className="h-20 w-20 mx-auto mb-4 bg-white dark:bg-primary/20 rounded-full p-2 relative z-10" />
-          <DialogTitle className="font-hindi text-3xl font-bold mb-2 relative z-10">शीतल शिवालय समिति</DialogTitle>
-          <p className="font-hindi text-sm text-primary-foreground/80 relative z-10">
+          <img src={logoAsset.url} alt="Logo" className="h-14 w-14 sm:h-20 sm:w-20 mx-auto mb-3 sm:mb-4 bg-white dark:bg-primary/20 rounded-full p-2 relative z-10" />
+          <DialogTitle className="font-hindi text-xl sm:text-3xl font-bold mb-2 relative z-10">शीतल शिवालय समिति</DialogTitle>
+          <p className="font-hindi text-[11px] sm:text-sm text-primary-foreground/80 relative z-10">
             शीतल सिटी, मंडीदीप, जिला-रायसेन (मध्यप्रदेश) – 462046
           </p>
         </div>
 
-        <div className="p-8 space-y-8">
+        <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
           <div className="text-center space-y-4">
-            <h3 className="font-hindi text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">{t('donation.title')}</h3>
-            <p className="font-hindi text-foreground/80 leading-relaxed italic">
+            <h3 className="font-hindi text-lg sm:text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">{t('donation.title')}</h3>
+            <p className="font-hindi text-sm sm:text-base text-foreground/80 leading-relaxed italic">
               {t('donation.msg')}
             </p>
 
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <Button 
               variant={activeTab === 'qr' ? 'default' : 'outline'} 
-              className={`font-hindi rounded-2xl h-16 text-lg ${activeTab === 'qr' ? 'bg-primary' : 'border-primary text-primary'}`}
+              className={`font-hindi rounded-2xl h-12 sm:h-16 text-base sm:text-lg ${activeTab === 'qr' ? 'bg-primary' : 'border-primary text-primary'}`}
               onClick={() => setActiveTab('qr')}
             >
               <QrCode className="mr-2 h-6 w-6" />
@@ -74,7 +74,7 @@ export function DonationModal() {
             </Button>
             <Button 
               variant={activeTab === 'bank' ? 'default' : 'outline'} 
-              className={`font-hindi rounded-2xl h-16 text-lg ${activeTab === 'bank' ? 'bg-primary' : 'border-primary text-primary'}`}
+              className={`font-hindi rounded-2xl h-12 sm:h-16 text-base sm:text-lg ${activeTab === 'bank' ? 'bg-primary' : 'border-primary text-primary'}`}
               onClick={() => setActiveTab('bank')}
             >
               <Building2 className="mr-2 h-6 w-6" />
@@ -84,11 +84,11 @@ export function DonationModal() {
 
           {activeTab === 'qr' ? (
             <div className="flex flex-col items-center gap-6 animate-in fade-in duration-500">
-              <div className="bg-white dark:bg-primary/5 p-6 rounded-3xl shadow-2xl border-4 border-secondary/20">
+              <div className="bg-white dark:bg-primary/5 p-4 sm:p-6 rounded-3xl shadow-2xl border-4 border-secondary/20">
                 <img 
                   src={settings?.donation_qr_url || "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=UPI_ID_HERE"} 
                   alt="Donation QR" 
-                  className="w-48 h-48 md:w-64 md:h-64 object-contain"
+                  className="h-40 w-40 sm:h-48 sm:w-48 md:h-64 md:w-64 object-contain"
                 />
               </div>
               <div className="text-center">
@@ -96,7 +96,7 @@ export function DonationModal() {
                 {settings?.upi_id && (
                   <Button 
                     variant="ghost" 
-                    className="font-inter text-muted-foreground hover:text-primary gap-2"
+                    className="font-inter text-muted-foreground hover:text-primary gap-2 max-w-full whitespace-normal break-all"
                     onClick={() => copyToClipboard(settings.upi_id || "")}
                   >
                     {settings.upi_id}
@@ -107,20 +107,20 @@ export function DonationModal() {
             </div>
           ) : (
             <div className="space-y-4 animate-in fade-in duration-500">
-              <div className="bg-secondary/5 border-2 border-secondary/20 rounded-3xl p-6 space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-secondary/5 border-2 border-secondary/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.holder')}</label>
-                    <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_account_name || "शीतल शिवालय समिति"}</p>
+                    <p className="font-hindi text-base sm:text-lg font-bold text-primary break-words">{settings?.bank_account_name || "शीतल शिवालय समिति"}</p>
                   </div>
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.bankName')}</label>
-                    <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_name || "---"}</p>
+                    <p className="font-hindi text-base sm:text-lg font-bold text-primary break-words">{settings?.bank_name || "---"}</p>
                   </div>
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.accountNo')}</label>
                     <div className="flex items-center justify-between">
-                      <p className="font-inter text-lg font-bold text-primary tracking-wider">{settings?.bank_account_number || "---"}</p>
+                      <p className="font-inter text-base sm:text-lg font-bold text-primary tracking-wider break-all">{settings?.bank_account_number || "---"}</p>
                       <Button variant="ghost" size="sm" onClick={() => copyToClipboard(settings?.bank_account_number || "")}>
                         <Copy className="h-4 w-4" />
                       </Button>
@@ -129,7 +129,7 @@ export function DonationModal() {
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.ifsc')}</label>
                     <div className="flex items-center justify-between">
-                      <p className="font-inter text-lg font-bold text-primary">{settings?.bank_ifsc || "---"}</p>
+                      <p className="font-inter text-base sm:text-lg font-bold text-primary break-all">{settings?.bank_ifsc || "---"}</p>
                       <Button variant="ghost" size="sm" onClick={() => copyToClipboard(settings?.bank_ifsc || "")}>
                         <Copy className="h-4 w-4" />
                       </Button>
@@ -140,7 +140,7 @@ export function DonationModal() {
             </div>
           )}
 
-          <div className="bg-muted/30 p-6 rounded-3xl text-center space-y-2">
+          <div className="bg-muted/30 p-4 sm:p-6 rounded-2xl sm:rounded-3xl text-center space-y-2">
             <p className="font-hindi text-sm font-bold text-primary">{t('donation.importance')}</p>
             <p className="font-hindi text-xs text-foreground/70 leading-relaxed">
               {t('donation.importanceMsg')}
