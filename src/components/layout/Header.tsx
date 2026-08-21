@@ -43,7 +43,7 @@ export function Header() {
                 {t('brand.name')}
               </span>
               <span className="font-hindi hidden truncate text-[9px] text-foreground/70 min-[360px]:block sm:text-[10px] md:text-xs">
-                शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
+                {t('brand.subtitle')}
               </span>
             </div>
           </Link>
