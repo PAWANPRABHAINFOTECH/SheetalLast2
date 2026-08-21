@@ -47,7 +47,7 @@ export function YouTubeSection() {
                     loading="lazy"
                   />
                 )}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FF0000] text-white shadow-lg">
                     <Youtube className="h-6 w-6" />
                   </div>
