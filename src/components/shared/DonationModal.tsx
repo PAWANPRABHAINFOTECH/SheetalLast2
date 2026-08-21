@@ -42,8 +42,8 @@ export function DonationModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="w-[95vw] max-w-2xl max-h-[92vh] overflow-y-auto overflow-x-hidden rounded-2xl p-0 border-none bg-background sm:w-full sm:rounded-3xl">
-        <div className="bg-primary text-primary-foreground p-5 sm:p-8 text-center relative overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[92vh] flex flex-col overflow-hidden rounded-2xl p-0 border-none bg-background sm:w-full sm:rounded-3xl">
+        <div className="bg-primary text-primary-foreground p-5 sm:p-8 text-center relative overflow-hidden shrink-0">
           {/* Decorative Pattern */}
           <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           
@@ -54,7 +54,7 @@ export function DonationModal() {
           </p>
         </div>
 
-        <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-8 space-y-6 sm:space-y-8">
           <div className="text-center space-y-4">
             <h3 className="font-hindi text-lg sm:text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">{t('donation.title')}</h3>
             <p className="font-hindi text-sm sm:text-base text-foreground/80 leading-relaxed italic">
