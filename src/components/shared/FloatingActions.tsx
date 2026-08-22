@@ -15,7 +15,7 @@ export function FloatingActions() {
         asChild
       >
         <a 
-          href={`https://wa.me/${settings?.whatsapp?.replace(/\D/g, "") || "918319322374"}?text=नमस्कार, शीतल शिवालय समिति`}
+          href={`https://wa.me/${settings?.whatsapp?.replace(/\D/g, "") || "918319322374"}?text=${encodeURIComponent(String(settings?.whatsapp_auto_message || "नमस्कार, शीतल शिवालय समिति"))}`}
           target="_blank" 
           rel="noopener noreferrer"
         >
