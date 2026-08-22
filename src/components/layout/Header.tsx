@@ -39,11 +39,11 @@ export function Header() {
               />
             </div>
             <div className="flex min-w-0 flex-col py-1">
-              <span className="font-hindi whitespace-nowrap text-[15px] sm:text-base md:text-xl font-bold leading-none text-primary lg:truncate">
-                शीतल शिवालय समिति
+              <span className="font-hindi whitespace-nowrap text-[15px] sm:text-base md:text-xl font-bold leading-none text-primary lg:whitespace-normal">
+                {settings?.temple_name || "शीतल शिवालय समिति"}
               </span>
-              <span className="font-hindi whitespace-nowrap text-[9px] sm:text-[10px] md:text-xs text-foreground/70 leading-none mt-0.5 lg:truncate">
-                शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
+              <span className="font-hindi whitespace-nowrap text-[9px] sm:text-[10px] md:text-xs text-foreground/70 leading-none mt-1 lg:whitespace-normal">
+                {settings?.address || "शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046"}
               </span>
             </div>
           </Link>
