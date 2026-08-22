@@ -15,7 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.live': 'लाइव दर्शन',
     'nav.news': 'विशेष सूचना',
     'nav.gallery': 'गैलरी',
-    'nav.members': "'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                        \n                                            \n                                            back to latest",
+    'nav.members': "'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                        \n                                            \n                                            Load the security issues from the scan results and fix the selected issues.",
     'nav.contact': 'संपर्क',
     'action.donate': 'दान करें',
     'footer.admin': 'एडमिन लॉगिन',
