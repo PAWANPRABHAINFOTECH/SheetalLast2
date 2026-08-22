@@ -40,10 +40,10 @@ export function Header() {
             </div>
             <div className="flex min-w-0 flex-col justify-center">
               <span className="font-hindi text-[13px] font-bold leading-none text-primary whitespace-nowrap min-[360px]:text-[15px] min-[400px]:text-[16px] sm:text-lg md:text-2xl lg:text-xl xl:text-2xl">
-                {t('brand.name')}
+                {settings?.site_name || t('brand.name')}
               </span>
               <span className="font-hindi mt-0.5 text-[9px] leading-tight text-muted-foreground/90 whitespace-normal line-clamp-1 min-[360px]:text-[10px] sm:text-xs md:text-sm lg:text-[11px] xl:text-xs">
-                {t('brand.subtitle')}
+                {settings?.address || t('brand.subtitle')}
               </span>
             </div>
           </Link>
