@@ -119,7 +119,7 @@ export function Footer() {
                 <div>
                   <span className="text-[10px] text-white/50 block uppercase tracking-wider">WhatsApp</span>
                   <a 
-                    href={`https://wa.me/${settings?.whatsapp?.replace(/\D/g, "") || "918319322374"}?text=नमस्कार, शीतल शिवालय समिति`}
+                    href={`https://wa.me/${settings?.whatsapp?.replace(/\D/g, "") || "918319322374"}?text=${encodeURIComponent(String(settings?.whatsapp_auto_message || "नमस्कार, शीतल शिवालय समिति"))}`}
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="text-sm hover:text-secondary transition-colors font-inter"

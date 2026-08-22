@@ -18,6 +18,7 @@ const TEXT_FIELDS: { name: string; label: string; long?: boolean }[] = [
   { name: "registration_no", label: "पंजीयन क्रमांक" },
   { name: "phone", label: "फ़ोन नंबर" },
   { name: "whatsapp", label: "व्हाट्सएप नंबर" },
+  { name: "whatsapp_auto_message", label: "WhatsApp Auto Message", long: true },
   { name: "email", label: "ईमेल" },
   { name: "upi_id", label: "UPI आईडी" },
   { name: "bank_account_name", label: "खाता धारक का नाम" },

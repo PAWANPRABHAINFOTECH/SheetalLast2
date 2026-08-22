@@ -416,6 +416,7 @@ export type Database = {
           updated_at: string | null
           upi_id: string | null
           whatsapp: string | null
+          whatsapp_auto_message: string | null
           youtube_channel_logo: string | null
           youtube_channel_name: string | null
           youtube_channel_url: string | null
@@ -451,6 +452,7 @@ export type Database = {
           updated_at?: string | null
           upi_id?: string | null
           whatsapp?: string | null
+          whatsapp_auto_message?: string | null
           youtube_channel_logo?: string | null
           youtube_channel_name?: string | null
           youtube_channel_url?: string | null
@@ -486,6 +488,7 @@ export type Database = {
           updated_at?: string | null
           upi_id?: string | null
           whatsapp?: string | null
+          whatsapp_auto_message?: string | null
           youtube_channel_logo?: string | null
           youtube_channel_name?: string | null
           youtube_channel_url?: string | null
