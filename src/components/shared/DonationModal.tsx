@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/logo.png.asset.json";
 import { useState, useEffect } from "react";
-import { Copy, Check, QrCode, Building2 } from "lucide-react";
+import { Copy, Check, QrCode, Building2, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 
 
