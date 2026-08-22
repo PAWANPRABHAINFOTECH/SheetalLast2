@@ -30,7 +30,7 @@ export function Header() {
       <div className="container mx-auto px-4 py-2 lg:py-3">
         <div className="flex flex-wrap items-center justify-between gap-3 lg:flex-nowrap lg:gap-6">
           {/* Logo & Branding */}
-          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0 lg:w-auto">
+          <Link to="/" className="flex shrink-0 items-center gap-2 sm:gap-3">
             <div className="aspect-square h-12 w-12 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
