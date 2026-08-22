@@ -42,7 +42,7 @@ export function DonationModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-2xl w-[95vw] sm:w-full max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none bg-background scrollbar-hide">
+      <DialogContent className="max-w-2xl w-[95vw] sm:w-[500px] md:w-full max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none bg-background scrollbar-hide">
         <div className="bg-primary text-primary-foreground p-8 text-center relative overflow-hidden">
           {/* Decorative Pattern */}
           <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
@@ -55,29 +55,28 @@ export function DonationModal() {
         </div>
 
         <div className="p-8 space-y-8">
-          <div className="text-center space-y-4">
-            <h3 className="font-hindi text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">{t('donation.title')}</h3>
-            <p className="font-hindi text-foreground/80 leading-relaxed italic">
+          <div className="text-center space-y-3 sm:space-y-4">
+            <h3 className="font-hindi text-xl sm:text-2xl font-bold text-primary underline decoration-secondary decoration-4 underline-offset-8">{t('donation.title')}</h3>
+            <p className="font-hindi text-xs sm:text-base text-foreground/80 leading-relaxed italic px-2 sm:px-0">
               {t('donation.msg')}
             </p>
-
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <Button 
               variant={activeTab === 'qr' ? 'default' : 'outline'} 
-              className={`font-hindi rounded-2xl h-16 text-lg ${activeTab === 'qr' ? 'bg-primary' : 'border-primary text-primary'}`}
+              className={`font-hindi rounded-2xl h-12 sm:h-16 text-base sm:text-lg ${activeTab === 'qr' ? 'bg-primary' : 'border-primary text-primary'}`}
               onClick={() => setActiveTab('qr')}
             >
-              <QrCode className="mr-2 h-6 w-6" />
+              <QrCode className="mr-1 sm:mr-2 h-5 w-5 sm:h-6 w-6" />
               {t('donation.qrTab')}
             </Button>
             <Button 
               variant={activeTab === 'bank' ? 'default' : 'outline'} 
-              className={`font-hindi rounded-2xl h-16 text-lg ${activeTab === 'bank' ? 'bg-primary' : 'border-primary text-primary'}`}
+              className={`font-hindi rounded-2xl h-12 sm:h-16 text-base sm:text-lg ${activeTab === 'bank' ? 'bg-primary' : 'border-primary text-primary'}`}
               onClick={() => setActiveTab('bank')}
             >
-              <Building2 className="mr-2 h-6 w-6" />
+              <Building2 className="mr-1 sm:mr-2 h-5 w-5 sm:h-6 w-6" />
               {t('donation.bankTab')}
             </Button>
           </div>
@@ -108,7 +107,7 @@ export function DonationModal() {
           ) : (
             <div className="space-y-4 animate-in fade-in duration-500">
               <div className="bg-secondary/5 border-2 border-secondary/20 rounded-3xl p-6 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 overflow-x-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 overflow-x-hidden">
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.holder')}</label>
                     <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_account_name || "शीतल शिवालय समिति"}</p>
@@ -120,7 +119,7 @@ export function DonationModal() {
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.accountNo')}</label>
                     <div className="flex items-center justify-between gap-2 overflow-hidden">
-                      <p className="font-inter text-base md:text-lg font-bold text-primary tracking-wider truncate">{settings?.bank_account_number || "---"}</p>
+                      <p className="font-inter text-sm sm:text-lg font-bold text-primary tracking-wider truncate">{settings?.bank_account_number || "---"}</p>
                       <Button variant="ghost" size="sm" className="shrink-0" onClick={() => copyToClipboard(settings?.bank_account_number || "")}>
                         <Copy className="h-4 w-4" />
                       </Button>
@@ -129,7 +128,7 @@ export function DonationModal() {
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.ifsc')}</label>
                     <div className="flex items-center justify-between gap-2 overflow-hidden">
-                      <p className="font-inter text-base md:text-lg font-bold text-primary truncate">{settings?.bank_ifsc || "---"}</p>
+                      <p className="font-inter text-sm sm:text-lg font-bold text-primary truncate">{settings?.bank_ifsc || "---"}</p>
                       <Button variant="ghost" size="sm" className="shrink-0" onClick={() => copyToClipboard(settings?.bank_ifsc || "")}>
                         <Copy className="h-4 w-4" />
                       </Button>
@@ -147,14 +146,14 @@ export function DonationModal() {
             </p>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-muted-foreground/10 text-center pb-8">
+          <div className="mt-6 pt-5 border-t border-muted-foreground/10 text-center pb-6">
             <a 
               href="https://wa.me/916262013335?text=नमस्कार, शीतल शिवालय समिति" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group flex flex-col sm:flex-row items-center justify-center gap-2 hover:opacity-80 transition-opacity"
+              className="group flex flex-col items-center justify-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <span className="text-[10px] md:text-xs font-bold tracking-widest text-muted-foreground uppercase">
+              <span className="text-[10px] sm:text-xs font-bold tracking-widest text-muted-foreground uppercase">
                 DESIGNED & DEVELOPED BY PAWANPRABHA INFOTECH
               </span>
               <div className="flex items-center gap-1.5 bg-green-500/10 text-green-600 px-3 py-1 rounded-full border border-green-500/20">
