@@ -28,42 +28,46 @@ export function Header() {
   return (
     <header className="z-50 w-full border-b border-primary/10 bg-background">
       <div className="container mx-auto px-4 py-2 lg:py-3">
-        <div className="flex items-center justify-between gap-3 lg:gap-4 xl:gap-8">
-          {/* Logo & Branding */}
-          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0">
-            <div className="aspect-square h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 min-[360px]:h-11 min-[360px]:w-11 sm:h-14 sm:w-14 border-secondary shadow-md md:h-20 md:w-20 bg-white">
-              <img
-                src={logoAsset.url}
-                alt="Shital Shivalaya Samiti Logo"
-                className="h-full w-full rounded-full object-cover"
-              />
-            </div>
-            <div className="flex min-w-0 flex-col justify-center">
-              <span className="font-hindi text-[13px] font-bold leading-none text-primary whitespace-nowrap min-[360px]:text-[15px] min-[400px]:text-[16px] sm:text-lg md:text-2xl lg:text-xl xl:text-2xl">
-                {settings?.site_name || t('brand.name')}
-              </span>
-              <span className="font-hindi mt-0.5 text-[9px] leading-tight text-muted-foreground/90 whitespace-normal line-clamp-1 min-[360px]:text-[10px] sm:text-xs md:text-sm lg:text-[11px] xl:text-xs">
-                {settings?.address || t('brand.subtitle')}
-              </span>
-            </div>
-          </Link>
+        <div className="flex items-center justify-between w-full">
+          {/* Logo & Branding - LEFT */}
+          <div className="flex shrink-0 items-center mr-4 lg:mr-8 xl:mr-12">
+            <Link to="/" className="flex items-center gap-2 sm:gap-3">
+              <div className="aspect-square h-9 w-9 shrink-0 overflow-hidden rounded-full border-2 min-[360px]:h-11 min-[360px]:w-11 sm:h-14 sm:w-14 border-secondary shadow-md md:h-16 md:w-16 bg-white">
+                <img
+                  src={logoAsset.url}
+                  alt="Shital Shivalaya Samiti Logo"
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
+              <div className="flex min-w-0 flex-col justify-center">
+                <span className="font-hindi text-[13px] font-bold leading-none text-primary whitespace-nowrap min-[360px]:text-[15px] min-[400px]:text-[16px] sm:text-lg md:text-xl lg:text-lg xl:text-xl">
+                  {settings?.site_name || t('brand.name')}
+                </span>
+                <span className="font-hindi mt-0.5 text-[9px] leading-tight text-muted-foreground/90 whitespace-normal line-clamp-1 min-[360px]:text-[10px] sm:text-xs md:text-sm lg:text-[11px] xl:text-xs">
+                  {settings?.address || t('brand.subtitle')}
+                </span>
+              </div>
+            </Link>
+          </div>
 
-          {/* Inline navigation - desktop */}
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-1 lg:flex xl:gap-x-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="font-hindi px-1 py-2 whitespace-nowrap text-[12px] font-bold text-foreground/80 transition-colors hover:text-primary min-[1100px]:text-[13px] min-[1200px]:px-2 xl:text-[15px]"
-                activeProps={{ className: "text-primary font-bold" }}
-              >
-                {link.name}
-              </Link>
-            ))}
+          {/* Inline navigation - CENTER */}
+          <nav className="hidden lg:flex flex-1 items-center justify-center min-w-0 px-2">
+            <div className="flex items-center gap-x-1 xl:gap-x-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="font-hindi px-1.5 py-2 whitespace-nowrap text-[13px] font-bold text-foreground/80 transition-colors hover:text-primary min-[1200px]:px-2.5 xl:text-[15px]"
+                  activeProps={{ className: "text-primary font-bold" }}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </nav>
 
-          {/* Right side actions */}
-          <div className="flex shrink-0 items-center gap-2 lg:gap-3">
+          {/* Right side actions - RIGHT */}
+          <div className="flex shrink-0 items-center gap-2 ml-4 lg:ml-8 xl:ml-12">
             <div className="hidden items-center gap-2 xl:flex">
               {settings?.phone && (
                 <a
