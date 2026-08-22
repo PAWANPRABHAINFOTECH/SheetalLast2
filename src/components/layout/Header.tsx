@@ -49,12 +49,12 @@ export function Header() {
           </Link>
 
           {/* Inline navigation - desktop */}
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-3 lg:flex xl:gap-x-5">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-1 lg:flex xl:gap-x-4">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="font-hindi whitespace-nowrap text-[13px] font-bold text-foreground/80 transition-colors hover:text-primary xl:text-[15px]"
+                className="font-hindi px-1 py-2 whitespace-nowrap text-[12px] font-bold text-foreground/80 transition-colors hover:text-primary min-[1100px]:text-[13px] min-[1200px]:px-2 xl:text-[15px]"
                 activeProps={{ className: "text-primary font-bold" }}
               >
                 {link.name}
