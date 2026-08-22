@@ -30,19 +30,19 @@ export function Header() {
       <div className="container mx-auto px-4 py-2 lg:py-3">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:gap-6">
           {/* Logo & Branding */}
-          <Link to="/" className="flex min-w-0 items-center gap-3 lg:shrink-0">
-            <div className="aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
+          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0">
+            <div className="aspect-square h-12 w-12 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
                 alt="Shital Shivalaya Samiti Logo"
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
-            <div className="flex min-w-0 flex-col">
-              <span className="font-hindi whitespace-nowrap text-base font-bold leading-tight text-primary md:text-xl lg:truncate">
+            <div className="flex min-w-0 flex-col py-1">
+              <span className="font-hindi whitespace-nowrap text-[15px] sm:text-base md:text-xl font-bold leading-none text-primary lg:truncate">
                 शीतल शिवालय समिति
               </span>
-              <span className="font-hindi whitespace-nowrap text-[10px] text-foreground/70 md:text-xs lg:truncate">
+              <span className="font-hindi whitespace-nowrap text-[9px] sm:text-[10px] md:text-xs text-foreground/70 leading-none mt-0.5 lg:truncate">
                 शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
               </span>
             </div>
@@ -142,10 +142,10 @@ export function Header() {
 
             <Button
               size="sm"
-              className="font-hindi bg-accent px-3 text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
+              className="font-hindi bg-accent px-2 sm:px-3 text-[10px] sm:text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
               onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
             >
-              <Heart className="mr-1.5 h-4 w-4 fill-current md:mr-2" />
+              <Heart className="mr-1 h-3.5 w-3.5 fill-current sm:mr-1.5 md:mr-2" />
               {t('action.donate')}
             </Button>
 

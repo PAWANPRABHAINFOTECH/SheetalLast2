@@ -108,7 +108,7 @@ export function DonationModal() {
           ) : (
             <div className="space-y-4 animate-in fade-in duration-500">
               <div className="bg-secondary/5 border-2 border-secondary/20 rounded-3xl p-6 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 overflow-x-hidden">
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.holder')}</label>
                     <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_account_name || "शीतल शिवालय समिति"}</p>
@@ -119,18 +119,18 @@ export function DonationModal() {
                   </div>
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.accountNo')}</label>
-                    <div className="flex items-center justify-between">
-                      <p className="font-inter text-lg font-bold text-primary tracking-wider">{settings?.bank_account_number || "---"}</p>
-                      <Button variant="ghost" size="sm" onClick={() => copyToClipboard(settings?.bank_account_number || "")}>
+                    <div className="flex items-center justify-between gap-2 overflow-hidden">
+                      <p className="font-inter text-base md:text-lg font-bold text-primary tracking-wider truncate">{settings?.bank_account_number || "---"}</p>
+                      <Button variant="ghost" size="sm" className="shrink-0" onClick={() => copyToClipboard(settings?.bank_account_number || "")}>
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.ifsc')}</label>
-                    <div className="flex items-center justify-between">
-                      <p className="font-inter text-lg font-bold text-primary">{settings?.bank_ifsc || "---"}</p>
-                      <Button variant="ghost" size="sm" onClick={() => copyToClipboard(settings?.bank_ifsc || "")}>
+                    <div className="flex items-center justify-between gap-2 overflow-hidden">
+                      <p className="font-inter text-base md:text-lg font-bold text-primary truncate">{settings?.bank_ifsc || "---"}</p>
+                      <Button variant="ghost" size="sm" className="shrink-0" onClick={() => copyToClipboard(settings?.bank_ifsc || "")}>
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
