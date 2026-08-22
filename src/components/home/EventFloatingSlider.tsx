@@ -4,11 +4,13 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 export function EventFloatingSlider() {
   const { data: ads, isLoading } = useAdvertisements();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const activeAds = ads?.filter(ad => ad.is_active) || [];
 
@@ -29,6 +31,24 @@ export function EventFloatingSlider() {
 
   return (
     <div className="fixed bottom-24 left-4 z-40 w-40 sm:w-56 lg:w-64">
+      <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+        <DialogContent className="max-w-[95vw] sm:max-w-3xl p-0 border-none bg-black/90 shadow-2xl overflow-hidden rounded-2xl focus:outline-none">
+          <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-4">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute right-2 top-2 z-50 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/80"
+            >
+              <X className="h-5 w-5 sm:h-6 w-6" />
+            </button>
+            <img 
+              src={selectedImage || ""} 
+              alt="Enlarged Poster" 
+              className="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-lg"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentAd.id}
@@ -51,11 +71,9 @@ export function EventFloatingSlider() {
             <X className="h-3 w-3" />
           </Button>
 
-          <a
-            href={currentAd.button_url || "#"}
-            target={currentAd.button_url?.startsWith('http') ? "_blank" : "_self"}
-            rel="noopener noreferrer"
-            className="block h-full w-full"
+          <button
+            onClick={() => setSelectedImage(currentAd.image_url)}
+            className="block h-full w-full cursor-pointer text-left"
           >
             <img
               src={currentAd.image_url}
@@ -69,7 +87,7 @@ export function EventFloatingSlider() {
                 </p>
               </div>
             )}
-          </a>
+          </button>
         </motion.div>
       </AnimatePresence>
       <div className="mt-2 flex justify-center gap-1.5">
