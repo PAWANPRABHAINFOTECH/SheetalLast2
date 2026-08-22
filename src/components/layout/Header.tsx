@@ -38,11 +38,11 @@ export function Header() {
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
-            <div className="flex min-w-0 flex-col py-1">
-              <span className="font-hindi whitespace-nowrap text-[15px] sm:text-base md:text-xl font-bold leading-none text-primary lg:whitespace-normal">
+            <div className="flex flex-col py-1">
+              <span className="font-hindi whitespace-nowrap text-[15px] sm:text-base md:text-xl font-bold leading-none text-primary">
                 {settings?.site_name || "शीतल शिवालय समिति"}
               </span>
-              <span className="font-hindi whitespace-nowrap text-[9px] sm:text-[10px] md:text-xs text-foreground/70 leading-none mt-1 lg:whitespace-normal">
+              <span className="font-hindi whitespace-nowrap text-[9px] sm:text-[10px] md:text-xs text-foreground/70 leading-none mt-1">
                 {settings?.address || "शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.) – 462046"}
               </span>
             </div>
