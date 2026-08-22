@@ -15,7 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.live': 'लाइव दर्शन',
     'nav.news': 'विशेष सूचना',
     'nav.gallery': 'गैलरी',
-    'nav.members': 'पदाधिकारी',
+    'nav.members': 'पोस्टर',
     'nav.contact': 'संपर्क',
     'action.donate': 'दान करें',
     'footer.admin': 'एडमिन लॉगिन',
@@ -91,8 +91,6 @@ const translations: Record<Language, Record<string, string>> = {
     'विशेष झलकियां': 'विशेष झलकियां',
     'चैनल देखें': 'चैनल देखें',
     'और वीडियो देखें': 'और वीडियो देखें',
-    'brand.name': 'शीतल शिवालय समिति',
-    'brand.subtitle': 'शीतल सिटी, मंडीदीप, जिला-रायसेन (मध्यप्रदेश)',
   },
 
 
@@ -181,8 +179,6 @@ const translations: Record<Language, Record<string, string>> = {
     'विशेष झलकियां': 'Special Highlights',
     'चैनल देखें': 'View Channel',
     'और वीडियो देखें': 'More Videos',
-    'brand.name': 'Sheetal Shivalaya Samiti',
-    'brand.subtitle': 'Sheetal City, Mandideep, District-Raisen (M.P.)',
   },
 
 
