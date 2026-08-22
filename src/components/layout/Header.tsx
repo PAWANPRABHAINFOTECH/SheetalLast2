@@ -28,9 +28,9 @@ export function Header() {
   return (
     <header className="z-50 w-full border-b border-primary/10 bg-background">
       <div className="container mx-auto px-4 py-2 lg:py-3">
-        <div className="flex flex-wrap items-center justify-between gap-3 lg:flex-nowrap lg:gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-2 lg:flex-nowrap lg:gap-4 xl:gap-8">
           {/* Logo & Branding */}
-          <Link to="/" className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <Link to="/" className="flex items-center gap-2 min-w-0 sm:gap-3">
             <div className="aspect-square h-12 w-12 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
