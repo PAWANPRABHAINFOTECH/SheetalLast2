@@ -145,7 +145,23 @@ export function DonationModal() {
             <p className="font-hindi text-xs text-foreground/70 leading-relaxed">
               {t('donation.importanceMsg')}
             </p>
+          </div>
 
+          <div className="mt-8 pt-6 border-t border-muted-foreground/10 text-center pb-8">
+            <a 
+              href="https://wa.me/916262013335?text=नमस्कार, शीतल शिवालय समिति" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex flex-col sm:flex-row items-center justify-center gap-2 hover:opacity-80 transition-opacity"
+            >
+              <span className="text-[10px] md:text-xs font-bold tracking-widest text-muted-foreground uppercase">
+                DESIGNED & DEVELOPED BY PAWANPRABHA INFOTECH
+              </span>
+              <div className="flex items-center gap-1.5 bg-green-500/10 text-green-600 px-3 py-1 rounded-full border border-green-500/20">
+                <MessageCircle className="h-3.5 w-3.5 fill-green-600/20" />
+                <span className="text-xs font-bold font-inter tracking-wider">6262013335</span>
+              </div>
+            </a>
           </div>
         </div>
       </DialogContent>
