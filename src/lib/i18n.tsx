@@ -15,7 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.live': 'लाइव दर्शन',
     'nav.news': 'विशेष सूचना',
     'nav.gallery': 'गैलरी',
-    'nav.members': "'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                        \n                                            \n                                            Restore the project to the exact state it was in immediately BEFORE the most recent ZIP backup/export was created.\n\nTreat the most recent ZIP version as the reference point and undo only the changes made after that ZIP was created.\n\nImportant requirements:\n\nDo not redesign the website.\n\nDo not change the existing layout, colors, typography, images, navigation, responsive design, or functionality that existed before the ZIP.\n\nDo not remove any features that were already present before the ZIP.\n\nDo not add any new features.\n\nDo not create new settings, database tables, components, or duplicate functionality.\n\nRestore the previous working code/state as accurately as possible.\n\nPreserve the existing Admin Panel, database structure, authentication, language system, forms, and all previously working functionality.\n\nDo not make any changes related to the domain, GitHub, Hostinger, or deployment configuration.\n\nThe goal is rollback only, not improvement or modification.\n\nAfter the rollback, verify that the project matches the condition it had immediately before the latest ZIP backup/export was created.",
+    'nav.members': 'पदाधिकारी',
     'nav.contact': 'संपर्क',
     'action.donate': 'दान करें',
     'footer.admin': 'एडमिन लॉगिन',
