@@ -30,19 +30,19 @@ export function Header() {
       <div className="container mx-auto px-4 py-2 lg:py-3">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:gap-6">
           {/* Logo & Branding */}
-          <Link to="/" className="flex min-w-0 items-center gap-3 lg:shrink-0">
-            <div className="aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
+          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 lg:shrink-0">
+            <div className="aspect-square h-12 w-12 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-2 border-secondary shadow-md md:h-20 md:w-20 bg-white">
               <img
                 src={logoAsset.url}
                 alt="Shital Shivalaya Samiti Logo"
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
-            <div className="flex min-w-0 flex-col">
-              <span className="font-hindi truncate text-base font-bold leading-tight text-primary md:text-xl">
+            <div className="flex min-w-0 flex-col py-1">
+              <span className="font-hindi whitespace-nowrap text-[15px] sm:text-base md:text-xl font-bold leading-none text-primary lg:truncate">
                 शीतल शिवालय समिति
               </span>
-              <span className="font-hindi truncate text-[10px] text-foreground/70 md:text-xs">
+              <span className="font-hindi whitespace-nowrap text-[9px] sm:text-[10px] md:text-xs text-foreground/70 leading-none mt-0.5 lg:truncate">
                 शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
               </span>
             </div>
@@ -111,7 +111,7 @@ export function Header() {
               )}
             </div>
 
-            <div className="flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm">
+            <div className="hidden items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm sm:flex">
               <Languages className="h-3 w-3 text-primary shrink-0" />
               <button
                 onClick={() => setLanguage('hi')}
@@ -130,7 +130,7 @@ export function Header() {
             
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10"
+              className="hidden sm:flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10"
               title={theme === "dark" ? "Light Mode" : "Dark Mode"}
             >
               {theme === "dark" ? (
@@ -142,10 +142,10 @@ export function Header() {
 
             <Button
               size="sm"
-              className="font-hindi bg-accent px-3 text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
+              className="font-hindi bg-accent px-2 sm:px-3 text-[10px] sm:text-[11px] text-accent-foreground shadow-md hover:bg-accent/90 md:px-5 md:text-sm"
               onClick={() => window.dispatchEvent(new CustomEvent("open-donation-modal"))}
             >
-              <Heart className="mr-1.5 h-4 w-4 fill-current md:mr-2" />
+              <Heart className="mr-1 h-3.5 w-3.5 fill-current sm:mr-1.5 md:mr-2" />
               {t('action.donate')}
             </Button>
 
@@ -176,6 +176,36 @@ export function Header() {
                 <div className="h-2 w-2 rounded-full bg-secondary/30" />
               </Link>
             ))}
+
+            <div className="flex items-center justify-between border-b border-border/50 py-4 sm:hidden">
+              <div className="flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 shadow-sm">
+                <Languages className="h-4 w-4 text-primary shrink-0" />
+                <button
+                  onClick={() => setLanguage('hi')}
+                  className={`text-sm font-bold transition-colors ${language === 'hi' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  हिन्दी
+                </button>
+                <span className="text-primary/30 mx-1">|</span>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`text-sm font-bold transition-colors ${language === 'en' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  EN
+                </button>
+              </div>
+
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-2 shadow-sm text-primary"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </button>
+            </div>
 
             <div className="mt-4 flex flex-wrap items-center gap-3 border-t pt-4">
               {settings?.phone && (
