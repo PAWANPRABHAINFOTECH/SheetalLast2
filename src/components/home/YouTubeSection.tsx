@@ -3,6 +3,7 @@ import { Youtube, ExternalLink, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { VideoModal } from "@/components/shared/VideoModal";
 
 export function YouTubeSection() {
   const { data: syncedVideos, isLoading: loadingSynced } = useYoutubeVideos("synced");
@@ -11,6 +12,7 @@ export function YouTubeSection() {
   const { t } = useI18n();
   const [displayCountSynced, setDisplayCountSynced] = useState(8);
   const [displayCountSpecial, setDisplayCountSpecial] = useState(8);
+  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
 
   const renderVideoGrid = (videos: any[], count: number, setCount: React.Dispatch<React.SetStateAction<number>>) => {
     const visibleVideos = videos.filter(v => v.is_active !== false && v.youtube_id && v.source_type === (videos === syncedVideos ? 'synced' : 'special')).slice(0, count);
@@ -20,12 +22,10 @@ export function YouTubeSection() {
       <>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {visibleVideos.map((video) => (
-            <a
+            <button
               key={video.id}
-              href={video.url || `https://www.youtube.com/watch?v=${video.youtube_id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              onClick={() => setSelectedVideoId(video.youtube_id)}
+              className="group flex flex-col text-left overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="relative aspect-video overflow-hidden bg-muted">
                 {video.youtube_id ? (
@@ -75,7 +75,7 @@ export function YouTubeSection() {
                   </div>
                 )}
               </div>
-            </a>
+            </button>
           ))}
         </div>
         {hasMore && (
@@ -96,6 +96,11 @@ export function YouTubeSection() {
 
   return (
     <div className="space-y-16">
+      <VideoModal 
+        videoId={selectedVideoId} 
+        isOpen={!!selectedVideoId} 
+        onClose={() => setSelectedVideoId(null)} 
+      />
       {/* Synced Videos Section */}
       {syncedVideos && syncedVideos.length > 0 && (
         <section className="py-16 container mx-auto px-4 border-b border-primary/5">

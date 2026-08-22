@@ -39,10 +39,10 @@ export function Header() {
               />
             </div>
             <div className="flex min-w-0 flex-col">
-              <span className="font-hindi truncate text-base font-bold leading-tight text-primary md:text-xl">
+              <span className="font-hindi whitespace-nowrap text-base font-bold leading-tight text-primary md:text-xl lg:truncate">
                 शीतल शिवालय समिति
               </span>
-              <span className="font-hindi truncate text-[10px] text-foreground/70 md:text-xs">
+              <span className="font-hindi whitespace-nowrap text-[10px] text-foreground/70 md:text-xs lg:truncate">
                 शीतल सिटी, मंडीदीप, जिला-रायसेन (म.प्र.)
               </span>
             </div>
@@ -111,7 +111,7 @@ export function Header() {
               )}
             </div>
 
-            <div className="flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm">
+            <div className="hidden items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-1.5 py-0.5 shadow-sm sm:flex">
               <Languages className="h-3 w-3 text-primary shrink-0" />
               <button
                 onClick={() => setLanguage('hi')}
@@ -130,7 +130,7 @@ export function Header() {
             
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10"
+              className="hidden sm:flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-1.5 shadow-sm text-primary transition-colors hover:bg-primary/10"
               title={theme === "dark" ? "Light Mode" : "Dark Mode"}
             >
               {theme === "dark" ? (
@@ -176,6 +176,36 @@ export function Header() {
                 <div className="h-2 w-2 rounded-full bg-secondary/30" />
               </Link>
             ))}
+
+            <div className="flex items-center justify-between border-b border-border/50 py-4 sm:hidden">
+              <div className="flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 shadow-sm">
+                <Languages className="h-4 w-4 text-primary shrink-0" />
+                <button
+                  onClick={() => setLanguage('hi')}
+                  className={`text-sm font-bold transition-colors ${language === 'hi' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  हिन्दी
+                </button>
+                <span className="text-primary/30 mx-1">|</span>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`text-sm font-bold transition-colors ${language === 'en' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  EN
+                </button>
+              </div>
+
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center justify-center rounded-full border border-primary/20 bg-primary/5 p-2 shadow-sm text-primary"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </button>
+            </div>
 
             <div className="mt-4 flex flex-wrap items-center gap-3 border-t pt-4">
               {settings?.phone && (

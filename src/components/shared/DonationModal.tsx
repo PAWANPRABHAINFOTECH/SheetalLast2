@@ -42,13 +42,13 @@ export function DonationModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-2xl sm:max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none bg-background">
+      <DialogContent className="max-w-2xl w-[95vw] sm:w-full max-h-[90vh] overflow-y-auto rounded-3xl p-0 border-none bg-background scrollbar-hide">
         <div className="bg-primary text-primary-foreground p-8 text-center relative overflow-hidden">
           {/* Decorative Pattern */}
           <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           
-          <img src={logoAsset.url} alt="Logo" className="h-20 w-20 mx-auto mb-4 bg-white dark:bg-primary/20 rounded-full p-2 relative z-10" />
-          <DialogTitle className="font-hindi text-3xl font-bold mb-2 relative z-10">शीतल शिवालय समिति</DialogTitle>
+          <img src={logoAsset.url} alt="Logo" className="h-16 w-16 md:h-20 md:w-20 mx-auto mb-4 bg-white dark:bg-primary/20 rounded-full p-2 relative z-10" />
+          <DialogTitle className="font-hindi text-2xl md:text-3xl font-bold mb-2 relative z-10 leading-tight">शीतल शिवालय समिति</DialogTitle>
           <p className="font-hindi text-sm text-primary-foreground/80 relative z-10">
             शीतल सिटी, मंडीदीप, जिला-रायसेन (मध्यप्रदेश) – 462046
           </p>
@@ -108,7 +108,7 @@ export function DonationModal() {
           ) : (
             <div className="space-y-4 animate-in fade-in duration-500">
               <div className="bg-secondary/5 border-2 border-secondary/20 rounded-3xl p-6 space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="font-hindi text-xs text-muted-foreground uppercase tracking-widest">{t('donation.holder')}</label>
                     <p className="font-hindi text-lg font-bold text-primary">{settings?.bank_account_name || "शीतल शिवालय समिति"}</p>
