@@ -51,7 +51,7 @@ export function Header() {
           </div>
 
           {/* Inline navigation - CENTER */}
-          <nav className="hidden lg:flex flex-1 items-center justify-center min-w-0">
+          <nav className="hidden lg:flex flex-1 items-center justify-center min-w-0 px-2">
             <div className="flex items-center gap-x-1 xl:gap-x-4">
               {navLinks.map((link) => (
                 <Link
